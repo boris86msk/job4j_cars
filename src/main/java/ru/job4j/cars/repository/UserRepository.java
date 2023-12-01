@@ -33,8 +33,7 @@ public class UserRepository {
             session.getTransaction().rollback();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             session.close();
         }
         return user;
