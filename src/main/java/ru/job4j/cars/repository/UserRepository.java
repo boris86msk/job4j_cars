@@ -31,7 +31,10 @@ public class UserRepository {
         } catch (ConstraintViolationException e) {
             System.out.println(e.getSQLException().getLocalizedMessage());
             session.getTransaction().rollback();
-        } finally {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
             session.close();
         }
         return user;
@@ -50,7 +53,7 @@ public class UserRepository {
                     .setParameter("fId", user.getId())
                     .executeUpdate();
             session.getTransaction().commit();
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
@@ -70,7 +73,7 @@ public class UserRepository {
                     .setParameter("fId", userId)
                     .executeUpdate();
             session.getTransaction().commit();
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
@@ -89,7 +92,7 @@ public class UserRepository {
             List<User> fromUser = session.createQuery("from User ORDER BY id", User.class).list();
             session.getTransaction().commit();
             return fromUser;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
@@ -111,7 +114,7 @@ public class UserRepository {
             Optional<User> user = query.uniqueResultOptional();
             session.getTransaction().commit();
             return user;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
@@ -134,7 +137,7 @@ public class UserRepository {
                     .list();
             session.getTransaction().commit();
             return fromUser;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
@@ -157,7 +160,7 @@ public class UserRepository {
             Optional<User> user = query.uniqueResultOptional();
             session.getTransaction().commit();
             return user;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
