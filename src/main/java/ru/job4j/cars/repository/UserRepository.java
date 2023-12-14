@@ -27,11 +27,14 @@ public class UserRepository {
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
-            session.close();
             return user;
         } catch (ConstraintViolationException e) {
             System.out.println(e.getSQLException().getLocalizedMessage());
             session.getTransaction().rollback();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
         return user;
     }
@@ -49,10 +52,11 @@ public class UserRepository {
                     .setParameter("fId", user.getId())
                     .executeUpdate();
             session.getTransaction().commit();
-            session.close();
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
     }
 
@@ -68,10 +72,11 @@ public class UserRepository {
                     .setParameter("fId", userId)
                     .executeUpdate();
             session.getTransaction().commit();
-            session.close();
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
     }
 
@@ -85,11 +90,12 @@ public class UserRepository {
             session.beginTransaction();
             List<User> fromUser = session.createQuery("from User ORDER BY id", User.class).list();
             session.getTransaction().commit();
-            session.close();
             return fromUser;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return null;
     }
@@ -106,11 +112,12 @@ public class UserRepository {
             query.setParameter("fuserId", userId);
             Optional<User> user = query.uniqueResultOptional();
             session.getTransaction().commit();
-            session.close();
             return user;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return Optional.empty();
     }
@@ -128,11 +135,12 @@ public class UserRepository {
                     .setParameter("fkey", "%" + key + "%")
                     .list();
             session.getTransaction().commit();
-            session.close();
             return fromUser;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return List.of();
     }
@@ -150,11 +158,12 @@ public class UserRepository {
             query.setParameter("flogin", login);
             Optional<User> user = query.uniqueResultOptional();
             session.getTransaction().commit();
-            session.close();
             return user;
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return Optional.empty();
     }
