@@ -21,7 +21,4 @@ public class PriceHistory {
     private int after;
     @Column(name = "created")
     private LocalDateTime created;
-    @ManyToOne
-    @JoinColumn(name = "auto_user_id")
-    private Post post;
 }
