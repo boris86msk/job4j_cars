@@ -18,6 +18,6 @@ public class Owner {
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany
-    @JoinColumn(name = "history_id")
+    @JoinColumn(name = "owner_id")
     private Set<History> history = new HashSet<>();
 }
