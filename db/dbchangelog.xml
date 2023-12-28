@@ -14,6 +14,7 @@
     <include file="scripts/007_ddl_create_table_owners.sql" relativeToChangelogFile="true"/>
     <include file="scripts/008_ddl_create_table_history.sql" relativeToChangelogFile="true"/>
     <include file="scripts/009_ddl_create_history_owners.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/010_ddl_alter_auto_user.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/011_dml_insert_data.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/010_ddl_alter_car.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/011_ddl_create_table_files.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/012_dml_insert_data.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

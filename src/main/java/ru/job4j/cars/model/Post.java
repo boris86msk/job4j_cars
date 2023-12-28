@@ -27,6 +27,10 @@ public class Post {
     @JoinColumn(name = "auto_user_id")
     private User user;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id")
+    private List<Files> files = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private List<PriceHistory> historyList = new ArrayList<>();
