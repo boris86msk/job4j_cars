@@ -7,7 +7,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "auto_post")
@@ -21,19 +23,19 @@ public class Post {
 
     private String description;
 
-    private LocalDate created;
+    private LocalDateTime created;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "auto_user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
-    private List<Files> files = new ArrayList<>();
+    private Set<Files> files = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
-    private List<PriceHistory> historyList = new ArrayList<>();
+    private Set<PriceHistory> historyList = new HashSet<>();
 }
 /**
  * при связи OneToMany в @JoinColumn указываем имя столбца той таблицы, которая
