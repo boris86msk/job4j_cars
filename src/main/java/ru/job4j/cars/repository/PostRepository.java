@@ -6,8 +6,10 @@ import ru.job4j.cars.model.Engine;
 import ru.job4j.cars.model.Post;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Repository
 public class PostRepository {
@@ -18,11 +20,20 @@ public class PostRepository {
     }
 
     public List<Post> findAll() {
-        return crudRepository.query("from Post", Post.class);
+        return crudRepository.query("from Post p"
+                        + " left join fetch p.user"
+                        + " left join fetch p.files"
+                        + " left join fetch p.historyList"
+                , Post.class);
     }
+
     public List<Post> findByToday() {
-        LocalDate now = LocalDate.now();
-        return crudRepository.query("from Post where created = :fnow", Post.class,
+        LocalDateTime now = LocalDateTime.now().minusDays(1);
+        return crudRepository.query("from Post p"
+                        + " left join fetch p.user"
+                        + " left join fetch p.files"
+                        + " left join fetch p.historyList"
+                        + " where p.created > :fnow", Post.class,
                 Map.of("fnow", now));
     }
 
