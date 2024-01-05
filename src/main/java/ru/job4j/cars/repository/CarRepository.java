@@ -36,7 +36,7 @@ public class CarRepository {
      */
     public List<Car> findAllCar() {
         return crudRepository.query(
-                "from Car order by id", Car.class
+                "from Car c left join fetch c.owners order by c.id", Car.class
         );
     }
 
@@ -47,7 +47,7 @@ public class CarRepository {
      */
     public Optional<Car> findById(int id) {
         return crudRepository.optional(
-                "from car where id = :fcarId", Car.class,
+                "from Car c left join fetch c.owners where c.id = :fcarId", Car.class,
                 Map.of("fcarId", id)
         );
     }

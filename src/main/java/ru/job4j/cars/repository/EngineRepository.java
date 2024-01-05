@@ -47,8 +47,8 @@ public class EngineRepository {
      */
     public Optional<Engine> findById(int id) {
         return crudRepository.optional(
-                "from engine where id = :fengineId", Engine.class,
-                Map.of(":fengineId", id)
+                "from Engine where id = :fengineId", Engine.class,
+                Map.of("fengineId", id)
         );
     }
 
@@ -66,7 +66,7 @@ public class EngineRepository {
      */
     public void delete(int engineId) {
         crudRepository.run(
-                "delete from engine where id = :fId",
+                "delete from Engine where id = :fId",
                 Map.of("fId", engineId)
         );
     }
