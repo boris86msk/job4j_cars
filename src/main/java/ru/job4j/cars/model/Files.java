@@ -12,5 +12,9 @@ public class Files {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "path")
     private String path;
+
+    @Column(name = "post_id")
+    private int postId;
 }

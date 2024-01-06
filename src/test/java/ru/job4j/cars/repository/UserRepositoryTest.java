@@ -23,7 +23,7 @@ class UserRepositoryTest {
             .buildMetadata().buildSessionFactory();
     private static CrudRepository crudRepository = new CrudRepository(sf);
 
-    private static UserRepository userRepository = new UserRepository(crudRepository, sf);
+    private static UserRepository userRepository = new UserRepository(crudRepository);
 
     private static User user;
     private static User user2;

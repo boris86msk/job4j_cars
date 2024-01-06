@@ -1,12 +1,6 @@
 package ru.job4j.cars.repository;
 
-import lombok.AllArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import ru.job4j.cars.model.Car;
 import ru.job4j.cars.model.User;
 
 import java.util.List;
@@ -16,11 +10,9 @@ import java.util.Optional;
 @Repository
 public class UserRepository {
     private final CrudRepository crudRepository;
-    private final SessionFactory sf;
 
-    public UserRepository(CrudRepository crudRepository, SessionFactory sf) {
+    public UserRepository(CrudRepository crudRepository) {
         this.crudRepository = crudRepository;
-        this.sf = sf;
     }
 
     /**
@@ -43,23 +35,7 @@ public class UserRepository {
      * @param user пользователь.
      */
     public void update(User user) {
-
         crudRepository.run(session -> session.merge(user));
-
-//        Session session = sf.openSession();
-//        try {
-//            session.beginTransaction();
-//            session.createQuery("UPDATE User SET password = :pass WHERE id = :fId")
-//                    .setParameter("pass", user.getPassword())
-//                    .setParameter("fId", user.getId())
-//                    .executeUpdate();
-//            session.getTransaction().commit();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            session.getTransaction().rollback();
-//        } finally {
-//            session.close();
-//        }
     }
 
     /**

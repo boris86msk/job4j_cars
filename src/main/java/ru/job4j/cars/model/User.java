@@ -23,10 +23,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<Car> cars = new ArrayList<>();
-
     @ManyToMany
     @JoinTable(
             name = "participates",
