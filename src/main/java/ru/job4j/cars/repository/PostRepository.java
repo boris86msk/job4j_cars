@@ -72,5 +72,4 @@ public class PostRepository {
                 Map.of("fId", id)
         );
     }
-
 }

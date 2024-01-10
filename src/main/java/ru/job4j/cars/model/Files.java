@@ -14,7 +14,4 @@ public class Files {
 
     @Column(name = "path")
     private String path;
-
-    @Column(name = "post_id")
-    private int postId;
 }

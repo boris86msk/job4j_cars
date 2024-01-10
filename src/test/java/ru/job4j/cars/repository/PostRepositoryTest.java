@@ -10,14 +10,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.job4j.cars.model.Files;
-import ru.job4j.cars.model.Post;
-import ru.job4j.cars.model.User;
+import ru.job4j.cars.model.*;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,34 +28,66 @@ class PostRepositoryTest {
     private static CrudRepository crudRepository = new CrudRepository(sf);
 
     private static PostRepository postRepository = new PostRepository(crudRepository);
-    private static UserRepository userRepository = new UserRepository(crudRepository);
-    private static FileRepository fileRepository = new FileRepository(crudRepository);
     private static Post post;
     private static Post post2;
+    private static Post post3;
 
     @BeforeEach
-    public void createAndSavePostToDb() {
+    public void initDataForDb() {
+        Engine engine = new Engine();
+        engine.setName("ВАЗ-21129");
+
+        Car car = new Car();
+        car.setBrand("Lada");
+        car.setModel("Vesta");
+        car.setEngine(engine);
+
+        Car car2 = new Car();
+        car2.setBrand("Lada");
+        car2.setModel("Vesta2");
+        car2.setEngine(engine);
+
         User user = new User();
         user.setLogin("myLogin");
         user.setPassword("1111");
-        userRepository.create(user);
+        user.setCars(Set.of(car));
+
+        User user2 = new User();
+        user2.setLogin("myLogin2");
+        user2.setPassword("2222");
+
+        Files file = new Files();
+        file.setPath("somePath");
 
         post = new Post();
         post.setDescription("test_description");
         post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
         post.setUser(user);
-        postRepository.save(post);
-
-        Files file = new Files();
-        file.setPath("somePath");
-        file.setPostId(post.getId());
-        fileRepository.save(file);
+        post.setFiles(Set.of(file));
 
         post2 = new Post();
         post2.setDescription("test_description_2");
         post2.setCreated(LocalDateTime.of(2024, Month.JANUARY, 5, 12, 0, 0));
         post2.setUser(user);
-        postRepository.save(post2);
+
+        post3 = new Post();
+        post3.setDescription("test_description_3");
+        post3.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
+        post3.setUser(user2);
+
+        Session session = sf.openSession();
+        try {
+            session.beginTransaction();
+            session.persist(post);
+            session.persist(post2);
+            session.persist(post3);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
     }
 
     @AfterAll
@@ -73,6 +104,10 @@ class PostRepositoryTest {
                     .executeUpdate();
             session.createQuery("DELETE Post")
                     .executeUpdate();
+            session.createQuery("DELETE Car")
+                    .executeUpdate();
+            session.createQuery("DELETE Engine")
+                    .executeUpdate();
             session.createQuery("DELETE User")
                     .executeUpdate();
             session.getTransaction().commit();
@@ -85,14 +120,28 @@ class PostRepositoryTest {
     }
 
     @Test
-    public void wenSaveNewPostsAndFindAll() {
-        var expectedList = List.of(post, post2);
+    public void wenSaveNewPost() {
+        Post testPost = new Post();
+        testPost.setDescription("in_test_description");
+        testPost.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
+        User user = new User();
+        user.setLogin("login");
+        user.setPassword("pass");
+        testPost.setUser(user);
+        postRepository.save(testPost);
+        int id = testPost.getId();
+        assertThat(postRepository.findById(id).get()).isEqualTo(testPost);
+    }
+
+    @Test
+    public void wenFindAllPosts() {
+        var expectedList = List.of(post, post2, post3);
         assertThat(postRepository.findAll()).isEqualTo(expectedList);
     }
 
     @Test
     public void wenFindPostsByToDay() {
-        var expectedList = List.of(post);
+        var expectedList = List.of(post, post3);
         assertThat(postRepository.findByToday()).isEqualTo(expectedList);
     }
 
@@ -104,5 +153,13 @@ class PostRepositoryTest {
         var notExpected = List.of(ps2);
         assertThat(postRepository.findAllWhereFilesNotNull()).isEqualTo(expectedList);
         assertThat(postRepository.findAllWhereFilesNotNull()).isNotEqualTo(notExpected);
+    }
+
+    @Test
+    public void wenFindAllPostByCarModel() {
+        var expectedList = List.of(post, post2);
+        List<Post> vesta = postRepository.findByModel("Vesta");
+        assertThat(postRepository.findByModel("Vesta")).isEqualTo(expectedList);
+
     }
 }

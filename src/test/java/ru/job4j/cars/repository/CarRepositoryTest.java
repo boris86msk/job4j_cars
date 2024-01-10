@@ -34,7 +34,11 @@ class CarRepositoryTest {
     public void addDataToDataBase() {
         Engine engine = new Engine();
         engine.setName("ВАЗ-21129");
-        engineRepository.save(engine);
+//        engineRepository.save(engine);
+
+        Engine engine2 = new Engine();
+        engine2.setName("ВАЗ-21128");
+//        engineRepository.save(engine2);
 
         car = new Car();
         car.setBrand("Lada");
@@ -45,7 +49,7 @@ class CarRepositoryTest {
         car2 = new Car();
         car2.setBrand("Lada");
         car2.setModel("Granta");
-        car2.setEngine(engine);
+        car2.setEngine(engine2);
         carRepository.save(car2);
     }
 
