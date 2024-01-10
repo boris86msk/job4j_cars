@@ -36,7 +36,9 @@ public class OwnerRepository {
      */
     public List<Owner> findAllOwner() {
         return crudRepository.query(
-                "from Owner order by id", Owner.class
+                "from Owner o"
+                        + " left join fetch o.history"
+                        + " order by o.id", Owner.class
         );
     }
 
@@ -47,8 +49,10 @@ public class OwnerRepository {
      */
     public Optional<Owner> findById(int id) {
         return crudRepository.optional(
-                "from owner where id = :fownerId", Owner.class,
-                Map.of(":fownerId", id)
+                "from Owner o"
+                        + " left join fetch o.history"
+                        + " where o.id = :fownerId", Owner.class,
+                Map.of("fownerId", id)
         );
     }
 
@@ -66,7 +70,7 @@ public class OwnerRepository {
      */
     public void delete(int ownerId) {
         crudRepository.run(
-                "delete from owner where id = :fId",
+                "delete from Owner where id = :fId",
                 Map.of("fId", ownerId)
         );
     }

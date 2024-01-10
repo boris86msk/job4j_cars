@@ -12,5 +12,6 @@ public class Files {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "path")
     private String path;
 }

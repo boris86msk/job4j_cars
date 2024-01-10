@@ -20,7 +20,7 @@ public class Car {
     @Column(name = "model")
     private String model;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "engine_id")
     private Engine engine;
 
