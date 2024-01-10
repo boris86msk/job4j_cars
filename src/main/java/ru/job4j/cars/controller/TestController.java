@@ -25,14 +25,6 @@ public class TestController {
 
     @GetMapping("/")
     public String testMethod() {
-     //   List<Post> all = postRepository.findAll();
-        List<Post> byId = postRepository.findByToday();
- //       List<Post> byPhoto = postRepository.findAllWhereFilesNotNull();
- //       List<Post> byPhoto = postRepository.findByModel("Vesta");
-        System.out.println(byId);
-
-//        List<Post> byToday = postRepository.findByToday();
-//        byToday.stream().forEach(System.out::println);
         return "index";
     }
 }
