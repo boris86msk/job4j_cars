@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,13 +28,17 @@ public class Post {
     @JoinColumn(name = "auto_user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private Set<Files> files = new HashSet<>();
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "car_id")
+    private Car car;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
-    private Set<PriceHistory> historyList = new HashSet<>();
+    private List<Files> files = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id")
+    private List<PriceHistory> historyList = new ArrayList<>();
 }
 /**
  * при связи OneToMany в @JoinColumn указываем имя столбца той таблицы, которая

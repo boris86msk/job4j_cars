@@ -27,10 +27,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private Set<Car> cars = new HashSet<>();
-
     @ManyToMany
     @JoinTable(
             name = "participates",
