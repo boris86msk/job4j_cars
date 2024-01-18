@@ -13,10 +13,7 @@ import ru.job4j.cars.model.Post;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class PostRepository {
@@ -41,16 +38,6 @@ public class PostRepository {
     }
 
     public List<Post> findAll() {
-//        return crudRepository.query("from Post p"
-//                + " left join fetch p.user"
-//                + " left join fetch p.car"
-//                + " left join fetch p.files"
-//                + " left join fetch p.historyList", Post.class);
-
-        return crudRepository.query("from Post", Post.class);
-    }
-
-    public List<Post> findAll2() {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
@@ -73,28 +60,33 @@ public class PostRepository {
             session.close();
         }
         return null;
-//        List<Post> query = crudRepository.query("from Post p"
-//                + " left join fetch p.user"
-//                + " left join fetch p.car"
-//                + " left join fetch p.files", Post.class);
-//
-//        query = crudRepository.query("from Post p"
-//                + " left join fetch p.historyList"
-//                + " where p in :posts", Post.class,
-//                Map.of("posts", query));
-//
-//        return query;
     }
 
     public List<Post> findByToday() {
         LocalDateTime now = LocalDateTime.now().minusDays(1);
-        return crudRepository.query("from Post p"
-                        + " left join fetch p.user u"
-                        + " left join fetch u.participates"
-                        + " left join fetch p.files"
-                        + " left join fetch p.historyList"
-                        + " where p.created > :fnow", Post.class,
-                Map.of("fnow", now));
+        Session session = sf.openSession();
+        try {
+            session.beginTransaction();
+            List<Post> list = session.createQuery("from Post p"
+                            + " left join fetch p.user"
+                            + " left join fetch p.car"
+                            + " left join fetch p.files", Post.class)
+                    .list();
+            list = session.createQuery("from Post p"
+                            + " left join fetch p.historyList"
+                            + " where p in :posts and p.created > :fnow", Post.class)
+                    .setParameterList("posts", list)
+                    .setParameterList("fnow", Collections.singleton(now))
+                    .list();
+            session.getTransaction().commit();
+            return list;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+        return null;
     }
 
     public List<Post> findAllWhereFilesNotNull() {
@@ -107,8 +99,8 @@ public class PostRepository {
     public List<Post> findByModel(String model) {
         return crudRepository.query("from Post p "
                         + "left join fetch p.user "
-                        + "left join fetch p.user.cars "
-                        + "where model = :fmodel", Post.class,
+                        + "left join fetch p.car c "
+                        + "where c.model = :fmodel", Post.class,
                 Map.of("fmodel", model));
     }
 

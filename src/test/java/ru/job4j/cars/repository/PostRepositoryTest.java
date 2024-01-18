@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,10 +46,14 @@ class PostRepositoryTest {
         car2.setModel("Vesta2");
         car2.setEngine(engine);
 
+        Car car3 = new Car();
+        car3.setBrand("Lada");
+        car3.setModel("Kalina");
+        car3.setEngine(engine);
+
         User user = new User();
         user.setLogin("myLogin");
         user.setPassword("1111");
-        user.setCars(Set.of(car));
 
         User user2 = new User();
         user2.setLogin("myLogin2");
@@ -63,17 +66,20 @@ class PostRepositoryTest {
         post.setDescription("test_description");
         post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
         post.setUser(user);
-        post.setFiles(Set.of(file));
+        post.setCar(car);
+        post.setFiles(List.of(file));
 
         post2 = new Post();
         post2.setDescription("test_description_2");
         post2.setCreated(LocalDateTime.of(2024, Month.JANUARY, 5, 12, 0, 0));
         post2.setUser(user);
+        post2.setCar(car2);
 
         post3 = new Post();
         post3.setDescription("test_description_3");
         post3.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
         post3.setUser(user2);
+        post3.setCar(car3);
 
         Session session = sf.openSession();
         try {
@@ -127,7 +133,14 @@ class PostRepositoryTest {
         User user = new User();
         user.setLogin("login");
         user.setPassword("pass");
+        Engine engine = new Engine();
+        engine.setName("1118");
+        Car car = new Car();
+        car.setBrand("Brand");
+        car.setModel("Model");
+        car.setEngine(engine);
         testPost.setUser(user);
+        testPost.setCar(car);
         postRepository.save(testPost);
         int id = testPost.getId();
         assertThat(postRepository.findById(id).get()).isEqualTo(testPost);
@@ -157,8 +170,7 @@ class PostRepositoryTest {
 
     @Test
     public void wenFindAllPostByCarModel() {
-        var expectedList = List.of(post, post2);
-        List<Post> vesta = postRepository.findByModel("Vesta");
+        var expectedList = List.of(post);
         assertThat(postRepository.findByModel("Vesta")).isEqualTo(expectedList);
 
     }

@@ -1,0 +1,21 @@
+<div class="border-dark-3" th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <div class="collapse navbar-collapse bg-success text-white border-dark-1">
+                <div class="navbar-nav flex-grow-1">
+                    <a class="nav-item nav-link active" href="/index">Главная</a>
+                    <a class="nav-item nav-link active" href="/create">Создать</a>
+                    <a class="nav-item nav-link active" href="/account_page">Личный кабинет</a>
+                </div>
+                <div class="d-flex" th:if="${user.login == 'Гость'}">
+                    <a class="nav-link text-secondary me-3" th:href="@{/users/register}">Регистрация</a>
+                    <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
+                </div>
+                <div class="d-flex" th:if="${user.login != 'Гость'}">
+                    <a class="nav-link text-secondary me-3" href="#" th:text="${user.login}"></a>
+                    <a class="nav-link text-secondary" th:href="@{/users/logout}">Выйти</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

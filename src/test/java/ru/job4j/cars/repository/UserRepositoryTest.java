@@ -90,8 +90,10 @@ class UserRepositoryTest {
     @Test
     public void wenFindUserByLogin() {
         String findLogin = "myLogin";
-        var findUser = userRepository.findByLogin(findLogin);
+        String findPass = "1111";
+        var findUser = userRepository.findByLoginAndPassword(findLogin, findPass);
         assertThat(findUser.get().getLogin()).isEqualTo(findLogin);
+        assertThat(findUser.get().getPassword()).isEqualTo(findPass);
     }
 
     @Test

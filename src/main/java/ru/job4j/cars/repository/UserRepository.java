@@ -84,13 +84,16 @@ public class UserRepository {
 
     /**
      * Найти пользователя по login.
+     *
      * @param login login.
+     * @param pass
      * @return Optional or user.
      */
-    public Optional<User> findByLogin(String login) {
+    public Optional<User> findByLoginAndPassword(String login, String pass) {
         return crudRepository.optional(
-                "from User where login = :flogin", User.class,
-                Map.of("flogin", login)
+                "from User where login = :flogin"
+                        + " and password = :fPass", User.class,
+                Map.of("flogin", login, "fPass", pass)
         );
     }
 }
