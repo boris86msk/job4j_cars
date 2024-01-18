@@ -10,8 +10,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.Car;
-import ru.job4j.cars.model.Engine;
 
 import java.util.List;
 
@@ -26,28 +26,28 @@ class CarRepositoryTest {
     private static CrudRepository crudRepository = new CrudRepository(sf);
 
     private static CarRepository carRepository = new CarRepository(crudRepository);
-    private static EngineRepository engineRepository = new EngineRepository(crudRepository);
+    private static BodyTypeRepository bodyTypeRepository = new BodyTypeRepository(crudRepository);
     private static Car car;
     private static Car car2;
 
     @BeforeEach
     public void addDataToDataBase() {
-        Engine engine = new Engine();
-        engine.setName("ВАЗ-21129");
+        BodyType bodyType = new BodyType();
+        bodyType.setName("ВАЗ-21129");
 
-        Engine engine2 = new Engine();
-        engine2.setName("ВАЗ-21128");
+        BodyType bodyType2 = new BodyType();
+        bodyType2.setName("ВАЗ-21128");
 
         car = new Car();
         car.setBrand("Lada");
         car.setModel("Vesta");
-        car.setEngine(engine);
+        car.setBodyType(bodyType);
         carRepository.save(car);
 
         car2 = new Car();
         car2.setBrand("Lada");
         car2.setModel("Granta");
-        car2.setEngine(engine2);
+        car2.setBodyType(bodyType2);
         carRepository.save(car2);
     }
 
@@ -63,7 +63,7 @@ class CarRepositoryTest {
             session.beginTransaction();
             session.createQuery("DELETE Car")
                     .executeUpdate();
-            session.createQuery("DELETE Engine")
+            session.createQuery("DELETE BodyType")
                     .executeUpdate();
             session.getTransaction().commit();
         } catch (HibernateException e) {

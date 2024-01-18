@@ -7,11 +7,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Repository;
-import ru.job4j.cars.model.Car;
-import ru.job4j.cars.model.Engine;
 import ru.job4j.cars.model.Post;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 

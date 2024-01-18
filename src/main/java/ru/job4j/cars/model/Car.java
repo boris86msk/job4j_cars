@@ -20,9 +20,9 @@ public class Car {
     @Column(name = "model")
     private String model;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "engine_id")
-    private Engine engine;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "body_id")
+    private BodyType bodyType;
 
     @ManyToMany
     @JoinTable(

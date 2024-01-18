@@ -33,23 +33,23 @@ class PostRepositoryTest {
 
     @BeforeEach
     public void initDataForDb() {
-        Engine engine = new Engine();
-        engine.setName("ВАЗ-21129");
+        BodyType bodyType = new BodyType();
+        bodyType.setName("Седан");
 
         Car car = new Car();
         car.setBrand("Lada");
         car.setModel("Vesta");
-        car.setEngine(engine);
+        car.setBodyType(bodyType);
 
         Car car2 = new Car();
         car2.setBrand("Lada");
         car2.setModel("Vesta2");
-        car2.setEngine(engine);
+        car2.setBodyType(bodyType);
 
         Car car3 = new Car();
         car3.setBrand("Lada");
         car3.setModel("Kalina");
-        car3.setEngine(engine);
+        car3.setBodyType(bodyType);
 
         User user = new User();
         user.setLogin("myLogin");
@@ -112,7 +112,7 @@ class PostRepositoryTest {
                     .executeUpdate();
             session.createQuery("DELETE Car")
                     .executeUpdate();
-            session.createQuery("DELETE Engine")
+            session.createQuery("DELETE BodyType")
                     .executeUpdate();
             session.createQuery("DELETE User")
                     .executeUpdate();
@@ -133,12 +133,12 @@ class PostRepositoryTest {
         User user = new User();
         user.setLogin("login");
         user.setPassword("pass");
-        Engine engine = new Engine();
-        engine.setName("1118");
+        BodyType bodyType = new BodyType();
+        bodyType.setName("Кроссовер");
         Car car = new Car();
         car.setBrand("Brand");
         car.setModel("Model");
-        car.setEngine(engine);
+        car.setBodyType(bodyType);
         testPost.setUser(user);
         testPost.setCar(car);
         postRepository.save(testPost);

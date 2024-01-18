@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "engine")
+@Table(name = "body_type")
 @Data
-public class Engine {
+public class BodyType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
