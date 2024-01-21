@@ -67,7 +67,7 @@ class BodyTypeRepositoryTest {
         bodyTypeRepository.save(bodyType1);
         bodyTypeRepository.save(bodyType2);
         List<BodyType> bodyTypeList = List.of(bodyType1, bodyType2);
-        assertThat(bodyTypeRepository.findAllEngine()).isEqualTo(bodyTypeList);
+        assertThat(bodyTypeRepository.findAllType()).isEqualTo(bodyTypeList);
     }
 
     @Test

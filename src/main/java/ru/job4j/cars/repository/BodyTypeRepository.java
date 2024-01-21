@@ -34,7 +34,7 @@ public class BodyTypeRepository {
      * Получить список типов кузова.
      * @return Список BodyType, сортеровка по id.
      */
-    public List<BodyType> findAllEngine() {
+    public List<BodyType> findAllType() {
         return crudRepository.query(
                 "from BodyType order by id", BodyType.class
         );

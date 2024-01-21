@@ -30,8 +30,7 @@ public class AuthorizationFilter extends HttpFilter {
     }
 
     private boolean isAlwaysPermitted(String uri) {
-        return true;
-//        return uri.startsWith("/login")
- //               || uri.startsWith("/register");
+        return uri.startsWith("/login")
+                || uri.startsWith("/register");
     }
 }

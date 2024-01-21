@@ -24,7 +24,7 @@ public class Post {
 
     private LocalDateTime created;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "auto_user_id")
     private User user;
 

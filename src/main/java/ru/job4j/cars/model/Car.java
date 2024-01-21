@@ -20,7 +20,7 @@ public class Car {
     @Column(name = "model")
     private String model;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "body_id")
     private BodyType bodyType;
 
