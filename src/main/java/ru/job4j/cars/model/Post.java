@@ -6,9 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "auto_post")
@@ -32,9 +30,9 @@ public class Post {
     @JoinColumn(name = "car_id")
     private Car car;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private List<Files> files = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "file_id")
+    private File file;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")

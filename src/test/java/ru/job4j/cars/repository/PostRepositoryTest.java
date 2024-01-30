@@ -59,7 +59,7 @@ class PostRepositoryTest {
         user2.setLogin("myLogin2");
         user2.setPassword("2222");
 
-        Files file = new Files();
+        File file = new File();
         file.setPath("somePath");
 
         post = new Post();
@@ -106,7 +106,7 @@ class PostRepositoryTest {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            session.createQuery("DELETE Files")
+            session.createQuery("DELETE File")
                     .executeUpdate();
             session.createQuery("DELETE Post")
                     .executeUpdate();

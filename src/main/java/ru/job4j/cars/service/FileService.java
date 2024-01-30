@@ -1,11 +1,15 @@
 package ru.job4j.cars.service;
 
-import org.springframework.web.multipart.MultipartFile;
-import ru.job4j.cars.model.Files;
+import ru.job4j.cars.dto.FileDto;
+import ru.job4j.cars.model.File;
 
-import java.io.File;
-import java.util.List;
+import java.io.IOException;
+import java.util.Optional;
 
 public interface FileService {
-    List<Files> savePhoto(MultipartFile[] files);
+    File savePhoto(FileDto fileDto) throws IOException;
+
+    Optional<FileDto> getFileById(int id);
+
+    //void deleteById(int id);
 }

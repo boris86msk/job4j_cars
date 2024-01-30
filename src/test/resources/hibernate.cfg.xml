@@ -15,7 +15,7 @@
 
         <mapping class="ru.job4j.cars.model.BodyType" />
         <mapping class="ru.job4j.cars.model.Car" />
-        <mapping class="ru.job4j.cars.model.Files" />
+        <mapping class="ru.job4j.cars.model.File" />
         <mapping class="ru.job4j.cars.model.User" />
         <mapping class="ru.job4j.cars.model.History" />
         <mapping class="ru.job4j.cars.model.Owner" />

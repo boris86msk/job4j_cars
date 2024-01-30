@@ -41,11 +41,12 @@ public class PostRepository {
             List<Post> list = session.createQuery("from Post p"
                             + " left join fetch p.user"
                             + " left join fetch p.car"
-                            + " left join fetch p.files", Post.class)
+                            + " left join fetch p.file", Post.class)
                     .list();
             list = session.createQuery("from Post p"
                             + " left join fetch p.historyList"
-                            + " where p in :posts", Post.class)
+                            + " where p in :posts"
+                            + " order by p.id desc", Post.class)
                     .setParameterList("posts", list)
                     .list();
             session.getTransaction().commit();
@@ -67,7 +68,7 @@ public class PostRepository {
             List<Post> list = session.createQuery("from Post p"
                             + " left join fetch p.user"
                             + " left join fetch p.car"
-                            + " left join fetch p.files", Post.class)
+                            + " left join fetch p.file", Post.class)
                     .list();
             list = session.createQuery("from Post p"
                             + " left join fetch p.historyList"
@@ -88,7 +89,7 @@ public class PostRepository {
 
     public List<Post> findAllWhereFilesNotNull() {
         return crudRepository.query("from Post p"
-                + " left join fetch p.files"
+                + " left join fetch p.file"
                 + " left join fetch p.user"
                 + " where size(p.files) > 0", Post.class);
     }
@@ -105,7 +106,7 @@ public class PostRepository {
         return crudRepository.optional(
                 "from Post p "
                         + "left join fetch p.user "
-                        + "left join fetch p.files "
+                        + "left join fetch p.file "
                         + "where p.id = :fId", Post.class,
                 Map.of("fId", id)
         );

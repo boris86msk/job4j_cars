@@ -479,8 +479,8 @@ mark,
 }
 
 .img-fluid {
-  max-width: 50%;
-  height: auto;
+  width: 100%;
+  object-fit: contain;
 }
 
 .img-thumbnail {

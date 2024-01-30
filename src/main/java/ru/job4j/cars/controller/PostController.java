@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import ru.job4j.cars.dto.FileDto;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.repository.BodyTypeRepository;
@@ -14,6 +15,7 @@ import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.service.FileService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -36,11 +38,11 @@ public class PostController {
     }
 
     @PostMapping("save")
-    public String saveNewPost(@ModelAttribute Post post, @RequestParam MultipartFile[] file, HttpServletRequest request) {
+    public String saveNewPost(@ModelAttribute Post post, @RequestParam MultipartFile myFile, HttpServletRequest request) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         post.setUser(user);
         post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        post.setFiles(fileService.savePhoto(file));
+        post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
         postRepository.save(post);
         return "redirect:/index";
     }
