@@ -3,15 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link th:href = "@{/css/bootstrap.css}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+            crossorigin="anonymous"></script>
     <title>Вход</title>
 </head>
 <body class="bg-img">
 <div class="container-fluid p-0">
     <div class="container">
         <div class="row">
+            <img th:src="@{/img/DeLorean.jpg}" rel="stylesheet" style="position: absolute; top: 0;
+            margin-left: 12%;
+             width: 70%;
+            height: 50%;
+            object-fit: cover;
+            opacity: 0.4;">
             <div class="col-3"></div>
             <div class="col-6">
                 <h3 class="text-dark text-center">Войти как:</h3>
@@ -21,7 +31,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="login" class="form-label text-white"><b>Логин/email</b></label>
-                        <input type="email" class="form-control" id="login" name="login" placeholder="ivan@mail.ru" required>
+                        <input type="email" class="form-control" id="login" name="login" placeholder="ivan@mail.ru"
+                               required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label text-white"><b>Пароль</b></label>
@@ -29,7 +40,8 @@
                     </div>
                     <div class="mb-3 row">
                         <div class="col-7">
-                            <p class="text-white">Не зарегистрированы? <span><a th:href="@{/register}">Зарегистрироваться</a></span></p>
+                            <p class="text-white">Не зарегистрированы? <span><a th:href="@{/register}">Зарегистрироваться</a></span>
+                            </p>
                         </div>
                         <div class="col-777">
                             <div class="row">

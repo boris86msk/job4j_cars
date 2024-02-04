@@ -49,7 +49,7 @@ class BodyTypeRepositoryTest {
     }
 
     @Test
-    public void wenSaveEngine() {
+    public void wenSaveBodyType() {
         BodyType bodyType = new BodyType();
         bodyType.setName("Родстер");
         bodyTypeRepository.save(bodyType);
@@ -59,7 +59,7 @@ class BodyTypeRepositoryTest {
     }
 
     @Test
-    public void wenNeedFindAllEngine() {
+    public void wenNeedFindAllBodyType() {
         BodyType bodyType1 = new BodyType();
         BodyType bodyType2 = new BodyType();
         bodyType1.setName("Сидан");
@@ -71,7 +71,7 @@ class BodyTypeRepositoryTest {
     }
 
     @Test
-    public void wenFindEngineById() {
+    public void wenFindBodyTypeById() {
         BodyType bodyType = new BodyType();
         bodyType.setName("Пикап");
         bodyTypeRepository.save(bodyType);
@@ -81,7 +81,7 @@ class BodyTypeRepositoryTest {
     }
 
     @Test
-    public void wenNeedDeleteEngine() {
+    public void wenNeedDeleteBodyType() {
         BodyType bodyType = new BodyType();
         bodyType.setName("Хечбэк");
         bodyTypeRepository.save(bodyType);

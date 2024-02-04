@@ -67,7 +67,7 @@ class PostRepositoryTest {
         post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
         post.setUser(user);
         post.setCar(car);
-        post.setFiles(List.of(file));
+        post.setFile(new File());
 
         post2 = new Post();
         post2.setDescription("test_description_2");

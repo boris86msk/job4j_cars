@@ -20,6 +20,24 @@ public class Car {
     @Column(name = "model")
     private String model;
 
+    @Column(name = "tm")
+    private String transmission;
+
+    @Column(name = "volume")
+    private String volume;
+
+    @Column(name = "power")
+    private String power;
+
+    @Column(name = "drive")
+    private String drive;
+
+    @Column(name = "age")
+    private int age;
+
+    @Column(name = "mileage")
+    private int mileage;
+
     @ManyToOne
     @JoinColumn(name = "body_id")
     private BodyType bodyType;

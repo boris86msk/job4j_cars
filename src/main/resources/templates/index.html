@@ -19,17 +19,19 @@
         <div class="row w-75 justify-content-center">
             <h2 class="text-dark">Машины в продаже</h2>
         </div>
-        <div class="row border border-dark mt-3 rounded" style="width: 60%; height: 15vh; padding: 2px;"
+
+        <div class="container-fluid row border border-dark mt-3 rounded" style="width: 60%; padding: 2px;"
              th:each="post: ${posts}">
-            <div class="col-4" style="padding: 2px; overflow: hidden;">
+            <div class="col-4">
                 <img class="img-fluid rounded" th:if="${post.file != null}"
                      th:src="@{/files/{path}(path=${post.file.id})}" alt="My_img">
                 <img class="img-fluid rounded" th:if="${post.file == null}"
                      src="img/vector-33.jpg" alt="My_img">
             </div>
             <div class="col-8">
-                <h5 class="text-black-50" th:text="${post.car.brand}"></h5>
-                <h5 class="text-black-50" th:text="${post.car.model}"></h5>
+                <div class="row">
+                    <h5 class="text-black-50 col" th:text="${post.car.brand} + ' / ' + ${post.car.model}"></h5>
+                </div>
             </div>
         </div>
     </div>

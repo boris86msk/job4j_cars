@@ -20,6 +20,8 @@ public class Post {
 
     private String description;
 
+    private int price;
+
     private LocalDateTime created;
 
     @ManyToOne()
