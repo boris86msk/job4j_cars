@@ -12,7 +12,7 @@
             crossorigin="anonymous"></script>
     <title>car sales</title>
 </head>
-<body class="bg-img">
+<body>
 <div class="container">
     <form class="mt-3" th:action="@{/save}" method="post" enctype="multipart/form-data">
         <div class="row">
@@ -33,10 +33,10 @@
             <div class="row">
                 <div class="col">
                 <select type="text" class="form-control" id="tm" name="car.transmission">
-                    <option value="mkpp">Механическая (МКПП)</option>
-                    <option value="rkpp">Роботизированная (РКПП)</option>
-                    <option value="akpp">Автоматическая (АКПП)</option>
-                    <option value="var">Вариатор</option>
+                    <option value="МКПП">Механическая (МКПП)</option>
+                    <option value="РКПП">Роботизированная (РКПП)</option>
+                    <option value="АКПП">Автоматическая (АКПП)</option>
+                    <option value="Вариатор">Вариатор</option>
                 </select>
                 </div>
                 <div class="col"></div>
@@ -60,6 +60,21 @@
             <div class="row">
                 <div class="col">
                     <input type="text" class="form-control" id="power" name="car.power" placeholder="укажите мощность">
+                </div>
+                <div class="col"></div>
+                <div class="col"></div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fuel" class="form-label"><b>Тип топлива</b></label>
+            <div class="row">
+                <div class="col">
+                    <select type="text" class="form-control" id="fuel" name="car.fuel">
+                        <option value="Бензин">Бензин</option>
+                        <option value="Дизель">Дизель</option>
+                        <option value="Электро">Электро</option>
+                    </select>
                 </div>
                 <div class="col"></div>
                 <div class="col"></div>

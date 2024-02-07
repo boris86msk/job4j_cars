@@ -32,6 +32,9 @@ public class Car {
     @Column(name = "drive")
     private String drive;
 
+    @Column(name = "fuel")
+    private String fuel;
+
     @Column(name = "age")
     private int age;
 

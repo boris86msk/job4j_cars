@@ -9,3 +9,4 @@ ALTER TABLE car ADD COLUMN power varchar;
 ALTER TABLE car ADD COLUMN drive varchar;
 ALTER TABLE car ADD COLUMN age int not null;
 ALTER TABLE car ADD COLUMN mileage int not null;
+ALTER TABLE car ADD COLUMN fuel varchar not null;

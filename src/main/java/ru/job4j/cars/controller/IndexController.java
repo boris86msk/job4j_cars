@@ -22,6 +22,6 @@ public class IndexController {
     @GetMapping({"/", "/index"})
     public String testMethod(Model model) {
         model.addAttribute("posts", postRepository.findAll());
-        return "index";
+        return "index3";
     }
 }

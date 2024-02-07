@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link href="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/common_312e5f297e15b54d66d8.css"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+            crossorigin="anonymous"></script>
+    <title>car sales</title>
+</head>
+<body class="react-page body_controller_listing" data-has-counters="true">
+<div class="content">
+    <header th:insert="blocks/header :: header"></header>
+    <div class="Layout">
+        <section class="LayoutSidebar AppListingLayoutSidebar-xhYYY">
+            <div class="LayoutSidebar__content">
+                <div class="PageListing">
+                    <div class="ListingCars ListingCars_outputType_list"  th:each="post: ${posts}">
+                        <div class="ListingItem">
+                            <div class="ListingItem_man">
+                                <div class="ListingItem__thumb"><a class="Link OfferThumb OfferThumb_radius_r8"
+                                                                   href="https://auto.ru/cars/used/sale/mazda/6/1122110872-d31ba291/"
+                                                                   target="__lol-1707245459491-0.30906178703658216"
+                                                                   rel="noopener">
+                                    <div class="OfferThumb__brazzers">
+                                        <div class="Brazzers Brazzers_forceShowButtons">
+                                            <div class="Brazzers__page">
+                                                <div class="Brazzers__image-wrapper">
+                                                    <div class="Brazzers__image">
+                                                        <img class="LazyImage__image"
+                                                             th:src="@{/files/{path}(path=${post.file.id})}">
+                                                    </div>
+                                                </div>
+                                                <div class="Brazzers__button"></div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </a>
+                                    <div class="ExclusiveOfferPopupDesktop InfoPopup InfoPopup_theme_plain InfoPopup_withChildren">
+                                        <div class="Popup Popup_animation_full Popup_theme_plain Popup-info "></div>
+                                    </div>
+                                </div>
+                                <div class="ListingItem__description">
+                                    <div class="ListingItem__summary">
+                                        <h3 class="ListingItemTitle ListingItem__title">
+                                            <a class="Link ListingItemTitle__link"
+                                               href="http://localhost:8082/files/id=1"
+                                               target="__lol-1707245459615-0.5776272316566184" rel="noopener"
+                                               th:text="${post.car.brand} + '/' + ${post.car.model}">
+                                                <div>
+                                                    <div class="ListingItemTitle__clicker"></div>
+                                                </div>
+                                            </a>
+                                        </h3>
+                                        <div class="ListingItemTechSummaryDesktop ListingItem__techSummary">
+                                            <div class="ListingItemTechSummaryDesktop__column">
+                                                <div class="ListingItemTechSummaryDesktop__cell"
+                                                     th:text="${post.car.volume} + 'л/' + ${post.car.power} + 'л.с./' + ${post.car.fuel}"></div>
+                                                <div class="ListingItemTechSummaryDesktop__cell"
+                                                     th:text="${post.car.transmission}"></div>
+                                                <div class="ListingItemTechSummaryDesktop__cell"
+                                                     th:text="${post.car.bodyType.name}"></div>
+                                            </div>
+                                            <div class="ListingItemTechSummaryDesktop__column">
+                                                <div class="ListingItemTechSummaryDesktop__cell"
+                                                     th:text="${post.car.drive}"></div>
+                                                <div class="ListingItemTechSummaryDesktop__cell">красный</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ListingItem__priceBlock">
+                                        <div class="ListingItemPriceNew-wVhP3 ListingItem__price">
+                                            <div class="ListingItemPriceNew__content-HAVf2"><a
+                                                    class="Link ListingItemPriceNew__link-cYuLr"
+                                                    href="https://auto.ru/cars/used/sale/mazda/6/1122110872-d31ba291/"
+                                                    target="__lol-1707245459676-0.8460657616786218"
+                                                    rel="noopener"><span th:text="${post.price} + '₽'"></span></a>
+                                            </div>
+                                        </div>
+                                        <div class="ListingItemPriceNew-wVhP3 ListingItem__price ListingItem__price_second">
+                                            <div class="ListingItemPriceNew__content-HAVf2"><span
+                                                    th:text="'со скидками ' + ${post.price - 1201}  + '₽'"></span></div>
+                                        </div>
+                                        <div class="ListingItem__priceBadge">
+                                            <div class="OfferPriceBadgeNew-cQWc5 OfferPriceBadgeNew__green-H9eUp">
+                                                Справедливая
+                                                цена
+                                            </div>
+                                        </div>
+                                        <span class="Link CreditPrice CreditPrice_type_link" tabindex="0"
+                                              role="button"><span>Купить в&nbsp;кредит</span></span></div>
+                                    <div class="ListingItem__yearBlock">
+                                        <div class="ListingItem__year" th:text="${post.car.age}"></div>
+                                    </div>
+                                    <div class="ListingItem__kmAgeAndActionsBlock">
+                                        <div class="ListingItem__kmAgeAndSalonInfo">
+                                            <div class="ListingItem__kmAge" th:text="${post.car.mileage} + 'км'"></div>
+                                            <a class="Link ListingItemSalonName-z3w2o ListingItem__salonName"
+                                               href="https://auto.ru/diler/cars/ac_na_beregovoy_moskva/" target="_blank"
+                                               rel="noopener">АЦ
+                                                Береговой</a>
+                                        </div>
+                                        <div class="ListingItem__actionsContainer">
+                                            <div class="ListingItemActions ListingItem__actions">
+                                                <div class="Button Button_color_white Button_size_s Button_type_div Button_width_default Button_radius_r8 ButtonFavorite ButtonFavorite_size_s"
+                                                     type="div" role="button"><span class="Button__content"><span
+                                                        class="ButtonFavorite__content HoveredTooltip__trigger"><div
+                                                        class="ButtonFavorite__content ButtonFavorite__content_align_center"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        class="IconSvg IconSvg_name_SvgFavoriteSmall IconSvg_size_24 ButtonFavorite__icon"><path
+                                                        fill="currentColor"
+                                                        d="M17.107 11.357c1.19-1.226 1.19-3.236 0-4.462a2.88 2.88 0 0 0-4.172 0L11.5 8.372l-1.435-1.477a2.88 2.88 0 0 0-4.172 0c-1.19 1.226-1.19 3.236 0 4.462L11.5 17.13zM4.458 5.501a4.88 4.88 0 0 1 7.042 0 4.88 4.88 0 0 1 7.042 0c1.944 2.002 1.944 5.248 0 7.25L11.5 20l-7.042-7.25c-1.944-2.001-1.944-5.247 0-7.249"></path></svg></div></span></span>
+                                                </div>
+                                                <div class="Button Button_color_white Button_size_s Button_type_div Button_width_default ButtonCompare ButtonCompare_type_button ButtonCompare_size_s"
+                                                     type="div" role="button"><span class="Button__content"><span
+                                                        class="ButtonCompare__tooltip HoveredTooltip__trigger"><svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 16 16"
+                                                        class="IconSvg IconSvg_name_SvgCarCompareSmall IconSvg_size_18 ButtonCompare__icon"><path
+                                                        d="M8.889.5H7.11v15.03h1.78V.5ZM9.96 2.672l-.263-.021v1.777l.221.019c.7.06 1.284.165 1.843.323l.95 2.356H9.698v1.778h3.63c.186.359.246.738.249 1.258v.843h-3.88v1.778h2.787l.08 1.114c.033.465.42.825.886.825h1.015a.89.89 0 0 0 .889-.889v-3.678c-.004-.677-.084-1.4-.485-2.137l-.2-.407H16v-.889a.89.89 0 0 0-.889-.889h-1.005l-.998-2.474-.098-.037c-.92-.355-1.892-.554-3.05-.65M6.303 4.428V2.65l-.262.021c-1.16.096-2.13.295-3.05.65l-.099.037-.998 2.474H.889a.89.89 0 0 0-.889.89v.888h1.331l-.2.407c-.401.736-.48 1.46-.485 2.137v3.678c0 .491.398.89.89.89H2.55a.89.89 0 0 0 .886-.826l.08-1.114h2.787v-1.778H2.424v-.842c.003-.52.063-.9.25-1.259h3.629V7.126H3.288L4.24 4.77a9.7 9.7 0 0 1 1.842-.323l.221-.02Z"></path></svg> </span></span>
+                                                </div>
+                                                <div class="Button Button_color_white Button_size_s Button_type_div Button_width_default ButtonNote ButtonNote_size_s"
+                                                     type="div" role="button"><span class="Button__content"><div
+                                                        class="ButtonNote__tooltip HoveredTooltip__trigger"><svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="IconSvg IconSvg_name_SvgNoteSmall IconSvg_size_24 ButtonNote__icon"><g
+                                                        fill="currentColor"><path
+                                                        d="m9.3 12.497 1.767 1.769 8.485-8.486-1.768-1.768z"></path><path
+                                                        d="M5 4v15h13v-8h-2v6H7V6h7V4z"></path></g></svg></div></span>
+                                                </div>
+                                                <button class="Button Button_color_white Button_size_s Button_type_button Button_width_default ListingItemActions__rollup"
+                                                        type="button"><span class="Button__content"><span
+                                                        class="ListingItemActions__iconWrapper HoveredTooltip__trigger"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        class="IconSvg IconSvg_name_SvgCloseSmall IconSvg_size_24 ListingItemActions__icon"><path
+                                                        fill="currentColor" fill-rule="evenodd"
+                                                        d="M12 10.586 7.757 6.343 6.343 7.757 10.586 12l-4.243 4.243 1.414 1.414L12 13.414l4.243 4.243 1.414-1.414L13.414 12l4.243-4.243-1.414-1.414z"></path></svg></span></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ListingItem__tags">
+                                        <div class="ListingItemTagsDesktop">
+                                            <div class="BadgeHistory4Call__badge-NhvxJ HoveredTooltip__trigger">
+                                                <div class="Badge Badge_color_dark Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
+                                                    Отчёт
+                                                    за звонок
+                                                </div>
+                                            </div>
+                                            <div class="Badge Badge_color_blueGrayLightExtra Badge_size_l Badge_padding_default ListingItemTagsDesktop__item">
+                                                Онлайн заявка✅
+                                            </div>
+                                            <div class="InfoPopup InfoPopup_theme_plain InfoPopup_withChildren">
+                                                <div class="Badge Badge_color_blueGrayLightExtra Badge_size_l Badge_padding_default BadgeDiscountDesktop ListingItemTagsDesktop__item">
+                                                    Скидки
+                                                </div>
+                                                <div class="Popup Popup_animation_full Popup_theme_plain Popup-info "></div>
+                                            </div>
+                                            <div class="InfoPopup InfoPopup_theme_plain InfoPopup_withChildren">
+                                                <div class="Badge Badge_color_blueGrayLightExtra Badge_size_l Badge_padding_default BadgeVinReportDesktop ListingItemTagsDesktop__item">
+                                                    Отчёт Job4j &#128513;
+                                                </div>
+                                                <div class="Popup Popup_animation_full Popup_theme_plain Popup-info "></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>

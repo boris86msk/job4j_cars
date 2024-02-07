@@ -12,7 +12,7 @@
             crossorigin="anonymous"></script>
     <title>car sales</title>
 </head>
-<body class="bg-img">
+<body>
 <div class="container-fluid">
     <header th:insert="blocks/header :: header"></header>
     <div class="row justify-content-center">
@@ -29,8 +29,9 @@
                      src="img/vector-33.jpg" alt="My_img">
             </div>
             <div class="col-8">
-                <div class="row">
-                    <h5 class="text-black-50 col" th:text="${post.car.brand} + ' / ' + ${post.car.model}"></h5>
+                <div class="row" style="padding-left: 10px;">
+                    <h6 class="text-dark col" th:text="${post.car.brand} + '/' + ${post.car.model} + '   ' +
+                     ${post.car.volume} + 'л/' + ${post.car.power} + 'л.с./' + ${post.car.fuel}"></h6>
                 </div>
             </div>
         </div>
