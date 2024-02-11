@@ -236,8 +236,8 @@
                                         <div class="ListingItem__main">
                                             <div class="ListingItem__thumb"><a
                                                     class="Link OfferThumb OfferThumb_radius_r8"
-                                                    href="https://auto.ru/cars/used/sale/mazda/6/1122110872-d31ba291/"
-                                                    target="__lol-1707245459491-0.30906178703658216" rel="noopener">
+                                                    th:href="@{/one/{postId}(postId=${post.id})}"
+                                                    rel="noopener">
                                                 <div class="OfferThumb__brazzers">
                                                     <div class="Brazzers Brazzers_forceShowButtons">
                                                         <div class="Brazzers__page">
@@ -269,8 +269,7 @@
                                                 <div class="ListingItem__summary">
                                                     <h3 class="ListingItemTitle ListingItem__title">
                                                         <a class="Link ListingItemTitle__link"
-                                                           href="https://auto.ru/cars/used/sale/mazda/6/1122110872-d31ba291/"
-                                                           target="__lol-1707245459615-0.5776272316566184"
+                                                           th:href="@{/one/{id}(id=${post.id})}"
                                                            rel="noopener"
                                                            th:text="${post.car.brand} + '/' + ${post.car.model}">
                                                             <div>
@@ -286,7 +285,7 @@
                                                         </div>
                                                         <div class="ListingItemTechSummaryDesktop__column">
                                                             <div class="ListingItemTechSummaryDesktop__cell" th:text="${post.car.drive}"></div>
-                                                            <div class="ListingItemTechSummaryDesktop__cell">красный</div>
+                                                            <div class="ListingItemTechSummaryDesktop__cell" th:text="${post.car.color}"></div>
                                                         </div>
                                                     </div>
                                                 </div>

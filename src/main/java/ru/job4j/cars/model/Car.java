@@ -20,6 +20,9 @@ public class Car {
     @Column(name = "model")
     private String model;
 
+    @Column(name = "color")
+    private String color;
+
     @Column(name = "tm")
     private String transmission;
 

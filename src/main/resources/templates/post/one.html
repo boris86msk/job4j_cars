@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/job4j.css}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+            crossorigin="anonymous"></script>
+    <title>car sales</title>
+</head>
+<body class="react-page body_controller_listing" data-has-counters="true">
+<div id="app" class="__react-app__">
+    <div class="SusaninReact">
+        <div id="sale-data-attributes"
+             data-bem="{&quot;sale-data-attributes&quot;:{&quot;asciiCat&quot;:&quot;cars&quot;,&quot;puid10&quot;:&quot;1&quot;,&quot;mark&quot;:&quot;MAZDA&quot;,&quot;segment&quot;:&quot;MEDIUM&quot;,&quot;puid2&quot;:&quot;3171&quot;,&quot;type&quot;:&quot;&quot;}}"
+             style="display:none"></div>
+        <div class="page page_type_listing">
+            <div class="TopBgKolya"></div>
+            <div id="seller-data-attributes" data-bem="{&quot;seller-data-attributes&quot;:{}}"
+                 style="display:none"></div>
+            <header class="Header Header_theme_default" th:insert="blocks/header :: header">
+
+            </header>
+            <div class="content">
+                <div class="TopNavigation TopNavigation_background_white TopNavigation_bottom-margin_true">
+                    <div class="TopNavigation__inner Layout">
+                        <div class="TopNavigation__left">
+                            <div class="ServiceNavigation">
+                                <span class="Link ServiceNavigation__link ServiceNavigation__link_name_listing ServiceNavigation__link_active"
+                                    tabindex="0" role="button">Объявления</span>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_catalog"
+                                    href="https://auto.ru/catalog/cars/mazda/">Каталог</a>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_dealers"
+                                    href="https://auto.ru/moskva/dilery/cars/all/">Дилеры</a>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_reviews"
+                                    href="https://auto.ru/reviews/cars/mazda/">Отзывы</a>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_video"
+                                    href="https://auto.ru/video/cars/mazda/">Видео</a>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_logbook"
+                                    href="https://auto.ru/logbook/mazda/">Бортжурнал</a>
+                            </div>
+                        </div>
+                        <div class="TopNavigationIndicators TopNavigation__right">
+                            <div class="TopNavigationIndicators__item">
+                                <div class="GeoSelect-QRQ2Q">
+                                    <div class="GeoSelect__title-wkExE">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                             class="IconSvg IconSvg_name_SvgGeo IconSvg_size_24 GeoSelect__icon-R79tf">
+                                            <g fill="currentColor" fill-rule="evenodd">
+                                                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2m0 2c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8"></path>
+                                                <path d="m7 12 9-4-4 9-1-4z"></path>
+                                            </g>
+                                        </svg>
+                                        <span class="GeoSelect__titleShrinker-wjCdV"
+                                              title="Москва">Москва + 200 км</span></div>
+                                    <div class="Popup Popup_animation_full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <H1>Просмотр объявления</H1>
+            <div style="display:contents">
+                <div class="Footer">
+                    <div class="Footer__inner Layout">
+                        <div class="Footer__important-links"></div>
+
+                        <div class="Footer__links">
+                            <div class="Footer__services-links__links"><a
+                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_realty-tIbnA"
+                                    href="https://realty.ya.ru/" target="_blank" rel="noopener"></a><a
+                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_arenda-n7mVx"
+                                    href="https://arenda.yandex.ru/" target="_blank" rel="noopener"></a><a
+                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_travel-iPy3y"
+                                    href="https://travel.yandex.ru/" target="_blank" rel="noopener"></a><a
+                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_rasp-HIVUe"
+                                    href="https://rasp.yandex.ru/" target="_blank" rel="noopener"></a><a
+                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_uslugi-jGhfz"
+                                    href="https://uslugi.yandex.ru/" target="_blank" rel="noopener"></a></div>
+                            <div class="FooterLogo-ROe50">
+                                <div class="FooterLogo__caption-mpypv">Проект </div>
+                                <a class="FooterLogo__img-vl1I_" href="http://www.job4j.ru/"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Notifier"></div>
+            <div class="PageLoaderBarDesktop-fTD8M PageLoaderBarDesktop__red-ZrYpg"></div>
+            <div class="Modal" role="dialog" aria-hidden="true">
+                <div class="Modal__container">
+                    <div class="Modal__content_wrapper">
+                        <div class="Modal__content AuthModal">
+                            <div class="Modal__content_relative">
+                                <div class="Modal__content_body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Modal__closer" aria-label="Закрыть" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
+                            <path fill="currentColor"
+                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Modal" role="dialog" aria-hidden="true">
+                <div class="Modal__container">
+                    <div class="Modal__content_wrapper">
+                        <div class="Modal__content GusModal">
+                            <div class="Modal__content_relative">
+                                <div class="Modal__content_body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Modal__closer" aria-label="Закрыть" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
+                            <path fill="currentColor"
+                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Modal" role="dialog" aria-hidden="true">
+                <div class="Modal__container">
+                    <div class="Modal__content_wrapper">
+                        <div class="Modal__content ContactsLimitedModal">
+                            <div class="Modal__content_relative">
+                                <div class="Modal__content_body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Modal__closer" aria-label="Закрыть" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
+                            <path fill="currentColor"
+                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Modal" role="dialog" aria-hidden="true">
+                <div class="Modal__container">
+                    <div class="Modal__content_wrapper">
+                        <div class="Modal__content PhoneRequiredModal-Hdnl6">
+                            <div class="Modal__content_relative">
+                                <div class="Modal__content_body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Modal__closer" aria-label="Закрыть" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
+                            <path fill="currentColor"
+                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Modal" role="dialog" aria-hidden="true">
+                <div class="Modal__container">
+                    <div class="Modal__content_wrapper YandexPlusInfoModal__modalWrapper-UMVWs">
+                        <div class="Modal__content">
+                            <div class="Modal__content_relative">
+                                <div class="Modal__content_body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Modal__closer" aria-label="Закрыть" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
+                            <path fill="currentColor"
+                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Modal" role="dialog" aria-hidden="true">
+                <div class="Modal__container">
+                    <div class="Modal__content_wrapper MatchApplicationModal__modalWrapper-mC12L">
+                        <div class="Modal__content">
+                            <div class="Modal__content_relative">
+                                <div class="Modal__content_body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Modal__closer" aria-label="Закрыть" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
+                            <path fill="currentColor"
+                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Modal DealerCallbackModal-JEZMT" role="dialog" aria-hidden="true">
+                <div class="Modal__container">
+                    <div class="Modal__content_wrapper">
+                        <div class="Modal__content">
+                            <div class="Modal__content_relative">
+                                <div class="Modal__content_body"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Modal__closer" aria-label="Закрыть" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
+                            <path fill="currentColor"
+                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script async="" nonce="" src="https://sso.auto.ru/st/js/v1/mda2.1.min.js"></script>
+<script crossorigin="anonymous" nonce="" src="https://yastatic.net/react/18.2.0/react-with-dom.min.js"
+        data-rcid="3071"></script>
+<script crossorigin="anonymous" nonce=""
+        src="https://yastatic.net/s3/vertis-front-deploy/libs/lodash/4.17.21/lodash.min.js" data-rcid="lodash"></script>
+<script async="" nonce="" src="https://adfstat.yandex.ru/autoru?reqid=ee3b803ffbd47b3ee93f851ab32799bc"
+        type="application/json" data-rcid="adfstat"></script>
+<script type="application/json" id="app-config">{
+    "appId": "af-desktop-search",
+    "debug": false,
+    "env": "production",
+    "envDev": false,
+    "envProd": true,
+    "envTesting": false,
+    "version": "17.1.1",
+    "authDomain": "auth.auto.ru",
+    "baseDomain": "auto.ru",
+    "cookiesDomain": ".auto.ru",
+    "ssoDomain": "sso.auto.ru",
+    "ssoPassportDomain": "sso.passport.yandex.ru",
+    "apiPassport": "https://api.passport.yandex.ru",
+    "passport": "https://passport.yandex.ru",
+    "moderationFrameHost": "moderation.vertis.yandex-team.ru",
+    "yandexKassaShopId": "589398",
+    "trustPaymentApiHostname": "https://trust.yandex.ru/web",
+    "trustDiehardHostname": "https://card-form.diehard.yandex.net",
+    "ajaxPath": "/-/ajax/desktop-search/",
+    "staticPath": "https://yastatic.net/s3/vertis-front-deploy/af-desktop-search/17.1.1",
+    "staticPathReact": "https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend",
+    "CMEAddCampaignsPath": "https://lk.cm.expert/ad-campaigns",
+    "CMELogoutPath": "https://auth.cm.expert/logout",
+    "CMEBusinessAccountsPath": "https://auth.cm.expert/autoru/business-accounts",
+    "CMEIssueAutoruTicket": "https://auth.cm.expert/issue-autoru-ticket",
+    "CMESettingsPath": "https://lk.cm.expert/settings/profile?addCabinet=true"
+}</script>
+<script type="application/json" id="app-config-client">{
+    "experimentsData": {
+        "experiments": {
+            "AUTORUFRONT-23124_credit_wizard_redirect": true,
+            "VS-1796_dj_related": true,
+            "AUTORUFRONT-23965_autoru_exclusive_promo": true,
+            "AUTORUFRONT-23869_listing_new": true,
+            "AUTORUFRONT-23869_card_new": true,
+            "AUTORUFRONT-23869_group_card": true,
+            "AUTORUFRONT-23869_empty_card": true,
+            "AUTORUFRONT-23963_default_without_discount": true,
+            "AUTORUFRONT-24751": true,
+            "AUTORUFRONT-24587_match_application_filters": true,
+            "dj_catalog_catalog_mark_model": true,
+            "AUTORUFRONT-24727_match_application_reviews_and_catalog": true,
+            "AUTORUFRONT-21782_new_dealer_poffer": true,
+            "AUTORUFRONT-24817_help_select_car": true,
+            "AUTORUFRONT-24817_help_select_car_listing": true,
+            "AUTORUFRONT-25336_chinese_pinned": true,
+            "AUTORUFRONT-26038_autumn_rk": true,
+            "AUTORUFRONT-26087_autumn_rk": true,
+            "AUTORUFRONT-26482": true,
+            "AUTORUFRONT-26393_china_landing_binding": true,
+            "AUTORUFRONT-26075_chinese_all_models_listing_links": true,
+            "AUTORUFRONT-26724_carfax_offer_without_gibdd_web_exp": true,
+            "AUTORUFRONT-26062_newdesign": true,
+            "AUTORUFRONT-27267_dkp_with_auth": true,
+            "AUTORUFRONT-27976_dkp_no_popup": true,
+            "AUTORUFRONT-27656_exp": true,
+            "AUTORUFRONT-25176_akinator_enabled": true,
+            "AUTORUFRONT-28080_disable_listing_banner_places_v2": true,
+            "AUTORUFRONT-28131-0": true,
+            "AUTORUFRONT-26096_autumn_rk": true,
+            "AUTORUFRONT-26164_gpt_description": true,
+            "AUTORUFRONT-22762_nps_seller": true,
+            "AUTORUFRONT-23199-leasing-promo": true,
+            "AUTORUFRONT-25488_NO_ANSWER_ENABLED": true,
+            "AUTORUFRONT-26560_exp12": true,
+            "INTMONETIZATION-1104-1-C": true,
+            "AUTORUFRONT-26040_autumn_rk": true
+        },
+        "uaas": {
+            "expboxes": [
+                "944266,0,14",
+                "925357,0,27",
+                "896332,0,6",
+                "941926,0,20",
+                "952078,0,49",
+                "960686,0,17",
+                "869772,0,20",
+                "808860,0,79",
+                "924707,0,76",
+                "960498,0,98",
+                "896344,0,49",
+                "956000,0,30",
+                "896374,0,59",
+                "896392,0,3",
+                "924671,0,19",
+                "734988,0,89",
+                "886145,0,31",
+                "640467,0,86",
+                "674887,0,52",
+                "688733,0,38",
+                "437429,0,73",
+                "382180,0,50",
+                "804879,0,44",
+                "900207,0,77",
+                "945458,0,65",
+                "960315,0,21",
+                "946281,0,69",
+                "896364,0,47",
+                "896365,0,26"
+            ]
+        }
+    },
+    "featureToggles": [
+        {
+            "key": "enabled_streaming_chunks",
+            "value": {
+                "index": [],
+                "listing": [
+                    "ads"
+                ]
+            }
+        },
+        {
+            "key": "enable_early_streaming_for_pages",
+            "value": []
+        },
+        {
+            "key": "new_year_logo",
+            "value": false
+        },
+        {
+            "key": "AUTORUFRONT-27687-jetour-buy-online",
+            "value": false
+        },
+        {
+            "key": "happy_birthday",
+            "value": false
+        },
+        {
+            "key": "insurance_tinkoff",
+            "value": true
+        },
+        {
+            "key": "reseller_user_rating_feedback_button",
+            "value": true
+        },
+        {
+            "key": "ssr_without_worker",
+            "value": false
+        },
+        {
+            "key": "AUTORUFRONT-27632_vip_vas",
+            "value": true
+        },
+        {
+            "key": "reseller_user_rating",
+            "value": true
+        },
+        {
+            "key": "search_bot_ssr_only_enabled",
+            "value": true
+        },
+        {
+            "key": "show_new_reseller_view_on_offer",
+            "value": true
+        },
+        {
+            "key": "AUTORUFRONT-25830_logbook_reviews",
+            "value": true
+        },
+        {
+            "key": "sso_redirect_enabled",
+            "value": true
+        },
+        {
+            "key": "AUTORUFRONT-26577_show_dealer_profile_iks",
+            "value": true
+        },
+        {
+            "key": "search_bot_ssr_only",
+            "value": [
+                "card",
+                "card-new",
+                "listing",
+                "moto-listing",
+                "commercial-listing",
+                "card-group",
+                "index",
+                "dealers-listing",
+                "dealer-profile"
+            ]
+        },
+        {
+            "key": "journal_api_posts_v2",
+            "value": true
+        },
+        {
+            "key": "enable_static_streaming",
+            "value": false
+        },
+        {
+            "key": "antirobot_suspiciousness_support",
+            "value": true
+        },
+        {
+            "key": "AUTORUFRONT-25932-buy-online",
+            "value": true
+        },
+        {
+            "key": "disable_user_seo_microdata",
+            "value": true
+        },
+        {
+            "key": "dealer_of_the_year_achievement",
+            "value": true
+        },
+        {
+            "key": "sso_redirect_enabled_for_webview",
+            "value": true
+        }
+    ],
+    "devFeaturesConfig": {
+        "no-ad": false,
+        "no-marketing-iframe": false,
+        "no-uxfeedback": false,
+        "no-dev-tools": false,
+        "no-event-logs": false,
+        "no-internal-network": false,
+        "event-logs-debug-logs": false,
+        "initial-data": false,
+        "initial-state": false
+    },
+    "isInternalNetwork": false,
+    "isCrawler": false,
+    "pageRequestId": "ee3b803ffbd47b3ee93f851ab32799bc",
+    "webpack": 93
+}</script>
+<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json" crossorigin="anonymous" nonce="">[
+    736,
+    592,
+    295,
+    39,
+    731
+]</script>
+<script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json" crossorigin="anonymous" nonce="">{
+    "namedChunks": [
+        "listing",
+        "listing-item-price-new",
+        "offer-price-badge",
+        "SellerPopup"
+    ]
+}</script>
+<script async="" data-chunk="client"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/shared-libs_react-redux_b3aeb990129e44287aa2.js"
+        crossorigin="anonymous" nonce="" data-rcid="shared-libs_react-redux.js"></script>
+<script async="" data-chunk="client"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/shared-libs_nommon_9c57f4a94ff0fa8b53d0.js"
+        crossorigin="anonymous" nonce="" data-rcid="shared-libs_nommon.js"></script>
+<script async="" data-chunk="client"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/shared-libs_dayjs_58ab386bd6d0ef10866f.js"
+        crossorigin="anonymous" nonce="" data-rcid="shared-libs_dayjs.js"></script>
+<script async="" data-chunk="client"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/shared-libs_susanin_5f7d96b0ba37fc71e7ed.js"
+        crossorigin="anonymous" nonce="" data-rcid="shared-libs_susanin.js"></script>
+<script async="" data-chunk="client"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/shared-libs_redux_b3ddc2cce551656718c2.js"
+        crossorigin="anonymous" nonce="" data-rcid="shared-libs_redux.js"></script>
+<script async="" data-chunk="client"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/client_0d201d675c430ffe68a7.js"
+        crossorigin="anonymous" nonce="" data-rcid="client.js"></script>
+<script async="" data-chunk="listing"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/vendor_51a27421f78974b8434d.js"
+        crossorigin="anonymous" nonce="" data-rcid="vendor.js"></script>
+<script async="" data-chunk="listing"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/common_3e08e12d8e0bfb2faa6a.js"
+        crossorigin="anonymous" nonce="" data-rcid="common.js"></script>
+<script async="" data-chunk="listing"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/listing_3ea9607a22daceb34da7.js"
+        crossorigin="anonymous" nonce="" data-rcid="listing.js"></script>
+<script async="" data-chunk="listing-item-price-new"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/listing-item-price-new_f7d5f6b4820f5c845837.js"
+        crossorigin="anonymous" nonce="" data-rcid="listing-item-price-new.js"></script>
+<script async="" data-chunk="SellerPopup"
+        src="https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/SellerPopup_366ef7af476290369bee.js"
+        crossorigin="anonymous" nonce="" data-rcid="SellerPopup.js"></script>
+<iframe id="uxfb_iframe" src="https://yastatic.net/s3/vertis-frontend/autoru-frontend/uxfeedback-static/uxfeedback.html"
+        frameborder="0" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+        style="display: none;"></iframe>
+<iframe id="marketing-iframe"
+        src="https://promo.avto.ru/retargeting/?category=cars&amp;currency_code=RUR&amp;pageName=desktop_listing_cars&amp;hashEmail=da95c45f1c2e7d66ddc76b1e63d82f696e77b2dfd18f0b96c67bdb300dcbfc20&amp;products=1122110872-d31ba291&amp;products=1122110868-7da0a98f&amp;products=1121737489-c0506e33&amp;products=1121916748-241172fb&amp;products=1122019676-1f0894a9&amp;products=1121819908-8dca9179&amp;products=1121647302-9bf0aa4b&amp;products=1121646420-10316ede&amp;products=1121962025-1a279752&amp;products=1121647301-6f2ecf04&amp;products=1122052528-cf4eaece&amp;products=1122037597-7994bfd8&amp;products=1119892645-1e5a5597&amp;products=1121610624-7b6b370d&amp;products=1122037598-73dac8eb&amp;products=1122037601-623136ef&amp;products=1120452059-476bb08b&amp;products=1122037596-4ff392a4&amp;products=1121919670-229122c6&amp;products=1121928315-0c1f2498&amp;products=1122162622-e0bfe074&amp;products=1122037599-6f1726d4&amp;products=1122118787-6aa2d537&amp;products=1122037600-b2b9ae2f&amp;products=1120365765-067ed8f3&amp;products=1121147098-bbb3c692&amp;products=1121900399-953a6b2b&amp;products=1121381979-c2aecfb1&amp;products=1121459638-c59dee3c&amp;products=1121858105-218fa2a3&amp;products=1121647315-1b3afa51&amp;products=1121596488-4e3ab390&amp;products=1121611455-57503fc2&amp;products=1122037593-f7a2508f&amp;products=1120779525-8c2684a4&amp;products=1120454322-38c27f0f&amp;products=1121630109-9a16ec9a&amp;currentUrl=https%3A%2F%2Fauto.ru%2Fmoskva%2Fcars%2Fmazda%2Fall%2F&amp;referer=https%3A%2F%2Fauto.ru%2F%3Futm_referrer%3Dhttps%253A%252F%252Fwww.yandex.ru%252Fclck%252Fjsredir%253Ffrom%253Dyandex.ru%253Bsuggest%253Bbrowser%2526text%253D&amp;section=all&amp;gaId=&amp;ymId=1707160962386011799&amp;total_price=117430999&amp;output_type=list&amp;geo=1"
+        width="0" height="0" frameborder="0" scrolling="no"
+        style="border-width: 0px; margin: 0px; display: none;"></iframe>
+<iframe id="rtb-iframe"
+        src="https://creativecdn.com/tags?type=iframe&amp;id=pr_c2rHi7OQgV0u3CcfQ00B_listing_1122110872-d31ba291,1122110868-7da0a98f,1121737489-c0506e33,1121916748-241172fb,1122019676-1f0894a9&amp;id=pr_c2rHi7OQgV0u3CcfQ00B_uid_3c76327d0a8c948e0f972194edb2d4db.2d18202c58231e941e696578324faa3a&amp;id=pr_c2rHi7OQgV0u3CcfQ00B_lid_IiiKK6NVqYtVd7TwJfmI&amp;su=https://auto.ru/moskva/cars/mazda/all/&amp;sr=https://auto.ru/?utm_referrer=https%3A%2F%2Fwww.yandex.ru%2Fclck%2Fjsredir%3Ffrom%3Dyandex.ru%3Bsuggest%3Bbrowser%26text%3D&amp;ts=1707245461288"
+        width="1" height="1" frameborder="0" scrolling="no"
+        style="border-width: 0px; margin: 0px; display: none;"></iframe>
+<iframe id="pro-iframe" src="https://pro.auto.ru/metric.html" width="0" height="0" frameborder="0" scrolling="no"
+        style="border-width: 0px; margin: 0px; display: none;"></iframe>
+<script async="" src="/chat/loader.js" type="text/javascript"></script>
+<iframe id="yafp" src="https://auto.ru/static/yafp.html" style="display: none;"></iframe>
+<link rel="stylesheet" href="//yastatic.net/s3/vertis-front-deploy/af-chat/54.0.13373535/vertis-chat.css">
+<script async="" type="text/javascript"
+        src="//yastatic.net/s3/vertis-front-deploy/af-chat/54.0.13373535/vertis-chat.js"></script>
+<div></div>
+<div>
+    <div class="Popup Popup_animation_full Popup_theme_plain Popup_direction_top-center Popup_js_inited Popup-info "
+         style="z-index: 3001; left: 113.07px; top: 1491px;"></div>
+</div>
+<div>
+    <div class="Popup Popup_animation_full Popup_theme_plain Popup_direction_left-center Popup_js_inited Popup-info "
+         style="z-index: 3001; left: 127.875px; top: 1125px;"></div>
+</div>
+</body>
+</html>

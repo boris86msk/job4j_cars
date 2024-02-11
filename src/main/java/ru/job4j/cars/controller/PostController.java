@@ -2,10 +2,7 @@ package ru.job4j.cars.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.cars.dto.FileDto;
 import ru.job4j.cars.model.BodyType;
@@ -19,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class PostController {
@@ -40,6 +40,12 @@ public class PostController {
         model.addAttribute("ages",  ages);
         model.addAttribute("bodyType", bodyTypeRepository.findAllType());
         return "post/create";
+    }
+
+    @GetMapping("/one/{postId}")
+    public String  getOnePage(@PathVariable int postId) {
+        Map<Integer, Integer> map = new HashMap<>();
+        return "post/one";
     }
 
     @PostMapping("save")
