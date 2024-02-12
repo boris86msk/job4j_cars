@@ -59,13 +59,11 @@ public class UserRepository {
         );
     }
 
-    /**
-     * Найти пользователя по ID
-     * @return пользователь.
-     */
     public Optional<User> findById(int userId) {
         return crudRepository.optional(
-                "from User where id = :fId", User.class,
+                "from User u"
+                        + " left join fetch u.participates"
+                        + " where u.id = :fId", User.class,
                 Map.of("fId", userId)
         );
     }

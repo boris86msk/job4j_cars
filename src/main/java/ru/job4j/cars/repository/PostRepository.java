@@ -111,4 +111,12 @@ public class PostRepository {
                 Map.of("fId", id)
         );
     }
+
+    public List<Post> findByUser(int userId) {
+        return crudRepository.query("from Post p "
+                        + "left join fetch p.user u "
+                        + "left join fetch p.car c "
+                        + "where u.id = :userId", Post.class,
+                Map.of("userId", userId));
+    }
 }

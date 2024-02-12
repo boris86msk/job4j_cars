@@ -1,0 +1,41 @@
+<td>
+    <div class="ListingItem__main">
+        <div class="row">
+            <a class="Link OfferThumb OfferThumb_radius_r8 col m-2"
+               th:href="@{/one/{postId}(postId=${post.id})}"
+               rel="noopener">
+                <div class="OfferThumb__brazzers">
+                    <div class="Brazzers Brazzers_forceShowButtons">
+                        <div class="Brazzers__page">
+                            <div class="Brazzers__image-wrapper">
+                                <div class="Brazzers__image"><img
+                                        class="LazyImage__image"
+                                        th:src="@{/files/{path}(path=${post.file.id})}"
+                                        decoding="async" loading="lazy"></div>
+                            </div>
+                            <div class="Brazzers__button"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="ListingItemTechSummaryDesktop ListingItem__techSummary col">
+                <a class="Link OfferThumb OfferThumb_radius_r8 col m-2"
+                   th:href="@{/one/{postId}(postId=${post.id})}"
+                   rel="noopener">
+                <div class="ListingItemTechSummaryDesktop__column">
+                    <div class="ListingItemTechSummaryDesktop__cell"
+                         th:text="${post.car.brand} + ' ' + ${post.car.model}"></div>
+                    <div class="ListingItemTechSummaryDesktop__cell"
+                         th:text="${post.car.volume} + 'л/' + ${post.car.power} + 'л.с./' + ${post.car.fuel}"></div>
+                    <div class="ListingItemTechSummaryDesktop__cell" th:text="${post.car.transmission}"></div>
+                    <div class="ListingItemTechSummaryDesktop__cell" th:text="${post.car.bodyType.name}"></div>
+                </div>
+                <div class="ListingItemTechSummaryDesktop__column">
+                    <div class="ListingItemTechSummaryDesktop__cell" th:text="${post.car.drive}"></div>
+                    <div class="ListingItemTechSummaryDesktop__cell" th:text="${post.car.color}"></div>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</td>

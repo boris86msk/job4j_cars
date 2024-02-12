@@ -13,8 +13,42 @@
   <title>car sales</title>
 </head>
 <body class="bg-img">
-<div class="container">
-  <h1>Account page</h1>
+<div>
+  <header class="Header Header_theme_default" th:insert="blocks/header :: header"></header>
+  <table class="table table-success table-striped table-bordered border-primary m-1">
+    <thead>
+    <tr>
+      <th scope="col">Мои объявления</th>
+      <th scope="col">Избранное</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><table style="border-collapse: separate; border-spacing: 10px;">
+        <thead>
+        <tr>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${posts}" th:insert="blocks/tdPost :: td">
+        </tr>
+        </tbody>
+      </table>
+      </td>
+      <td>
+        <table style="border-collapse: separate; border-spacing: 10px;">
+          <thead>
+          <tr>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="post : ${user.participates}" th:insert="blocks/tdPost :: td"></tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>

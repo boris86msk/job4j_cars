@@ -23,4 +23,9 @@ public class SimpleUserService implements UserService {
     public Optional<User> findByEmailAndPassword(String login, String pass) {
         return userRepository.findByLoginAndPassword(login, pass);
     }
+
+    @Override
+    public Optional<User> findById(int userId) {
+        return userRepository.findById(userId);
+    }
 }
