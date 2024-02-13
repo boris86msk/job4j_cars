@@ -3,7 +3,9 @@ package ru.job4j.cars.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import ru.job4j.cars.model.Post;
+import ru.job4j.cars.model.User;
 import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.repository.UserRepository;
 
@@ -20,7 +22,9 @@ public class IndexController {
     }
 
     @GetMapping({"/", "/index"})
-    public String testMethod(Model model) {
+    public String getIndexPage(Model model, @SessionAttribute User user) {
+        User thisUser = userRepository.findById(user.getId()).get();
+        model.addAttribute("thisUser", thisUser);
         model.addAttribute("posts", postRepository.findAll());
         return "index";
     }
