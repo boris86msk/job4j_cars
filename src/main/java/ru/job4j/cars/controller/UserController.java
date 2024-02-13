@@ -11,6 +11,7 @@ import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -62,5 +63,11 @@ public class UserController {
         model.addAttribute("user", userService.findById(userId).get());
         model.addAttribute("posts", postRepository.findByUser(userId));
         return "users/accountpage";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
     }
 }

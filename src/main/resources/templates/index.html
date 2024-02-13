@@ -144,8 +144,8 @@
                                                     <div class="ListingItem__kmAgeAndSalonInfo">
                                                         <div class="ListingItem__kmAge" th:text="${post.car.mileage} + ' км'"></div>
                                                         <a class="Link ListingItemSalonName-z3w2o ListingItem__salonName"
-                                                           href="https://auto.ru/diler/cars/ac_na_beregovoy_moskva/"
-                                                           target="_blank" rel="noopener">В избранное!</a>
+                                                           th:href="@{/favourites/{postId}(postId=${post.id})}"
+                                                           rel="noopener">В избранное!</a>
                                                     </div>
 
                                                     <div class="ListingItem__actionsContainer">

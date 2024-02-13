@@ -9,6 +9,7 @@ import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.repository.BodyTypeRepository;
+import ru.job4j.cars.repository.ParticipatesRepository;
 import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.service.FileService;
 
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,25 +26,25 @@ public class PostController {
     private final BodyTypeRepository bodyTypeRepository;
     private final FileService fileService;
     private final BodyTypeRepository btRepository;
+    private final ParticipatesRepository partRepository;
 
-    public PostController(PostRepository postRepository, BodyTypeRepository bodyTypeRepository, FileService fileService, BodyTypeRepository btRepository) {
+    public PostController(PostRepository postRepository, BodyTypeRepository bodyTypeRepository, FileService fileService,
+                          BodyTypeRepository btRepository, ParticipatesRepository partRepository) {
         this.postRepository = postRepository;
         this.bodyTypeRepository = bodyTypeRepository;
         this.fileService = fileService;
         this.btRepository = btRepository;
+        this.partRepository = partRepository;
     }
 
     @GetMapping("/create")
     public String getCreatePage(Model model) {
-        int[] ages = {2024, 2023, 2022, 2021, 2020};
-        model.addAttribute("ages",  ages);
         model.addAttribute("bodyType", bodyTypeRepository.findAllType());
         return "post/create";
     }
 
     @GetMapping("/one/{postId}")
     public String  getOnePage(@PathVariable int postId) {
-        Map<Integer, Integer> map = new HashMap<>();
         return "post/one";
     }
 
@@ -58,6 +58,12 @@ public class PostController {
         post.getCar().setBodyType(bodyType);
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
         postRepository.save(post);
+        return "redirect:/index";
+    }
+
+    @GetMapping("favourites/{postId}")
+    public String addToFavourites(@PathVariable int postId, @SessionAttribute User user) {
+        partRepository.save(user.getId(), postId);
         return "redirect:/index";
     }
 }
