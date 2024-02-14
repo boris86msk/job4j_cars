@@ -6534,6 +6534,12 @@
     color: var(--primary-skoda-container)
 }
 
+.ListingItemPrice__iconDiscountOut {
+    margin-right: -2px;
+    margin-left: -6px;
+    color: var(--primary-ferrari-container)
+}
+
 .ListingItemPrice_highlighted .ListingItemPrice__iconDiscount {
     margin-left: -10px;
     color: var(--white)
