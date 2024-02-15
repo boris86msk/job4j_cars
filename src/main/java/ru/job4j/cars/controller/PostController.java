@@ -12,13 +12,12 @@ import ru.job4j.cars.repository.BodyTypeRepository;
 import ru.job4j.cars.repository.ParticipatesRepository;
 import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.service.FileService;
+import ru.job4j.cars.service.PostService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class PostController {
@@ -27,14 +26,16 @@ public class PostController {
     private final FileService fileService;
     private final BodyTypeRepository btRepository;
     private final ParticipatesRepository partRepository;
+    private final PostService postService;
 
     public PostController(PostRepository postRepository, BodyTypeRepository bodyTypeRepository, FileService fileService,
-                          BodyTypeRepository btRepository, ParticipatesRepository partRepository) {
+                          BodyTypeRepository btRepository, ParticipatesRepository partRepository, PostService postService) {
         this.postRepository = postRepository;
         this.bodyTypeRepository = bodyTypeRepository;
         this.fileService = fileService;
         this.btRepository = btRepository;
         this.partRepository = partRepository;
+        this.postService = postService;
     }
 
     @GetMapping("/create")
@@ -58,6 +59,7 @@ public class PostController {
         post.getCar().setBodyType(bodyType);
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
         postRepository.save(post);
+        postService.savePriceHistory(post);
         return "redirect:/index";
     }
 

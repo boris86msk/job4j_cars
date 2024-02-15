@@ -3,12 +3,19 @@ package ru.job4j.cars.service;
 import org.springframework.stereotype.Service;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.PriceHistory;
+import ru.job4j.cars.repository.PriceHistoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SimplePostService implements PostService {
+    private final PriceHistoryRepository priceHistoryRepository;
+
+    public SimplePostService(PriceHistoryRepository priceHistoryRepository) {
+        this.priceHistoryRepository = priceHistoryRepository;
+    }
 
     /**
      * Метод преобразует лист истории цены для представления index.html,
@@ -25,5 +32,14 @@ public class SimplePostService implements PostService {
             }
         }
         return postList;
+    }
+
+    @Override
+    public Optional<PriceHistory> savePriceHistory(Post post) {
+        PriceHistory priceHistory = new PriceHistory();
+        priceHistory.setPrice(post.getPrice());
+        priceHistory.setCreated(post.getCreated());
+        priceHistory.setPostId(post.getId());
+        return priceHistoryRepository.save(priceHistory);
     }
 }

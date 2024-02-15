@@ -10,26 +10,15 @@ import java.time.LocalDateTime;
 @Table(name = "price_history")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PriceHistory implements Comparable<PriceHistory> {
+public class PriceHistory {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "before")
-    private int before;
-    @Column(name = "after")
-    private int after;
+    @Column(name = "price")
+    private int price;
     @Column(name = "created")
     private LocalDateTime created;
-
-    @Override
-    public int compareTo(PriceHistory o) {
-        int res = 0;
-        if(this.created.isBefore(o.created)) {
-            res = -1;
-        } else if(this.created.isAfter(o.created)) {
-            res = 1;
-        }
-        return res;
-    }
+    @Column(name = "post_id")
+    private int postId;
 }
