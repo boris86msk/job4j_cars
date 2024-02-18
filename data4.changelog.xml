@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="boris (generated)" id="1708265275536-1">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="db/dump/car.csv" quotchar="&quot;" separator="," tableName="car">
+            <column header="id" name="id" type="NUMERIC"/>
+            <column header="brand" name="brand" type="STRING"/>
+            <column header="model" name="model" type="STRING"/>
+            <column header="body_id" name="body_id" type="NUMERIC"/>
+            <column header="tm" name="tm" type="STRING"/>
+            <column header="volume" name="volume" type="STRING"/>
+            <column header="power" name="power" type="STRING"/>
+            <column header="drive" name="drive" type="STRING"/>
+            <column header="age" name="age" type="NUMERIC"/>
+            <column header="mileage" name="mileage" type="NUMERIC"/>
+            <column header="fuel" name="fuel" type="STRING"/>
+            <column header="color" name="color" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

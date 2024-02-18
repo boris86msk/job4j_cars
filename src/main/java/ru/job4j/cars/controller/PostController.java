@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -45,7 +46,9 @@ public class PostController {
     }
 
     @GetMapping("/one/{postId}")
-    public String  getOnePage(@PathVariable int postId) {
+    public String  getOnePage(@PathVariable int postId, Model model, @SessionAttribute User user) {
+        model.addAttribute("user", user);
+        model.addAttribute("post", postRepository.findById(postId).get());
         return "post/one";
     }
 
@@ -62,6 +65,13 @@ public class PostController {
         postService.savePriceHistory(post);
         return "redirect:/index";
     }
+
+    @PostMapping("change_price")
+    public String changePrice(@ModelAttribute Post post) {
+        postRepository.updateById(post.getId(), post.getPrice());
+        return "redirect:/one";
+    }
+
 
     @GetMapping("favourites/{postId}")
     public String addToFavourites(@PathVariable int postId, @SessionAttribute User user) {

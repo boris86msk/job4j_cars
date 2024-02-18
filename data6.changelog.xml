@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="boris (generated)" id="1708265636281-1">
+        <loadData commentLineStartsWith="#" encoding="UTF-8" file="db/dump/participates.csv" quotchar="&quot;" separator="," tableName="participates">
+            <column header="id" name="id" type="NUMERIC"/>
+            <column header="user_id" name="user_id" type="NUMERIC"/>
+            <column header="post_id" name="post_id" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

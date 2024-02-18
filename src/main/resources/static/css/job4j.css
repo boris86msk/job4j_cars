@@ -19471,6 +19471,14 @@ body {
     margin: 0 0 0 15px
 }
 
+.ListingItem__myDescription {
+    display: grid;
+    grid-template-areas:"ListingItem__summary ListingItem__priceBlock ListingItem__yearBlock ListingItem__kmAgeAndActionsBlock" "ListingItem__tags ListingItem__tags ListingItem__yearBlock ListingItem__controls";
+    grid-template-columns:290px 135px 55px;
+    min-height: 154px;
+    margin: 0 0 0 15px
+}
+
 .ListingItem_hidden .ListingItem__description {
     min-height: auto
 }

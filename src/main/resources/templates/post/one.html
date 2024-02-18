@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/css/job4j.css}" rel="stylesheet">
+    <link th:href="@{/css/myCSS.css}" rel="stylesheet">
+    <script th:src="@{/js/myJS.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
             crossorigin="anonymous"></script>
@@ -61,158 +63,120 @@
                     </div>
                 </div>
             </div>
-
-            <H1>Просмотр объявления</H1>
-
+            <div class="container-fluid">
+                <H3 th:text="${post.car.brand} + ' ' + ${post.car.model} + ' - ' + ${post.car.age} + ' года'"></H3>
+                <div class="ListingItem__main">
+                    <div class="ListingItem__thumb"><a
+                            class="Link OfferThumb OfferThumb_radius_r8"
+                            th:href="@{/one/{postId}(postId=${post.id})}"
+                            rel="noopener">
+                        <div class="OfferThumb__brazzers">
+                            <div class="Brazzers Brazzers_forceShowButtons">
+                                <div class="Brazzers__page">
+                                    <div class="Brazzers__image-wrapper">
+                                        <div class="Brazzers__image"><img
+                                                class="LazyImage__image"
+                                                th:src="@{/files/{path}(path=${post.file.id})}"
+                                                decoding="async" loading="lazy"></div>
+                                    </div>
+                                    <div class="Brazzers__button"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                        <div class="ExclusiveOfferPopupDesktop InfoPopup InfoPopup_theme_plain InfoPopup_withChildren">
+                            <div class="Popup Popup_animation_full Popup_theme_plain Popup-info "></div>
+                        </div>
+                    </div>
+                    <div class="ListingItem__myDescription">
+                        <div class="ListingItem__summary">
+                            <div class="ListingItemTechSummaryDesktop ListingItem__techSummary">
+                                <div class="ListingItemTechSummaryDesktop__column">
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Объем двигателя:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Мощность:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Тип топлива:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Трансмиссия:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Тип кузова:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Цвет:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Привод:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Пробег:</b></h7></div>
+                                </div>
+                                <div class="ListingItemTechSummaryDesktop__column">
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.volume} + ' л.'"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.power} + ' л.с.'"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.fuel}"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.transmission}"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.bodyType.name}"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.color}"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.drive}"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.mileage}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ListingItem__priceBlock">
+                            <div class="ListingItemPriceNew-wVhP3 ListingItem__price">
+                                <div class="ListingItemPriceNew__content-HAVf2">
+                                    <a
+                                            class="Link ListingItemPriceNew__link-cYuLr"
+                                            target="__lol-1707245459676-0.8460657616786218"
+                                            rel="noopener"><span th:text="'Цена: ' +  ${post.price} + ' ₽'"></span></a>
+                                </div>
+                            </div>
+                            <button class="open-button" onclick="openForm()">Изменить цену</button>
+                            <div class="form-popup" id="myForm">
+                                <form class="form-container" th:action="@{/change_price}" method="post">
+                                    <input type="text" placeholder="Новая цена" id="price" name="price" required>
+                                    <input type="hidden" name="id" th:field="*{post.id}">
+                                    <button type="submit" class="btn">Сохранить</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="ListingItem__tags">
+                            <div class="ListingItemTagsDesktop">
+                                <div class="BadgeHistory4Call__badge-NhvxJ HoveredTooltip__trigger">
+                                    <div class="Badge Badge_color_violet Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
+                                        Отчёт за шоколадку
+                                    </div>
+                                </div>
+                                <div class="Badge Badge_color_blueGrayLightExtra Badge_size_l Badge_padding_default ListingItemTagsDesktop__item">
+                                    Онлайн заявка✅
+                                </div>
+                                <div class="InfoPopup InfoPopup_theme_plain InfoPopup_withChildren">
+                                    <div class="Badge Badge_color_blueGrayLightExtra Badge_size_l Badge_padding_default BadgeVinReportDesktop ListingItemTagsDesktop__item">
+                                        Отчёт Job4j &#128513;
+                                    </div>
+                                    <div class="Popup Popup_animation_full Popup_theme_plain Popup-info "></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ListingItem__kmAge" th:text="'Описание: ' + ${post.description}"></div>
+                </div>
+            </div>
             <div style="display:contents">
                 <div class="Footer">
                     <div class="Footer__inner Layout">
                         <div class="Footer__important-links"></div>
 
                         <div class="Footer__links">
-                            <div class="Footer__services-links__links"><a
-                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_realty-tIbnA"
-                                    href="https://realty.ya.ru/" target="_blank" rel="noopener"></a><a
-                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_arenda-n7mVx"
-                                    href="https://arenda.yandex.ru/" target="_blank" rel="noopener"></a><a
-                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_travel-iPy3y"
-                                    href="https://travel.yandex.ru/" target="_blank" rel="noopener"></a><a
-                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_rasp-HIVUe"
-                                    href="https://rasp.yandex.ru/" target="_blank" rel="noopener"></a><a
-                                    class="Link FooterServiceLinks__link-Cuh3o FooterServiceLinks__link_uslugi-jGhfz"
-                                    href="https://uslugi.yandex.ru/" target="_blank" rel="noopener"></a></div>
+                            <div class="Footer__services-links__links">
+                            </div>
                             <div class="FooterLogo-ROe50">
                                 <div class="FooterLogo__caption-mpypv">Проект </div>
-                                <a class="FooterLogo__img-vl1I_" href="http://www.job4j.ru/"></a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="Notifier"></div>
-            <div class="PageLoaderBarDesktop-fTD8M PageLoaderBarDesktop__red-ZrYpg"></div>
-            <div class="Modal" role="dialog" aria-hidden="true">
-                <div class="Modal__container">
-                    <div class="Modal__content_wrapper">
-                        <div class="Modal__content AuthModal">
-                            <div class="Modal__content_relative">
-                                <div class="Modal__content_body"></div>
+                                <a class="FooterLogo__img-vl1I_" href="http://www.job4j.ru/"></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="Modal__closer" aria-label="Закрыть" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
-                            <path fill="currentColor"
-                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="Modal" role="dialog" aria-hidden="true">
-                <div class="Modal__container">
-                    <div class="Modal__content_wrapper">
-                        <div class="Modal__content GusModal">
-                            <div class="Modal__content_relative">
-                                <div class="Modal__content_body"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Modal__closer" aria-label="Закрыть" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
-                            <path fill="currentColor"
-                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="Modal" role="dialog" aria-hidden="true">
-                <div class="Modal__container">
-                    <div class="Modal__content_wrapper">
-                        <div class="Modal__content ContactsLimitedModal">
-                            <div class="Modal__content_relative">
-                                <div class="Modal__content_body"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Modal__closer" aria-label="Закрыть" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
-                            <path fill="currentColor"
-                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="Modal" role="dialog" aria-hidden="true">
-                <div class="Modal__container">
-                    <div class="Modal__content_wrapper">
-                        <div class="Modal__content PhoneRequiredModal-Hdnl6">
-                            <div class="Modal__content_relative">
-                                <div class="Modal__content_body"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Modal__closer" aria-label="Закрыть" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
-                            <path fill="currentColor"
-                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="Modal" role="dialog" aria-hidden="true">
-                <div class="Modal__container">
-                    <div class="Modal__content_wrapper YandexPlusInfoModal__modalWrapper-UMVWs">
-                        <div class="Modal__content">
-                            <div class="Modal__content_relative">
-                                <div class="Modal__content_body"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Modal__closer" aria-label="Закрыть" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
-                            <path fill="currentColor"
-                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="Modal" role="dialog" aria-hidden="true">
-                <div class="Modal__container">
-                    <div class="Modal__content_wrapper MatchApplicationModal__modalWrapper-mC12L">
-                        <div class="Modal__content">
-                            <div class="Modal__content_relative">
-                                <div class="Modal__content_body"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Modal__closer" aria-label="Закрыть" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
-                            <path fill="currentColor"
-                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="Modal DealerCallbackModal-JEZMT" role="dialog" aria-hidden="true">
-                <div class="Modal__container">
-                    <div class="Modal__content_wrapper">
-                        <div class="Modal__content">
-                            <div class="Modal__content_relative">
-                                <div class="Modal__content_body"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Modal__closer" aria-label="Закрыть" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="IconSvg IconSvg_name_SvgClose IconSvg_size_16 Modal__closer_icon">
-                            <path fill="currentColor"
-                                  d="M13.205 12 20 5.205 18.795 4 12 10.795 5.205 4 4 5.205 10.795 12 4 18.795 5.205 20 12 13.205 18.795 20 20 18.795z"></path>
-                        </svg>
                     </div>
                 </div>
             </div>

@@ -119,4 +119,13 @@ public class PostRepository {
                         + "where u.id = :userId", Post.class,
                 Map.of("userId", userId));
     }
+
+    public void updateById(int id, int price) {
+        crudRepository.run(
+                "UPDATE Post p"
+                        + " SET p.price = :newPrice"
+                        + " WHERE p.id = :postId", Post.class,
+                Map.of("newPrice", price, "postId", id)
+        );
+    }
 }
