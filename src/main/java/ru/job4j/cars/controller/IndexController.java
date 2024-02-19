@@ -28,7 +28,7 @@ public class IndexController {
     public String getIndexPage(Model model, @SessionAttribute User user) {
         User thisUser = userRepository.findById(user.getId()).get();
         List<Post> postList = postRepository.findAll();
-        postList = postService.priceListSort(postList);
+        //postList = postService.priceListSort(postList);
         model.addAttribute("thisUser", thisUser);
         model.addAttribute("posts", postList);
         return "index";

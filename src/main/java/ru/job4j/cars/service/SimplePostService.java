@@ -5,6 +5,7 @@ import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.PriceHistory;
 import ru.job4j.cars.repository.PriceHistoryRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class SimplePostService implements PostService {
     public Optional<PriceHistory> savePriceHistory(Post post) {
         PriceHistory priceHistory = new PriceHistory();
         priceHistory.setPrice(post.getPrice());
-        priceHistory.setCreated(post.getCreated());
+        priceHistory.setCreated(LocalDateTime.now());
         priceHistory.setPostId(post.getId());
         return priceHistoryRepository.save(priceHistory);
     }

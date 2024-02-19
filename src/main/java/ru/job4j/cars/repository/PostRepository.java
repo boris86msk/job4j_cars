@@ -7,6 +7,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Repository;
+import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.Post;
 
 import java.time.LocalDateTime;
@@ -38,12 +39,12 @@ public class PostRepository {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            List<Post> list = session.createQuery("from Post p"
+            List<Post> list = session.createQuery("select distinct p from Post p"
                             + " left join fetch p.user"
                             + " left join fetch p.car"
                             + " left join fetch p.file", Post.class)
                     .list();
-            list = session.createQuery("from Post p"
+            list = session.createQuery("select distinct p from Post p"
                             + " left join fetch p.historyList"
                             + " where p in :posts"
                             + " order by p.id desc", Post.class)
@@ -58,6 +59,14 @@ public class PostRepository {
             session.close();
         }
         return null;
+    }
+
+    public List<Post> findAll2() {
+        return crudRepository.query(
+                "from Post p" +
+                        " left join fetch p.historyList" +
+                        " order by p.id", Post.class
+        );
     }
 
     public List<Post> findByToday() {
@@ -124,7 +133,7 @@ public class PostRepository {
         crudRepository.run(
                 "UPDATE Post p"
                         + " SET p.price = :newPrice"
-                        + " WHERE p.id = :postId", Post.class,
+                        + " WHERE p.id = :postId",
                 Map.of("newPrice", price, "postId", id)
         );
     }

@@ -68,8 +68,10 @@ public class PostController {
 
     @PostMapping("change_price")
     public String changePrice(@ModelAttribute Post post) {
-        postRepository.updateById(post.getId(), post.getPrice());
-        return "redirect:/one";
+        int postId = post.getId();
+        postRepository.updateById(postId, post.getPrice());
+        postService.savePriceHistory(post);
+        return String.format("redirect:/one/%d", postId);
     }
 
 
