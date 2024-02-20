@@ -59,7 +59,7 @@ public class UserController {
     @GetMapping("/account_page")
     public String getPersonalAccountPage(Model model, HttpServletRequest request) {
         var user = (User) request.getSession().getAttribute("user");
-        var userId =user.getId();
+        var userId = user.getId();
         model.addAttribute("user", userService.findById(userId).get());
         model.addAttribute("posts", postRepository.findByUser(userId));
         return "users/accountpage";

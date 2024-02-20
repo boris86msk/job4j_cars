@@ -61,13 +61,6 @@ public class PostRepository {
         return null;
     }
 
-    public List<Post> findAll2() {
-        return crudRepository.query(
-                "from Post p" +
-                        " left join fetch p.historyList" +
-                        " order by p.id", Post.class
-        );
-    }
 
     public List<Post> findByToday() {
         LocalDateTime now = LocalDateTime.now().minusDays(1);

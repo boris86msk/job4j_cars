@@ -25,7 +25,7 @@ public class SimplePostService implements PostService {
     public List<Post> priceListSort(List<Post> postList) {
         for (Post post : postList) {
             List<PriceHistory> historyList = post.getHistoryList();
-            if(historyList.size() > 2) {
+            if (historyList.size() > 2) {
                 List<PriceHistory> newList = new ArrayList<>();
                 newList.add(historyList.get(0));
                 newList.add(historyList.get(historyList.size() - 1));
