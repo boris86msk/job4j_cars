@@ -52,6 +52,12 @@ public class PostController {
         return "post/one";
     }
 
+    @GetMapping("/delete/{postId}")
+    public String  deletePost(@PathVariable int postId) {
+        postRepository.delete(postId);
+        return "post/one";
+    }
+
     @PostMapping("save")
     public String saveNewPost(@ModelAttribute Post post, @RequestParam MultipartFile myFile,
                               HttpServletRequest request) throws IOException {

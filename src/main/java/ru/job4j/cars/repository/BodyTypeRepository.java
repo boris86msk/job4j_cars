@@ -15,11 +15,6 @@ public class BodyTypeRepository {
         this.crudRepository = crudRepository;
     }
 
-    /**
-     * Сохранить в базе.
-     * @param bodyType тип кузова.
-     * @return тип кузова с id.
-     */
     public Optional<BodyType> save(BodyType bodyType) {
         try {
             crudRepository.run(session -> session.persist(bodyType));
@@ -30,21 +25,12 @@ public class BodyTypeRepository {
         return Optional.empty();
     }
 
-    /**
-     * Получить список типов кузова.
-     * @return Список BodyType, сортеровка по id.
-     */
     public List<BodyType> findAllType() {
         return crudRepository.query(
                 "from BodyType order by id", BodyType.class
         );
     }
 
-    /**
-     * Найти тип кузова по id
-     * @param id
-     * @return BodyType по id
-     */
     public Optional<BodyType> findById(int id) {
         return crudRepository.optional(
                 "from BodyType where id = :fbodyId", BodyType.class,
@@ -52,10 +38,6 @@ public class BodyTypeRepository {
         );
     }
 
-    /**
-     * Удалить тип кузова по id.
-     * @param engineId
-     */
     public void delete(int engineId) {
         crudRepository.run(
                 "delete from BodyType where id = :fId",

@@ -130,7 +130,7 @@
                                             rel="noopener"><span th:text="'Цена: ' +  ${post.price} + ' ₽'"></span></a>
                                 </div>
                             </div>
-                            <button class="open-button" onclick="openForm()">Изменить цену</button>
+                            <button th:if="${post.user.equals(user)}" class="open-button" onclick="openForm()">Изменить цену</button>
                             <div class="form-popup" id="myForm">
                                 <form class="form-container" th:action="@{/change_price}" method="post">
                                     <input type="text" placeholder="Новая цена" id="price" name="price" required>
@@ -162,6 +162,20 @@
                 </div>
                 <div>
                     <div class="ListingItem__kmAge" th:text="'Описание: ' + ${post.description}"></div>
+                </div>
+                <div th:if="${post.user.equals(user)}" class="col-777">
+                    <div class="row">
+                        <div class="col">
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger w-100" th:href="@{/}">Продано!</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-primary w-100" th:href="@{/delete/{postId}(postId=${post.id})}">Удалить объявление</a>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div style="display:contents">

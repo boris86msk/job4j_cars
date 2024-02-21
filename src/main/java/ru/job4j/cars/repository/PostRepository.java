@@ -130,4 +130,11 @@ public class PostRepository {
                 Map.of("newPrice", price, "postId", id)
         );
     }
+
+    public void delete(int postId) {
+        crudRepository.run(
+                "delete from Post where id = :fId",
+                Map.of("fId", postId)
+        );
+    }
 }

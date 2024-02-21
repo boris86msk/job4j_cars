@@ -15,11 +15,6 @@ public class UserRepository {
         this.crudRepository = crudRepository;
     }
 
-    /**
-     * Сохранить в базе.
-     * @param user пользователь.
-     * @return пользователь с id.
-     */
     public Optional<User> create(User user) {
         try {
             crudRepository.run(session -> session.persist(user));
@@ -30,18 +25,10 @@ public class UserRepository {
         return Optional.empty();
     }
 
-    /**
-     * Обновить в базе пользователя.
-     * @param user пользователь.
-     */
     public void update(User user) {
         crudRepository.run(session -> session.merge(user));
     }
 
-    /**
-     * Удалить пользователя по id.
-     * @param userId ID
-     */
     public void delete(int userId) {
         crudRepository.run(
                 "delete from User where id = :fId",
@@ -49,10 +36,6 @@ public class UserRepository {
         );
     }
 
-    /**
-     * Список пользователь отсортированных по id.
-     * @return список пользователей.
-     */
     public List<User> findAllOrderById() {
         return crudRepository.query(
                 "from User order by id", User.class
@@ -68,11 +51,6 @@ public class UserRepository {
         );
     }
 
-    /**
-     * Список пользователей по login LIKE %key%
-     * @param key key
-     * @return список пользователей.
-     */
     public List<User> findByLikeLogin(String key) {
         return crudRepository.query(
                 "from User where login like :fkey", User.class,
@@ -80,13 +58,6 @@ public class UserRepository {
         );
     }
 
-    /**
-     * Найти пользователя по login.
-     *
-     * @param login login.
-     * @param pass
-     * @return Optional or user.
-     */
     public Optional<User> findByLoginAndPassword(String login, String pass) {
         return crudRepository.optional(
                 "from User where login = :flogin"

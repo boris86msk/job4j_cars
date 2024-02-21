@@ -15,11 +15,6 @@ public class OwnerRepository {
         this.crudRepository = crudRepository;
     }
 
-    /**
-     * Сохранить в базе.
-     * @param owner владелец.
-     * @return владелец с id.
-     */
     public Optional<Owner> save(Owner owner) {
         try {
             crudRepository.run(session -> session.persist(owner));
@@ -30,10 +25,6 @@ public class OwnerRepository {
         return Optional.empty();
     }
 
-    /**
-     * Найти всех владельцев.
-     * @return Список Owner, сортеровка по id.
-     */
     public List<Owner> findAllOwner() {
         return crudRepository.query(
                 "from Owner o"
@@ -42,11 +33,6 @@ public class OwnerRepository {
         );
     }
 
-    /**
-     * Найти владельца по id
-     * @param id
-     * @return Owner по id
-     */
     public Optional<Owner> findById(int id) {
         return crudRepository.optional(
                 "from Owner o"
@@ -56,18 +42,10 @@ public class OwnerRepository {
         );
     }
 
-    /**
-     * Обновить владельца в базе.
-     * @param owner
-     */
     public void update(Owner owner) {
         crudRepository.run(session -> session.merge(owner));
     }
 
-    /**
-     * Удалить владельца по id.
-     * @param ownerId
-     */
     public void delete(int ownerId) {
         crudRepository.run(
                 "delete from Owner where id = :fId",

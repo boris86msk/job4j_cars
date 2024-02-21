@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <include file="scripts/001_ddl_create_table_body_type.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/002_dml_insert_body_type.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/003_ddl_create_table_auto_user.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/004_ddl_create_table_car.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/005_ddl_create_table_auto_post.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/006_ddl_create_price_history.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/007_ddl_create_table_participates.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/008_ddl_create_table_owners.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/009_ddl_create_table_history.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/010_ddl_create_history_owners.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/011_ddl_create_table_files.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/012_ddl_update_table_post.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/013_ddl_update_participates.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/014_ddl_update_price_history.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>
