@@ -43,4 +43,14 @@ public class SimplePostService implements PostService {
         priceHistory.setPostId(post.getId());
         return priceHistoryRepository.save(priceHistory);
     }
+
+    @Override
+    public void delete(int postId) {
+        priceHistoryRepository.delete(postId);
+    }
+
+    @Override
+    public void sold(int postId) {
+
+    }
 }

@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface PostService {
     List<Post> priceListSort(List<Post> list);
     Optional<PriceHistory> savePriceHistory(Post post);
+    void delete(int postId);
+    void sold(int postId);
 }

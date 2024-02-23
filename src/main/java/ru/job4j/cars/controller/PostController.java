@@ -12,13 +12,13 @@ import ru.job4j.cars.repository.BodyTypeRepository;
 import ru.job4j.cars.repository.ParticipatesRepository;
 import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.service.FileService;
+import ru.job4j.cars.service.ParticipatesService;
 import ru.job4j.cars.service.PostService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -26,17 +26,17 @@ public class PostController {
     private final BodyTypeRepository bodyTypeRepository;
     private final FileService fileService;
     private final BodyTypeRepository btRepository;
-    private final ParticipatesRepository partRepository;
     private final PostService postService;
+    private final ParticipatesService participatesService;
 
     public PostController(PostRepository postRepository, BodyTypeRepository bodyTypeRepository, FileService fileService,
-                          BodyTypeRepository btRepository, ParticipatesRepository partRepository, PostService postService) {
+                          BodyTypeRepository btRepository, PostService postService, ParticipatesService participatesService) {
         this.postRepository = postRepository;
         this.bodyTypeRepository = bodyTypeRepository;
         this.fileService = fileService;
         this.btRepository = btRepository;
-        this.partRepository = partRepository;
         this.postService = postService;
+        this.participatesService = participatesService;
     }
 
     @GetMapping("/create")
@@ -54,8 +54,10 @@ public class PostController {
 
     @GetMapping("/delete/{postId}")
     public String  deletePost(@PathVariable int postId) {
+        postService.delete(postId);
+        participatesService.delete(postId);
         postRepository.delete(postId);
-        return "post/one";
+        return "redirect:/index";
     }
 
     @PostMapping("save")
@@ -69,6 +71,7 @@ public class PostController {
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
         postRepository.save(post);
         postService.savePriceHistory(post);
+        participatesService.save(post.getId(), user.getId());
         return "redirect:/index";
     }
 
@@ -83,7 +86,13 @@ public class PostController {
 
     @GetMapping("favourites/{postId}")
     public String addToFavourites(@PathVariable int postId, @SessionAttribute User user) {
-        partRepository.save(user.getId(), postId);
+        participatesService.save(postId, user.getId());
+        return "redirect:/index";
+    }
+
+    @GetMapping("sold/{postId}")
+    public String soldPost(@PathVariable int postId) {
+        postRepository.sold(postId);
         return "redirect:/index";
     }
 }

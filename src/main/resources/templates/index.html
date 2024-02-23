@@ -136,21 +136,27 @@
                                                     <div class="ListingItem__kmAge"
                                                          th:text="${post.car.mileage} + ' км'"></div>
                                                     <div class="Badge Badge_color_green Badge_size_l Badge_padding_default">
-                                                        <a th:if="${!thisUser.participates.contains(post)}"
+                                                        <a th:if="${!thisUser.participates.contains(post) && ((post.user.getId() != thisUser.getId()))}"
                                                            class="Link ListingItemSalonName-z3w2o ListingItem__salonName"
                                                            th:href="@{/favourites/{postId}(postId=${post.id})}"
                                                            rel="noopener">В избранное!</a>
+                                                    </div><div th:if="${thisUser.participates.contains(post) && ((post.user.getId() != thisUser.getId()))}"
+                                                               class="ListingItem__kmAge">В избранном
+                                                </div>
+                                                    <div class="ListingItem__kmAge">
                                                     </div>
-                                                    <div th:if="${thisUser.participates.contains(post)}"
-                                                         class="ListingItem__kmAge">В избранном
+                                                    <div class="ListingItem__kmAge">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="ListingItem__tags">
                                                 <div class="ListingItemTagsDesktop">
                                                     <div class="BadgeHistory4Call__badge-NhvxJ HoveredTooltip__trigger">
-                                                        <div class="Badge Badge_color_violet Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
-                                                            Отчёт за шоколадку
+                                                        <div th:if="${post.status}" class="Badge Badge_color_violet Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
+                                                            Обявление активно!
+                                                        </div>
+                                                        <div th:if="${!post.status}" class="Badge Badge_color_red Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
+                                                            Продано
                                                         </div>
                                                     </div>
                                                     <div class="Badge Badge_color_blueGrayLightExtra Badge_size_l Badge_padding_default ListingItemTagsDesktop__item">

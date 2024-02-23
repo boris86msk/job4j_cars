@@ -35,13 +35,13 @@ public class ParticipatesRepository {
         }
     }
 
-    public void delete(int participatesId) {
+    public void delete(int postId) {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            String sql = "DELETE FROM participates WHERE id = :partId";
+            String sql = "DELETE FROM participates WHERE id = :postId";
             session.createSQLQuery(sql)
-                    .setParameter("partId", participatesId)
+                    .setParameter("postId", postId)
                     .executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {

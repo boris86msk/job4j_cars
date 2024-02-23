@@ -131,6 +131,14 @@ public class PostRepository {
         );
     }
 
+    public void sold(int postId) {
+        crudRepository.run("UPDATE Post p"
+                        + " SET p.status = false"
+                        + " WHERE p.id = :postId",
+                Map.of( "postId", postId)
+        );
+    }
+
     public void delete(int postId) {
         crudRepository.run(
                 "delete from Post where id = :fId",

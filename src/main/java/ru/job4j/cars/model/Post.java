@@ -23,6 +23,7 @@ public class Post {
     private int price;
 
     private LocalDateTime created;
+    private boolean status;
 
     @ManyToOne()
     @JoinColumn(name = "auto_user_id")
@@ -40,11 +41,5 @@ public class Post {
     @JoinColumn(name = "post_id")
     private List<PriceHistory> historyList = new ArrayList<>();
 }
-/**
- * при связи OneToMany в @JoinColumn указываем имя столбца той таблицы, которая
- * "Many" и в которой он является foreign key
- *
- * при связи ManyToOne в @JoinColumn так же указываем имя столбца который "Many"
- * и является foreign key, (это будет текущая entity)
- */
+
 

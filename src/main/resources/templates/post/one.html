@@ -143,8 +143,11 @@
                         <div class="ListingItem__tags">
                             <div class="ListingItemTagsDesktop">
                                 <div class="BadgeHistory4Call__badge-NhvxJ HoveredTooltip__trigger">
-                                    <div class="Badge Badge_color_violet Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
-                                        Отчёт за шоколадку
+                                    <div th:if="${post.status}" class="Badge Badge_color_violet Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
+                                        Обявление активно!
+                                    </div>
+                                    <div th:if="${!post.status}" class="Badge Badge_color_red Badge_size_l Badge_padding_default BadgeHistory4Call__item-bmIi0">
+                                        Продано
                                     </div>
                                 </div>
                                 <div class="Badge Badge_color_blueGrayLightExtra Badge_size_l Badge_padding_default ListingItemTagsDesktop__item">
@@ -167,8 +170,8 @@
                     <div class="row">
                         <div class="col">
                         </div>
-                        <div class="col">
-                            <a class="btn btn-danger w-100" th:href="@{/}">Продано!</a>
+                        <div th:if="${post.status}" class="col">
+                            <a class="btn btn-danger w-100" th:href="@{/sold/{postId}(postId=${post.id})}">Продано!</a>
                         </div>
                         <div class="col">
                             <a class="btn btn-primary w-100" th:href="@{/delete/{postId}(postId=${post.id})}">Удалить объявление</a>

@@ -39,4 +39,11 @@ public class PriceHistoryRepository {
                 + " order by created", PriceHistory.class,
                 Map.of("id", postId));
     }
+
+    public void delete(int postId) {
+        crudRepository.run(
+                "delete from PriceHistory where id = :fId",
+                Map.of("fId", postId)
+        );
+    }
 }
