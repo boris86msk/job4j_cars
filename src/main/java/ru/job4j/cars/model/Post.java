@@ -2,6 +2,7 @@ package ru.job4j.cars.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,7 +24,7 @@ public class Post {
     private int price;
 
     private LocalDateTime created;
-    private boolean status;
+    private boolean status = true;
 
     @ManyToOne()
     @JoinColumn(name = "auto_user_id")

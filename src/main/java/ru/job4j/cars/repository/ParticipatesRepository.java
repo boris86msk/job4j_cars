@@ -39,7 +39,7 @@ public class ParticipatesRepository {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            String sql = "DELETE FROM participates WHERE id = :postId";
+            String sql = "DELETE FROM participates WHERE post_id = :postId";
             session.createSQLQuery(sql)
                     .setParameter("postId", postId)
                     .executeUpdate();

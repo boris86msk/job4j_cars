@@ -19,7 +19,7 @@ public class SimpleParticipatesService implements ParticipatesService {
     }
 
     @Override
-    public void delete(int postId) {
+    public void deleteByPostId(int postId) {
         participatesRepository.delete(postId);
     }
 }

@@ -47,6 +47,11 @@ public class SimpleFileService implements FileService {
         return Optional.of(new FileDto(fileOptional.get().getPath(), content));
     }
 
+    @Override
+    public void deletePhotoById(int id) {
+
+    }
+
 
     private void createStorageDirectory(String path) {
         try {

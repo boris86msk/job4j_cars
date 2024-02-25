@@ -22,19 +22,15 @@ import java.time.temporal.ChronoUnit;
 
 @Controller
 public class PostController {
-    private final PostRepository postRepository;
     private final BodyTypeRepository bodyTypeRepository;
     private final FileService fileService;
-    private final BodyTypeRepository btRepository;
     private final PostService postService;
     private final ParticipatesService participatesService;
 
-    public PostController(PostRepository postRepository, BodyTypeRepository bodyTypeRepository, FileService fileService,
-                          BodyTypeRepository btRepository, PostService postService, ParticipatesService participatesService) {
-        this.postRepository = postRepository;
+    public PostController(BodyTypeRepository bodyTypeRepository, FileService fileService,
+                          PostService postService, ParticipatesService participatesService) {
         this.bodyTypeRepository = bodyTypeRepository;
         this.fileService = fileService;
-        this.btRepository = btRepository;
         this.postService = postService;
         this.participatesService = participatesService;
     }
@@ -48,15 +44,13 @@ public class PostController {
     @GetMapping("/one/{postId}")
     public String  getOnePage(@PathVariable int postId, Model model, @SessionAttribute User user) {
         model.addAttribute("user", user);
-        model.addAttribute("post", postRepository.findById(postId).get());
+        model.addAttribute("post", postService.findById(postId).get());
         return "post/one";
     }
 
     @GetMapping("/delete/{postId}")
     public String  deletePost(@PathVariable int postId) {
-        postService.delete(postId);
-        participatesService.delete(postId);
-        postRepository.delete(postId);
+        postService.deletePost(postId);
         return "redirect:/index";
     }
 
@@ -66,10 +60,10 @@ public class PostController {
         User user = (User) request.getSession().getAttribute("user");
         post.setUser(user);
         post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        BodyType bodyType = btRepository.findById(post.getCar().getBodyType().getId()).get();
+        BodyType bodyType = bodyTypeRepository.findById(post.getCar().getBodyType().getId()).get();
         post.getCar().setBodyType(bodyType);
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
-        postRepository.save(post);
+        postService.save(post);
         postService.savePriceHistory(post);
         participatesService.save(post.getId(), user.getId());
         return "redirect:/index";
@@ -78,7 +72,7 @@ public class PostController {
     @PostMapping("change_price")
     public String changePrice(@ModelAttribute Post post) {
         int postId = post.getId();
-        postRepository.updateById(postId, post.getPrice());
+        postService.updateById(postId, post.getPrice());
         postService.savePriceHistory(post);
         return String.format("redirect:/one/%d", postId);
     }
@@ -92,7 +86,7 @@ public class PostController {
 
     @GetMapping("sold/{postId}")
     public String soldPost(@PathVariable int postId) {
-        postRepository.sold(postId);
+        postService.sold(postId);
         return "redirect:/index";
     }
 }

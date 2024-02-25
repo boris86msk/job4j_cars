@@ -6,3 +6,17 @@ insert into participates(user_id, post_id) VALUES (3, 3);
 insert into participates(user_id, post_id) VALUES (4, 4);
 insert into participates(user_id, post_id) VALUES (1, 5);
 insert into participates(user_id, post_id) VALUES (5, 6);
+
+
+create table pasport
+(
+    id         serial   primary key,
+    name       varchar  not null  unique
+);
+create table human
+(
+    id         serial   primary key,
+    model      varchar  not null,
+    p_id   int      not null references pasport(id)
+        ON DELETE CASCADE
+);

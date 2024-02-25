@@ -42,7 +42,7 @@ public class PriceHistoryRepository {
 
     public void delete(int postId) {
         crudRepository.run(
-                "delete from PriceHistory where id = :fId",
+                "delete from PriceHistory where post_id = :fId",
                 Map.of("fId", postId)
         );
     }

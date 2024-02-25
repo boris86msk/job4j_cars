@@ -3,6 +3,8 @@ package ru.job4j.cars.service;
 import org.springframework.stereotype.Service;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.PriceHistory;
+import ru.job4j.cars.repository.ParticipatesRepository;
+import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.repository.PriceHistoryRepository;
 
 import java.time.LocalDateTime;
@@ -13,9 +15,18 @@ import java.util.Optional;
 @Service
 public class SimplePostService implements PostService {
     private final PriceHistoryRepository priceHistoryRepository;
+    private final ParticipatesRepository participatesRepository;
+    private final PostRepository postRepository;
+    private final FileService fileService;
 
-    public SimplePostService(PriceHistoryRepository priceHistoryRepository) {
+    public SimplePostService(PriceHistoryRepository priceHistoryRepository,
+                             ParticipatesRepository participatesRepository,
+                             PostRepository postRepository,
+                             FileService fileService) {
         this.priceHistoryRepository = priceHistoryRepository;
+        this.participatesRepository = participatesRepository;
+        this.postRepository = postRepository;
+        this.fileService = fileService;
     }
 
     /**
@@ -45,12 +56,29 @@ public class SimplePostService implements PostService {
     }
 
     @Override
-    public void delete(int postId) {
+    public Optional<Post> save(Post post) {
+        return postRepository.save(post);
+    }
+
+    @Override
+    public Optional<Post> findById(int id) {
+        return postRepository.findById(id);
+    }
+
+    @Override
+    public void updateById(int postId, int price) {
+        postRepository.updateById(postId, price);
+    }
+
+    @Override
+    public void deletePost(int postId) {
+        participatesRepository.delete(postId);
         priceHistoryRepository.delete(postId);
+        postRepository.delete(postId);
     }
 
     @Override
     public void sold(int postId) {
-
+        postRepository.sold(postId);
     }
 }

@@ -6,5 +6,5 @@ import ru.job4j.cars.model.User;
 public interface ParticipatesService {
     void save(int postId, int userId);
 
-    void delete(int postId);
+    void deleteByPostId(int postId);
 }
