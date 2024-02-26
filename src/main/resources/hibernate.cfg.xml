@@ -21,7 +21,5 @@
         <mapping class="ru.job4j.cars.model.Owner" />
         <mapping class="ru.job4j.cars.model.History" />
         <mapping class="ru.job4j.cars.model.File" />
-        <mapping class="ru.job4j.cars.model.Human" />
-        <mapping class="ru.job4j.cars.model.Pasport" />
     </session-factory>
 </hibernate-configuration>

@@ -11,6 +11,7 @@ import ru.job4j.cars.model.User;
 import ru.job4j.cars.repository.BodyTypeRepository;
 import ru.job4j.cars.repository.ParticipatesRepository;
 import ru.job4j.cars.repository.PostRepository;
+import ru.job4j.cars.service.BodyTypeService;
 import ru.job4j.cars.service.FileService;
 import ru.job4j.cars.service.ParticipatesService;
 import ru.job4j.cars.service.PostService;
@@ -22,14 +23,14 @@ import java.time.temporal.ChronoUnit;
 
 @Controller
 public class PostController {
-    private final BodyTypeRepository bodyTypeRepository;
+    private final BodyTypeService bodyTypeService;
     private final FileService fileService;
     private final PostService postService;
     private final ParticipatesService participatesService;
 
-    public PostController(BodyTypeRepository bodyTypeRepository, FileService fileService,
+    public PostController(BodyTypeService bodyTypeService, FileService fileService,
                           PostService postService, ParticipatesService participatesService) {
-        this.bodyTypeRepository = bodyTypeRepository;
+        this.bodyTypeService = bodyTypeService;
         this.fileService = fileService;
         this.postService = postService;
         this.participatesService = participatesService;
@@ -37,7 +38,7 @@ public class PostController {
 
     @GetMapping("/create")
     public String getCreatePage(Model model) {
-        model.addAttribute("bodyType", bodyTypeRepository.findAllType());
+        model.addAttribute("bodyType", bodyTypeService.findAllType());
         return "post/create";
     }
 
@@ -48,9 +49,9 @@ public class PostController {
         return "post/one";
     }
 
-    @GetMapping("/delete/{postId}")
-    public String  deletePost(@PathVariable int postId) {
-        postService.deletePost(postId);
+    @GetMapping("/delete/{postId}/{fileId}")
+    public String  deletePost(@PathVariable int postId, @PathVariable int fileId) throws IOException {
+        postService.deletePost(postId, fileId);
         return "redirect:/index";
     }
 
@@ -60,7 +61,7 @@ public class PostController {
         User user = (User) request.getSession().getAttribute("user");
         post.setUser(user);
         post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        BodyType bodyType = bodyTypeRepository.findById(post.getCar().getBodyType().getId()).get();
+        BodyType bodyType = bodyTypeService.findById(post.getCar().getBodyType().getId()).get();
         post.getCar().setBodyType(bodyType);
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
         postService.save(post);

@@ -7,6 +7,7 @@ import ru.job4j.cars.repository.ParticipatesRepository;
 import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.repository.PriceHistoryRepository;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,10 +72,11 @@ public class SimplePostService implements PostService {
     }
 
     @Override
-    public void deletePost(int postId) {
+    public void deletePost(int postId, int fileId) throws IOException {
         participatesRepository.delete(postId);
         priceHistoryRepository.delete(postId);
         postRepository.delete(postId);
+        fileService.deletePhotoById(fileId);
     }
 
     @Override

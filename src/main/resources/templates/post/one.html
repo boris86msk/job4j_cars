@@ -172,7 +172,7 @@
                             <a class="btn btn-danger w-100" th:href="@{/sold/{postId}(postId=${post.id})}">Продано!</a>
                         </div>
                         <div class="col">
-                            <a class="btn btn-primary w-100" th:href="@{/delete/{postId}(postId=${post.id})}">Удалить объявление</a>
+                            <a class="btn btn-primary w-100" th:href="@{/delete/{postId}/{fileId}(postId=${post.id}, fileId=${post.file.id})}">Удалить объявление</a>
                         </div>
                         <div class="col">
                         </div>

@@ -48,8 +48,15 @@ public class SimpleFileService implements FileService {
     }
 
     @Override
-    public void deletePhotoById(int id) {
-
+    public void deletePhotoById(int id) throws IOException {
+        Optional<File> fid = crudRepository.optional("from File where id = :fid",
+                File.class, Map.of("fid", id));
+        String path = fid.get().getPath();
+        Files.delete(Path.of(path));
+        crudRepository.run(
+                "delete from File where id = :fId",
+                Map.of("fId", id)
+        );
     }
 
 
