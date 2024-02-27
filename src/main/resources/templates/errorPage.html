@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/job4j.css}" rel="stylesheet">
+    <link th:href="@{/css/myCSS.css}" rel="stylesheet">
+    <script th:src="@{/js/myJS.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+            crossorigin="anonymous"></script>
+    <title>car sales</title>
+</head>
+<body class="react-page body_controller_listing" data-has-counters="true">
+<div id="app" class="__react-app__">
+    <div class="SusaninReact">
+        <div id="sale-data-attributes"
+             data-bem="{&quot;sale-data-attributes&quot;:{&quot;asciiCat&quot;:&quot;cars&quot;,&quot;puid10&quot;:&quot;1&quot;,&quot;mark&quot;:&quot;MAZDA&quot;,&quot;segment&quot;:&quot;MEDIUM&quot;,&quot;puid2&quot;:&quot;3171&quot;,&quot;type&quot;:&quot;&quot;}}"
+             style="display:none"></div>
+        <div class="page page_type_listing">
+            <div class="TopBgKolya"></div>
+            <div id="seller-data-attributes" data-bem="{&quot;seller-data-attributes&quot;:{}}"
+                 style="display:none"></div>
+            <header class="Header Header_theme_default" th:insert="blocks/header :: header"></header>
+            <div class="container-fluid">
+                <h3 th:text="${errorText}"></h3>
+            </div>
+            <div style="display:contents">
+                <div class="Footer">
+                    <div class="Footer__inner Layout">
+                        <div class="Footer__important-links"></div>
+
+                        <div class="Footer__links">
+                            <div class="Footer__services-links__links">
+                            </div>
+                            <div class="FooterLogo-ROe50">
+                                <div class="FooterLogo__caption-mpypv">Проект </div>
+                                <a class="FooterLogo__img-vl1I_" href="http://www.job4j.ru/"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="Popup Popup_animation_full Popup_theme_plain Popup_direction_top-center Popup_js_inited Popup-info "
+         style="z-index: 3001; left: 113.07px; top: 1491px;"></div>
+</div>
+<div>
+    <div class="Popup Popup_animation_full Popup_theme_plain Popup_direction_left-center Popup_js_inited Popup-info "
+         style="z-index: 3001; left: 127.875px; top: 1125px;"></div>
+</div>
+</body>
+</html>

@@ -26,41 +26,6 @@
             <div id="seller-data-attributes" data-bem="{&quot;seller-data-attributes&quot;:{}}"
                  style="display:none"></div>
             <header class="Header Header_theme_default" th:insert="blocks/header :: header"></header>
-            <div class="content">
-                <div class="TopNavigation TopNavigation_background_white TopNavigation_bottom-margin_true">
-                    <div class="TopNavigation__inner Layout">
-                        <div class="TopNavigation__left">
-                            <div class="ServiceNavigation">
-                                <span class="Link ServiceNavigation__link ServiceNavigation__link_name_listing ServiceNavigation__link_active"
-                                    tabindex="0" role="button">Объявления</span>
-                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_catalog"
-                                    href="https://auto.ru/catalog/cars/mazda/">Каталог</a>
-                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_reviews"
-                                    href="https://auto.ru/reviews/cars/mazda/">Отзывы</a>
-                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_logbook"
-                                    href="https://auto.ru/logbook/mazda/">Бортжурнал</a>
-                            </div>
-                        </div>
-                        <div class="TopNavigationIndicators TopNavigation__right">
-                            <div class="TopNavigationIndicators__item">
-                                <div class="GeoSelect-QRQ2Q">
-                                    <div class="GeoSelect__title-wkExE">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                             class="IconSvg IconSvg_name_SvgGeo IconSvg_size_24 GeoSelect__icon-R79tf">
-                                            <g fill="currentColor" fill-rule="evenodd">
-                                                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2m0 2c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8"></path>
-                                                <path d="m7 12 9-4-4 9-1-4z"></path>
-                                            </g>
-                                        </svg>
-                                        <span class="GeoSelect__titleShrinker-wjCdV"
-                                              title="Москва">Москва + 200 км</span></div>
-                                    <div class="Popup Popup_animation_full"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="container-fluid">
                 <H3 th:text="${post.car.brand} + ' ' + ${post.car.model} + ' - ' + ${post.car.age} + ' года'"></H3>
                 <div class="ListingItem__main">
@@ -98,6 +63,7 @@
                                     <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Цвет:</b></h7></div>
                                     <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Привод:</b></h7></div>
                                     <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Пробег:</b></h7></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"><h7><b>Владельцев по ПТС:</b></h7></div>
                                 </div>
                                 <div class="ListingItemTechSummaryDesktop__column">
                                     <div class="ListingItemTechSummaryDesktop__cell"
@@ -116,6 +82,8 @@
                                          th:text="${post.car.drive}"></div>
                                     <div class="ListingItemTechSummaryDesktop__cell"
                                          th:text="${post.car.mileage}"></div>
+                                    <div class="ListingItemTechSummaryDesktop__cell"
+                                         th:text="${post.car.owners.size()}"></div>
                                 </div>
                             </div>
                         </div>

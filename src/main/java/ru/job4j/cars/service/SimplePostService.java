@@ -1,14 +1,14 @@
 package ru.job4j.cars.service;
 
 import org.springframework.stereotype.Service;
-import ru.job4j.cars.model.Post;
-import ru.job4j.cars.model.PriceHistory;
-import ru.job4j.cars.repository.ParticipatesRepository;
-import ru.job4j.cars.repository.PostRepository;
-import ru.job4j.cars.repository.PriceHistoryRepository;
+import org.springframework.web.multipart.MultipartFile;
+import ru.job4j.cars.dto.FileDto;
+import ru.job4j.cars.model.*;
+import ru.job4j.cars.repository.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,34 +17,26 @@ import java.util.Optional;
 public class SimplePostService implements PostService {
     private final PriceHistoryRepository priceHistoryRepository;
     private final ParticipatesRepository participatesRepository;
+    private final BodyTypeService bodyTypeService;
     private final PostRepository postRepository;
     private final FileService fileService;
+    private final OwnerRepository ownerRepository;
+    private final HistoryOwnersRepository historyOwnersRepository;
+    private final HistoryRepository historyRepository;
 
     public SimplePostService(PriceHistoryRepository priceHistoryRepository,
                              ParticipatesRepository participatesRepository,
-                             PostRepository postRepository,
-                             FileService fileService) {
+                             BodyTypeService bodyTypeService, PostRepository postRepository,
+                             FileService fileService, OwnerRepository ownerRepository,
+                             HistoryOwnersRepository historyOwnersRepository, HistoryRepository historyRepository) {
         this.priceHistoryRepository = priceHistoryRepository;
         this.participatesRepository = participatesRepository;
+        this.bodyTypeService = bodyTypeService;
         this.postRepository = postRepository;
         this.fileService = fileService;
-    }
-
-    /**
-     * Метод преобразует лист истории цены для представления index.html,
-     * оставляя из принемаемого листа только первое и последнее знаение
-     */
-    public List<Post> priceListSort(List<Post> postList) {
-        for (Post post : postList) {
-            List<PriceHistory> historyList = post.getHistoryList();
-            if (historyList.size() > 2) {
-                List<PriceHistory> newList = new ArrayList<>();
-                newList.add(historyList.get(0));
-                newList.add(historyList.get(historyList.size() - 1));
-                post.setHistoryList(newList);
-            }
-        }
-        return postList;
+        this.ownerRepository = ownerRepository;
+        this.historyOwnersRepository = historyOwnersRepository;
+        this.historyRepository = historyRepository;
     }
 
     @Override
@@ -57,8 +49,19 @@ public class SimplePostService implements PostService {
     }
 
     @Override
-    public Optional<Post> save(Post post) {
-        return postRepository.save(post);
+    public Optional<Post> savePost(Post post, MultipartFile myFile, User user) throws IOException {
+        post.setUser(user);
+        post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+        int id = post.getCar().getBodyType().getId();
+        BodyType bodyType = bodyTypeService.findById(id).get();
+        post.getCar().setBodyType(bodyType);
+        post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
+        Optional<Post> optionalPost = postRepository.save(post);
+        if(optionalPost.isPresent()) {
+            savePriceHistory(post);
+            participatesRepository.save(post.getId(), user.getId());
+        }
+        return optionalPost;
     }
 
     @Override
@@ -72,11 +75,13 @@ public class SimplePostService implements PostService {
     }
 
     @Override
-    public void deletePost(int postId, int fileId) throws IOException {
-        participatesRepository.delete(postId);
-        priceHistoryRepository.delete(postId);
-        postRepository.delete(postId);
-        fileService.deletePhotoById(fileId);
+    public boolean deletePost(int postId, int fileId) throws IOException {
+        String path = postRepository.delete(postId, fileId);
+        if(path != null) {
+            fileService.deleteFile(path);
+            return true;
+        }
+        return false;
     }
 
     @Override

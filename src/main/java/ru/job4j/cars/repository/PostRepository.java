@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.stereotype.Repository;
 import ru.job4j.cars.model.BodyType;
+import ru.job4j.cars.model.File;
 import ru.job4j.cars.model.Post;
 
 import java.time.LocalDateTime;
@@ -109,6 +110,8 @@ public class PostRepository {
                 "from Post p "
                         + "left join fetch p.user "
                         + "left join fetch p.file "
+                        + "left join fetch p.car c "
+                        + "left join fetch c.owners "
                         + "where p.id = :fId", Post.class,
                 Map.of("fId", id)
         );
@@ -139,10 +142,35 @@ public class PostRepository {
         );
     }
 
-    public void delete(int postId) {
-        crudRepository.run(
-                "delete from Post where id = :fId",
-                Map.of("fId", postId)
-        );
+    public String delete(int postId, int fileId) {
+        Session session = sf.openSession();
+        String path = null;
+        try {
+            session.beginTransaction();
+            path = session.createQuery("from File where id = :fid", File.class)
+                    .setParameterList("fid", Collections.singleton(fileId))
+                    .uniqueResult()
+                    .getPath();
+            session.createNativeQuery("delete from participates where post_id = :postId")
+                    .setParameter("postId", postId)
+                    .executeUpdate();
+            session.createNativeQuery("delete from price_history where post_id = :postId")
+                    .setParameter("postId", postId)
+                    .executeUpdate();
+            session.createNativeQuery("delete from auto_post where id = :postId")
+                    .setParameter("postId", postId)
+                    .executeUpdate();
+            session.createNativeQuery("delete from files where id = :fileId")
+                    .setParameter("fileId", fileId)
+                    .executeUpdate();
+            session.getTransaction().commit();
+            return path;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+        return path;
     }
 }

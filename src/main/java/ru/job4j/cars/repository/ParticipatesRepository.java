@@ -15,7 +15,7 @@ public class ParticipatesRepository {
     private static SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
 
-    public void save(int userId, int postId) {
+    public void save(int postId, int userId) {
         Session session = sf.openSession();
         try {
             session.beginTransaction();

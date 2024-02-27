@@ -11,5 +11,5 @@ public interface FileService {
 
     Optional<FileDto> getFileById(int id);
 
-    void deletePhotoById(int id) throws IOException;
+    void deleteFile(String  path) throws IOException;
 }

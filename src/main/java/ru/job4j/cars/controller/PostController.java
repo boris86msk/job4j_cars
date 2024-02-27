@@ -8,9 +8,6 @@ import ru.job4j.cars.dto.FileDto;
 import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.User;
-import ru.job4j.cars.repository.BodyTypeRepository;
-import ru.job4j.cars.repository.ParticipatesRepository;
-import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.service.BodyTypeService;
 import ru.job4j.cars.service.FileService;
 import ru.job4j.cars.service.ParticipatesService;
@@ -50,23 +47,18 @@ public class PostController {
     }
 
     @GetMapping("/delete/{postId}/{fileId}")
-    public String  deletePost(@PathVariable int postId, @PathVariable int fileId) throws IOException {
-        postService.deletePost(postId, fileId);
+    public String  deletePost(@PathVariable int postId, @PathVariable int fileId, Model model) throws IOException {
+        if(!postService.deletePost(postId, fileId)) {
+            model.addAttribute("errorText", "Не удалось удалить объявление");
+            return "errorPage";
+        }
         return "redirect:/index";
     }
 
     @PostMapping("save")
     public String saveNewPost(@ModelAttribute Post post, @RequestParam MultipartFile myFile,
-                              HttpServletRequest request) throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
-        post.setUser(user);
-        post.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        BodyType bodyType = bodyTypeService.findById(post.getCar().getBodyType().getId()).get();
-        post.getCar().setBodyType(bodyType);
-        post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
-        postService.save(post);
-        postService.savePriceHistory(post);
-        participatesService.save(post.getId(), user.getId());
+                              @SessionAttribute User user) throws IOException {
+        postService.savePost(post, myFile, user);
         return "redirect:/index";
     }
 
