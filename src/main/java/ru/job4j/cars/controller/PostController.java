@@ -40,7 +40,7 @@ public class PostController {
 
     @GetMapping("/delete/{postId}/{fileId}")
     public String  deletePost(@PathVariable int postId, @PathVariable int fileId, Model model) throws IOException {
-        if(!postService.deletePost(postId, fileId)) {
+        if (!postService.deletePost(postId, fileId)) {
             model.addAttribute("errorText", "Не удалось удалить объявление");
             return "errorPage";
         }

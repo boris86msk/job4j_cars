@@ -57,7 +57,7 @@ public class SimplePostService implements PostService {
         post.getCar().setBodyType(bodyType);
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
         Optional<Post> optionalPost = postRepository.save(post);
-        if(optionalPost.isPresent()) {
+        if (optionalPost.isPresent()) {
             savePriceHistory(post);
             participatesRepository.save(post.getId(), user.getId());
         }
@@ -77,7 +77,7 @@ public class SimplePostService implements PostService {
     @Override
     public boolean deletePost(int postId, int fileId) throws IOException {
         String path = postRepository.delete(postId, fileId);
-        if(path != null) {
+        if (path != null) {
             fileService.deleteFile(path);
             return true;
         }

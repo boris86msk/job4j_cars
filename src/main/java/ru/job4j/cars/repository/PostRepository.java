@@ -125,6 +125,34 @@ public class PostRepository {
                 Map.of("userId", userId));
     }
 
+    public List<Post> findByMaxPrice(int price) {
+        Session session = sf.openSession();
+        try {
+            session.beginTransaction();
+            List<Post> list = session.createQuery("select distinct p from Post p"
+                            + " left join fetch p.user"
+                            + " left join fetch p.car"
+                            + " left join fetch p.file"
+                            + " where p.price < :price", Post.class)
+                    .setParameter("price", price)
+                    .list();
+            list = session.createQuery("select distinct p from Post p"
+                            + " left join fetch p.historyList"
+                            + " where p in :posts"
+                            + " order by p.id desc", Post.class)
+                    .setParameterList("posts", list)
+                    .list();
+            session.getTransaction().commit();
+            return list;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
     public void updateById(int id, int price) {
         crudRepository.run(
                 "UPDATE Post p"
@@ -138,7 +166,7 @@ public class PostRepository {
         crudRepository.run("UPDATE Post p"
                         + " SET p.status = false"
                         + " WHERE p.id = :postId",
-                Map.of( "postId", postId)
+                Map.of("postId", postId)
         );
     }
 

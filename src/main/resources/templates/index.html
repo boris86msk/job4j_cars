@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/css/job4j.css}" rel="stylesheet">
+    <link th:href="@{/css/myCSS.css}" rel="stylesheet">
+    <script th:src="@{/js/myJS.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
             integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
             crossorigin="anonymous"></script>
@@ -24,6 +26,48 @@
             <div id="seller-data-attributes" data-bem="{&quot;seller-data-attributes&quot;:{}}"
                  style="display:none"></div>
             <header class="Header Header_theme_default" th:insert="blocks/header :: header"></header>
+            <div class="content">
+                <div class="TopNavigation TopNavigation_background_white TopNavigation_bottom-margin_true">
+                    <div class="TopNavigation__inner Layout">
+                        <div class="TopNavigation__left">
+                            <div class="ServiceNavigation">
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_catalog"
+                                   th:href="@{/index}">Все объявления</a>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_catalog"
+                                   th:href="@{/index/ByToday}">Свежие</a>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_reviews"
+                                   href="#" onclick="openForm()">По цене</a>
+                                <div class="form-popup" id="myForm">
+                                    <form class="form-container" th:action="@{/index/price}" method="get">
+                                        <input type="text" placeholder="Не дороже" id="price" name="price" required>
+                                        <button type="submit" class="btn">Выбрать</button>
+                                        <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
+                                    </form>
+                                </div>
+                                <a class="Link ServiceNavigation__link ServiceNavigation__link_name_logbook"
+                                   th:href="@{/index/3}">По модели</a>
+                            </div>
+                        </div>
+                        <div class="TopNavigationIndicators TopNavigation__right">
+                            <div class="TopNavigationIndicators__item">
+                                <div class="GeoSelect-QRQ2Q">
+                                    <div class="GeoSelect__title-wkExE">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                             class="IconSvg IconSvg_name_SvgGeo IconSvg_size_24 GeoSelect__icon-R79tf">
+                                            <g fill="currentColor" fill-rule="evenodd">
+                                                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2m0 2c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8"></path>
+                                                <path d="m7 12 9-4-4 9-1-4z"></path>
+                                            </g>
+                                        </svg>
+                                        <span class="GeoSelect__titleShrinker-wjCdV"
+                                              title="Москва">Москва + 200 км</span></div>
+                                    <div class="Popup Popup_animation_full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="content">
                 <div class="Layout d-flex justify-content-center">
                     <div class="LayoutSidebar__content">
@@ -140,9 +184,10 @@
                                                            class="Link ListingItemSalonName-z3w2o ListingItem__salonName"
                                                            th:href="@{/favourites/{postId}(postId=${post.id})}"
                                                            rel="noopener">В избранное!</a>
-                                                    </div><div th:if="${thisUser.participates.contains(post) && ((post.user.getId() != thisUser.getId()))}"
-                                                               class="ListingItem__kmAge">В избранном
-                                                </div>
+                                                    </div>
+                                                    <div th:if="${thisUser.participates.contains(post) && ((post.user.getId() != thisUser.getId()))}"
+                                                         class="ListingItem__kmAge">В избранном
+                                                    </div>
                                                     <div class="ListingItem__kmAge">
                                                     </div>
                                                     <div class="ListingItem__kmAge">
