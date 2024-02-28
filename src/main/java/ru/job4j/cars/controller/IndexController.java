@@ -33,7 +33,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping( "/price")
+    @GetMapping("/price")
     public String sortToPrice(Model model, @SessionAttribute User user, @RequestParam String price) {
         User thisUser = userRepository.findById(user.getId()).get();
         List<Post> postList = postRepository.findByMaxPrice(Integer.parseInt(price));
@@ -42,7 +42,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping( "/ByToday")
+    @GetMapping("/ByToday")
     public String sortByToday(Model model, @SessionAttribute User user) {
         User thisUser = userRepository.findById(user.getId()).get();
         List<Post> postList = postRepository.findByToday();
