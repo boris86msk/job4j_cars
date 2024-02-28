@@ -15,7 +15,7 @@ public class SimpleParticipatesService implements ParticipatesService {
 
     @Override
     public void save(int postId, int userId) {
-        participatesRepository.save(userId, postId);
+        participatesRepository.save(postId, userId);
     }
 
     @Override

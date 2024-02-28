@@ -4,31 +4,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.job4j.cars.dto.FileDto;
-import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.service.BodyTypeService;
-import ru.job4j.cars.service.FileService;
 import ru.job4j.cars.service.ParticipatesService;
 import ru.job4j.cars.service.PostService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 @Controller
 public class PostController {
     private final BodyTypeService bodyTypeService;
-    private final FileService fileService;
     private final PostService postService;
     private final ParticipatesService participatesService;
 
-    public PostController(BodyTypeService bodyTypeService, FileService fileService,
-                          PostService postService, ParticipatesService participatesService) {
+    public PostController(BodyTypeService bodyTypeService, PostService postService,
+                          ParticipatesService participatesService) {
         this.bodyTypeService = bodyTypeService;
-        this.fileService = fileService;
         this.postService = postService;
         this.participatesService = participatesService;
     }
