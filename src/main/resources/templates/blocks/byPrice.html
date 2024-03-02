@@ -1,0 +1,17 @@
+<div class="modal fade" id="priceModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Укажите максимальную цену</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-container" th:action="@{/index/price}" method="get">
+          <input type="text" class="form-control" id="title" name="price" required>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Применить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
