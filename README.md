@@ -19,7 +19,7 @@
 <p>3. Для сборки проекта и запуска миграций в базу данных в корне проекта выполняем команду "mvn install".</p>
 <p>4. Для запуска 
 приложения из консоли выполняем команду "java -jar target/job4j_cars-0.0.1-SNAPSHOT.jar". В браузере приложение будет доступно по адресу
-http://localhost:8083/index (при необходимости смените порт на указанный в application.properties)
+http://localhost:8083/index
 </p>
 <p>5. Если при попытке запуска приложения в консоли появляется ошибка "Web server failed to start. Port 8083 was already in use."
 Вам необходимо в проекте открыть файл src/main/resources/db/liquibase.properties и изменить настройки порта на свободный в параметре "server.port=...."
@@ -35,5 +35,17 @@ http://localhost:8083/index (при необходимости смените п
 <div style="text-align: center;">Оснавная страница, список всех постов. Краткая информация об авто, динамика цены, статус объявления</div>
 
 ![](img/index.jpg)
+
+<div style="text-align: center;">Страница с подробной информацией.</div>
+
+![](img/one.jpg)
+
+<div style="text-align: center;">Страница с подробной информацией для владельца.</div>
+
+![](img/oneOwner.jpg)
+
+<div style="text-align: center;">Личный кабинет.</div>
+
+![](img/lk.jpg)
 
 

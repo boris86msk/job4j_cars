@@ -19429,6 +19429,11 @@ body {
     display: flex
 }
 
+.ListingItem__main_one {
+    display: flex;
+    justify-content: center
+}
+
 .ListingItem_hidden {
     cursor: default
 }

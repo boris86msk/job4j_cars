@@ -1,0 +1,29 @@
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Выберете модель</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-container" th:action="@{/index/model}" method="get">
+                    <select type="text" class="form-control" id="tm" name="model">
+                        <option th:each="model : ${models}" th:value="${model.name}"
+                                th:text="${model.name}"></option>
+                    </select>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Применить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-popup" id="myForm">
+    <form class="form-container" th:action="@{/index/price}" method="get">
+        <input type="text" placeholder="Не дороже" id="price" name="price" required>
+        <button type="submit" class="btn">Выбрать</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
+    </form>
+</div>

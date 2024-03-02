@@ -17,4 +17,6 @@
     <include file="scripts/012_ddl_update_table_post.sql" relativeToChangelogFile="true"/>
     <include file="scripts/013_ddl_update_participates.sql" relativeToChangelogFile="true"/>
     <include file="scripts/014_ddl_update_price_history.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/015_ddl_create_car_model.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/016_dml_insert_car_model.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
