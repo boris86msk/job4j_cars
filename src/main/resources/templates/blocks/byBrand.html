@@ -6,8 +6,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form class="form-container" th:action="@{/index/model}" method="get">
-                    <select type="text" class="form-control" id="tm" name="carModel">
+                <form class="form-container" th:action="@{/index/brand}" method="get">
+                    <select type="text" class="form-control" id="tm" name="carBrand">
                         <option th:each="model : ${models}" th:value="${model.name}"
                                 th:text="${model.name}"></option>
                     </select>

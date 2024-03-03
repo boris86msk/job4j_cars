@@ -1,6 +1,7 @@
 package ru.job4j.cars.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.cars.model.CarModel;
@@ -41,8 +42,14 @@ public class IndexController {
     }
 
     @GetMapping("/price")
-    public void sortToPrice(@SessionAttribute User user, @RequestParam String price) {
-        sortListCars(() -> postRepository.findByMaxPrice(Integer.parseInt(price)), user);
+    public String  sortToPrice(@SessionAttribute User user, @RequestParam String price, Model model) {
+        User thisUser = userRepository.findById(user.getId()).get();
+        List<Post> postList = postRepository.findByMaxPrice(Integer.parseInt(price));
+        List<CarModel> modelsList = carModelRepository.findAllCarModel();
+        model.addAttribute("thisUser", thisUser);
+        model.addAttribute("posts", postList);
+        model.addAttribute("models", modelsList);
+        return "index";
     }
 
     @GetMapping("/byToday")
@@ -56,10 +63,10 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/model")
-    public String sortByModel(Model model, @SessionAttribute User user, @RequestParam String carModel) {
+    @GetMapping("/brand")
+    public String sortByModel(Model model, @SessionAttribute User user, @RequestParam String carBrand) {
         User thisUser = userRepository.findById(user.getId()).get();
-        List<Post> postList = postRepository.findByModel(carModel);
+        List<Post> postList = postRepository.findByModel(carBrand);
         List<CarModel> modelsList = carModelRepository.findAllCarModel();
         model.addAttribute("thisUser", thisUser);
         model.addAttribute("posts", postList);
@@ -67,13 +74,13 @@ public class IndexController {
         return "index";
     }
 
-    private String sortListCars(Supplier<List<Post>> posts, User user) {
-        Model model = null;
+    private Model sortListCars(Supplier<List<Post>> posts, User user) {
+        Model model = new ExtendedModelMap();
         User thisUser = userRepository.findById(user.getId()).get();
         List<CarModel> modelsList = carModelRepository.findAllCarModel();
         model.addAttribute("thisUser", thisUser);
         model.addAttribute("posts", posts);
         model.addAttribute("models", modelsList);
-        return "index";
+        return model;
     }
 }

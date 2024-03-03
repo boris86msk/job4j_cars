@@ -97,12 +97,32 @@ public class PostRepository {
                 + " where size(p.files) > 0", Post.class);
     }
 
-    public List<Post> findByModel(String model) {
-        return crudRepository.query("from Post p "
-                        + "left join fetch p.user "
-                        + "left join fetch p.car c "
-                        + "where c.model = :fmodel", Post.class,
-                Map.of("fmodel", model));
+    public List<Post> findByModel(String brand) {
+        Session session = sf.openSession();
+        try {
+            session.beginTransaction();
+            List<Post> list = session.createQuery("select distinct p from Post p"
+                            + " left join fetch p.user"
+                            + " left join fetch p.car c"
+                            + " left join fetch p.file"
+                            + " where c.brand = :brand", Post.class)
+                    .setParameter("brand", brand)
+                    .list();
+            list = session.createQuery("select distinct p from Post p"
+                            + " left join fetch p.historyList"
+                            + " where p in :posts"
+                            + " order by p.id desc", Post.class)
+                    .setParameterList("posts", list)
+                    .list();
+            session.getTransaction().commit();
+            return list;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+        return null;
     }
 
     public Optional<Post> findById(int id) {
