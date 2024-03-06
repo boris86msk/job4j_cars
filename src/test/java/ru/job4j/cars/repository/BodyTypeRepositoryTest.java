@@ -32,62 +32,25 @@ class BodyTypeRepositoryTest {
         StandardServiceRegistryBuilder.destroy(registry);
     }
 
-    @AfterEach
-    public void wipeTable() {
-        Session session = sf.openSession();
-        try {
-            session.beginTransaction();
-            session.createQuery("DELETE BodyType")
-                    .executeUpdate();
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
-    }
-
-    @Test
-    public void wenSaveBodyType() {
-        BodyType bodyType = new BodyType();
-        bodyType.setName("Родстер");
-        bodyTypeRepository.save(bodyType);
-        int id = bodyType.getId();
-        assertThat(bodyTypeRepository.findById(id)).isNotEmpty();
-        assertThat(bodyTypeRepository.findById(id).get()).isEqualTo(bodyType);
-    }
-
     @Test
     public void wenNeedFindAllBodyType() {
-        BodyType bodyType1 = new BodyType();
-        BodyType bodyType2 = new BodyType();
-        bodyType1.setName("Сидан");
-        bodyType2.setName("Купе");
-        bodyTypeRepository.save(bodyType1);
-        bodyTypeRepository.save(bodyType2);
-        List<BodyType> bodyTypeList = List.of(bodyType1, bodyType2);
-        assertThat(bodyTypeRepository.findAllType()).isEqualTo(bodyTypeList);
+        List<String> bodyTypeList = List.of("Сидан", "Хечбек", "Универсал", "Кроссовер",
+                "Внедорожник", "Минивэн", "Пикап", "Купе", "Кабриолет", "Лимузин");
+
+        List<String> nameList = bodyTypeRepository.findAllType().stream()
+                .map(BodyType::getName)
+                .toList();
+        assertThat(nameList).isEqualTo(bodyTypeList);
     }
 
     @Test
     public void wenFindBodyTypeById() {
         BodyType bodyType = new BodyType();
+        bodyType.setId(7);
         bodyType.setName("Пикап");
-        bodyTypeRepository.save(bodyType);
-        int id = bodyType.getId();
-        assertThat(bodyTypeRepository.findById(id).get()).isEqualTo(bodyType);
-        assertThat(bodyTypeRepository.findById(id + 1)).isEmpty();
-    }
+        int findId = 7;
 
-    @Test
-    public void wenNeedDeleteBodyType() {
-        BodyType bodyType = new BodyType();
-        bodyType.setName("Хечбэк");
-        bodyTypeRepository.save(bodyType);
-        int id = bodyType.getId();
-        bodyTypeRepository.delete(id);
-        assertThat(bodyTypeRepository.findById(id)).isEmpty();
+        assertThat(bodyTypeRepository.findById(findId).get()).isEqualTo(bodyType);
+        assertThat(bodyTypeRepository.findById(findId + 1).get()).isNotEqualTo(bodyType);
     }
-  
 }

@@ -33,11 +33,13 @@ class OwnerRepositoryTest {
         User user = new User();
         user.setLogin("login");
         user.setPassword("1111");
+        user.setName("Иванов Иван Ивыныч");
         crudRepository.run(session -> session.persist(user));
 
         User user2 = new User();
         user2.setLogin("login2");
         user2.setPassword("2222");
+        user2.setName("Петров Петр Петрович");
         crudRepository.run(session -> session.persist(user2));
 
         Owner owner = new Owner();
@@ -80,6 +82,7 @@ class OwnerRepositoryTest {
         User user = new User();
         user.setLogin("loginTest");
         user.setPassword("1111");
+        user.setName("Павлов Анатолий");
         crudRepository.run(session -> session.persist(user));
         Owner owner = new Owner();
         owner.setName("TestOwner");

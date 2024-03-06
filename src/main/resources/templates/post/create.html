@@ -25,8 +25,9 @@
             <label for="title" class="form-label"><b>Марка <span style="color: red;">*</span></b></label>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" id="title" name="car.brand" placeholder="укажите марку"
-                           required>
+                    <select class="form-control col" id="title" name="car.brand.id" required>
+                        <option th:each="cm : ${carModel}" th:value="${cm.id}" th:text="${cm.name}"></option>
+                    </select>
                 </div>
                 <div class="col"></div>
                 <div class="col"></div>

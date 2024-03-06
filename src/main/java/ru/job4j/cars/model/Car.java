@@ -14,8 +14,9 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "brand")
-    private String brand;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private CarBrand brand;
 
     @Column(name = "model")
     private String model;

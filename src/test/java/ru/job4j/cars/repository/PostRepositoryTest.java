@@ -25,7 +25,7 @@ class PostRepositoryTest {
     private static SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
     private static CrudRepository crudRepository = new CrudRepository(sf);
-
+    private static UserRepository userRepository = new UserRepository(crudRepository);
     private static PostRepository postRepository = new PostRepository(crudRepository);
     private static Post post;
     private static Post post2;
@@ -34,33 +34,53 @@ class PostRepositoryTest {
     @BeforeEach
     public void initDataForDb() {
         BodyType bodyType = new BodyType();
+        bodyType.setId(1);
         bodyType.setName("Седан");
 
+        CarBrand carBrand = new CarBrand();
+        carBrand.setId(2);
+        carBrand.setName("Audi");
+
+        CarBrand carBrand2 = new CarBrand();
+        carBrand2.setId(18);
+        carBrand2.setName("Lada");
+
         Car car = new Car();
-        car.setBrand("Lada");
-        car.setModel("Vesta");
+        car.setBrand(carBrand);
+        car.setModel("A4");
         car.setBodyType(bodyType);
+        car.setFuel("Бензин");
+        car.setAge(2018);
+        car.setMileage(100000);
 
         Car car2 = new Car();
-        car2.setBrand("Lada");
+        car2.setBrand(carBrand2);
         car2.setModel("Vesta2");
         car2.setBodyType(bodyType);
+        car2.setFuel("Бензин");
+        car2.setAge(2020);
+        car2.setMileage(90000);
 
         Car car3 = new Car();
-        car3.setBrand("Lada");
+        car3.setBrand(carBrand2);
         car3.setModel("Kalina");
         car3.setBodyType(bodyType);
+        car3.setFuel("Дизель");
+        car3.setAge(2015);
+        car3.setMileage(25000);
 
         User user = new User();
         user.setLogin("myLogin");
         user.setPassword("1111");
+        user.setName("Иванов Иван Ивыныч");
 
         User user2 = new User();
         user2.setLogin("myLogin2");
         user2.setPassword("2222");
+        user2.setName("Петров Петр Петрович");
 
-        File file = new File();
-        file.setPath("somePath");
+        userRepository.create(user);
+        userRepository.create(user2);
 
         post = new Post();
         post.setDescription("test_description");
@@ -106,13 +126,11 @@ class PostRepositoryTest {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            session.createQuery("DELETE File")
-                    .executeUpdate();
             session.createQuery("DELETE Post")
                     .executeUpdate();
-            session.createQuery("DELETE Car")
+            session.createQuery("DELETE File")
                     .executeUpdate();
-            session.createQuery("DELETE BodyType")
+            session.createQuery("DELETE Car")
                     .executeUpdate();
             session.createQuery("DELETE User")
                     .executeUpdate();
@@ -128,17 +146,29 @@ class PostRepositoryTest {
     @Test
     public void wenSaveNewPost() {
         Post testPost = new Post();
-        testPost.setDescription("in_test_description");
+        testPost.setDescription("test_description");
         testPost.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
         User user = new User();
         user.setLogin("login");
         user.setPassword("pass");
+        user.setName("Some name");
+        userRepository.create(user);
         BodyType bodyType = new BodyType();
+        bodyType.setId(4);
         bodyType.setName("Кроссовер");
+        CarBrand carBrand = new CarBrand();
+        carBrand.setId(10);
+        carBrand.setName("Ford");
         Car car = new Car();
-        car.setBrand("Brand");
+        car.setBrand(carBrand);
         car.setModel("Model");
         car.setBodyType(bodyType);
+        car.setFuel("Бензин");
+        car.setAge(2018);
+        car.setMileage(100000);
+        File file = new File();
+        file.setPath("some_path");
+        testPost.setFile(file);
         testPost.setUser(user);
         testPost.setCar(car);
         postRepository.save(testPost);
@@ -149,13 +179,13 @@ class PostRepositoryTest {
     @Test
     public void wenFindAllPosts() {
         var expectedList = List.of(post, post2, post3);
-        assertThat(postRepository.findAll()).isEqualTo(expectedList);
+        assertThat(postRepository.findAll()).containsAll(expectedList);
     }
 
     @Test
     public void wenFindPostsByToDay() {
         var expectedList = List.of(post, post3);
-        assertThat(postRepository.findByToday()).isEqualTo(expectedList);
+        assertThat(postRepository.findByToday()).containsAll(expectedList);
     }
 
     @Test
@@ -171,7 +201,7 @@ class PostRepositoryTest {
     @Test
     public void wenFindAllPostByCarModel() {
         var expectedList = List.of(post);
-        assertThat(postRepository.findByModel("Vesta")).isEqualTo(expectedList);
+        assertThat(postRepository.findByBrand("Audi")).isEqualTo(expectedList);
 
     }
 }

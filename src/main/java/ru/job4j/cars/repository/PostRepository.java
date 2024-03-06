@@ -41,8 +41,10 @@ public class PostRepository {
         try {
             session.beginTransaction();
             List<Post> list = session.createQuery("select distinct p from Post p"
-                            + " left join fetch p.user"
-                            + " left join fetch p.car"
+                            + " left join fetch p.user u"
+                            + " left join fetch u.participates"
+                            + " left join fetch p.car c"
+                            + " left join fetch c.owners"
                             + " left join fetch p.file", Post.class)
                     .list();
             list = session.createQuery("select distinct p from Post p"
@@ -91,13 +93,6 @@ public class PostRepository {
     }
 
     public List<Post> findAllWhereFilesNotNull() {
-        return crudRepository.query("from Post p"
-                + " left join fetch p.file"
-                + " left join fetch p.user"
-                + " where size(p.files) > 0", Post.class);
-    }
-
-    public List<Post> findByModel(String brand) {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
@@ -105,7 +100,34 @@ public class PostRepository {
                             + " left join fetch p.user"
                             + " left join fetch p.car c"
                             + " left join fetch p.file"
-                            + " where c.brand = :brand", Post.class)
+                            + " where p.file is not null", Post.class)
+                    .list();
+            list = session.createQuery("select distinct p from Post p"
+                            + " left join fetch p.historyList"
+                            + " where p in :posts"
+                            + " order by p.id desc", Post.class)
+                    .setParameterList("posts", list)
+                    .list();
+            session.getTransaction().commit();
+            return list;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    public List<Post> findByBrand(String brand) {
+        Session session = sf.openSession();
+        try {
+            session.beginTransaction();
+            List<Post> list = session.createQuery("select distinct p from Post p"
+                            + " left join fetch p.user"
+                            + " left join fetch p.car c"
+                            + " left join fetch p.file"
+                            + " where c.brand.name = :brand", Post.class)
                     .setParameter("brand", brand)
                     .list();
             list = session.createQuery("select distinct p from Post p"

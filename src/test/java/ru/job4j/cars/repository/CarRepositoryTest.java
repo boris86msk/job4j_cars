@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.Car;
+import ru.job4j.cars.model.CarBrand;
 
 import java.util.List;
 
@@ -33,21 +34,33 @@ class CarRepositoryTest {
     @BeforeEach
     public void addDataToDataBase() {
         BodyType bodyType = new BodyType();
-        bodyType.setName("ВАЗ-21129");
+        bodyType.setId(1);
+        bodyType.setName("Сидан");
 
         BodyType bodyType2 = new BodyType();
-        bodyType2.setName("ВАЗ-21128");
+        bodyType2.setId(2);
+        bodyType2.setName("Хечбек");
+
+        CarBrand carBrand = new CarBrand();
+        carBrand.setId(1);
+        carBrand.setName("AlfaRomeo");
 
         car = new Car();
-        car.setBrand("Lada");
+        car.setBrand(carBrand);
         car.setModel("Vesta");
         car.setBodyType(bodyType);
+        car.setFuel("Бензин");
+        car.setAge(2018);
+        car.setMileage(100000);
         carRepository.save(car);
 
         car2 = new Car();
-        car2.setBrand("Lada");
+        car2.setBrand(carBrand);
         car2.setModel("Granta");
         car2.setBodyType(bodyType2);
+        car2.setFuel("Бензин");
+        car2.setAge(2016);
+        car2.setMileage(150000);
         carRepository.save(car2);
     }
 
@@ -62,8 +75,6 @@ class CarRepositoryTest {
         try {
             session.beginTransaction();
             session.createQuery("DELETE Car")
-                    .executeUpdate();
-            session.createQuery("DELETE BodyType")
                     .executeUpdate();
             session.getTransaction().commit();
         } catch (HibernateException e) {

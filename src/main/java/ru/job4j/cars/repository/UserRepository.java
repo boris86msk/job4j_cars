@@ -38,7 +38,17 @@ public class UserRepository {
 
     public List<User> findAllOrderById() {
         return crudRepository.query(
-                "from User order by id", User.class
+                "from User u"
+                        + " left join fetch u.participates"
+                        + " order by u.id", User.class
+        );
+    }
+
+    public List<User> findAllOrderByName() {
+        return crudRepository.query(
+                "from User u"
+                        + " left join fetch u.participates"
+                        + " order by u.name asc", User.class
         );
     }
 

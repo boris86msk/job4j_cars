@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.service.BodyTypeService;
+import ru.job4j.cars.service.CarBrandService;
 import ru.job4j.cars.service.ParticipatesService;
 import ru.job4j.cars.service.PostService;
 
@@ -17,17 +18,20 @@ public class PostController {
     private final BodyTypeService bodyTypeService;
     private final PostService postService;
     private final ParticipatesService participatesService;
+    private final CarBrandService carBrandService;
 
     public PostController(BodyTypeService bodyTypeService, PostService postService,
-                          ParticipatesService participatesService) {
+                          ParticipatesService participatesService, CarBrandService carBrandService) {
         this.bodyTypeService = bodyTypeService;
         this.postService = postService;
         this.participatesService = participatesService;
+        this.carBrandService = carBrandService;
     }
 
     @GetMapping("/create")
     public String getCreatePage(Model model) {
         model.addAttribute("bodyType", bodyTypeService.findAllType());
+        model.addAttribute("carModel", carBrandService.findAllBrand());
         return "post/create";
     }
 

@@ -1,7 +1,7 @@
 package ru.job4j.cars.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.job4j.cars.model.CarModel;
+import ru.job4j.cars.model.CarBrand;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ public class CarModelRepository {
         this.crudRepository = crudRepository;
     }
 
-    public List<CarModel> findAllCarModel() {
+    public List<CarBrand> findAllCarBrand() {
         return crudRepository.query(
-                "from CarModel", CarModel.class
+                "from CarBrand", CarBrand.class
         );
     }
 }

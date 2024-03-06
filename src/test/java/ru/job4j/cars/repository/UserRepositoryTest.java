@@ -35,12 +35,14 @@ class UserRepositoryTest {
         user = new User();
         user.setLogin("myLogin");
         user.setPassword("1111");
+        user.setName("Иванов Иван Ивыныч");
         userRepository.create(user);
         userId = user.getId();
 
         user2 = new User();
         user2.setLogin("BobMarley");
         user2.setPassword("1234");
+        user2.setName("Петров Петр Петрович");
         userRepository.create(user2);
         user2Id = user2.getId();
     }
@@ -110,6 +112,14 @@ class UserRepositoryTest {
         List<User> descList = List.of(user2, user);
         assertThat(userRepository.findAllOrderById()).isEqualTo(adcList);
         assertThat(userRepository.findAllOrderById()).isNotEqualTo(descList);
+    }
+
+    @Test
+    public void wenNeedFindAllUsersOrderByName() {
+        List<User> adcList = List.of(user, user2);
+        List<User> descList = List.of(user2, user);
+        assertThat(userRepository.findAllOrderByName()).isEqualTo(adcList);
+        assertThat(userRepository.findAllOrderByName()).isNotEqualTo(descList);
     }
 
 }

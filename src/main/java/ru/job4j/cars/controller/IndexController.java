@@ -1,19 +1,16 @@
 package ru.job4j.cars.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.job4j.cars.model.CarModel;
+import ru.job4j.cars.model.CarBrand;
 import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.repository.CarModelRepository;
 import ru.job4j.cars.repository.PostRepository;
 import ru.job4j.cars.repository.UserRepository;
-import ru.job4j.cars.service.PostService;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @Controller
@@ -32,55 +29,33 @@ public class IndexController {
 
     @GetMapping
     public String getIndexPage(Model model, @SessionAttribute User user) {
-        User thisUser = userRepository.findById(user.getId()).get();
-        List<Post> postList = postRepository.findAll();
-        List<CarModel> modelsList = carModelRepository.findAllCarModel();
-        model.addAttribute("thisUser", thisUser);
-        model.addAttribute("posts", postList);
-        model.addAttribute("models", modelsList);
+        addAttributeToModel(() -> postRepository.findAll(), user, model);
         return "index";
     }
 
     @GetMapping("/price")
-    public String  sortToPrice(@SessionAttribute User user, @RequestParam String price, Model model) {
-        User thisUser = userRepository.findById(user.getId()).get();
-        List<Post> postList = postRepository.findByMaxPrice(Integer.parseInt(price));
-        List<CarModel> modelsList = carModelRepository.findAllCarModel();
-        model.addAttribute("thisUser", thisUser);
-        model.addAttribute("posts", postList);
-        model.addAttribute("models", modelsList);
+    public String  sortByPrice(Model model, @SessionAttribute User user, @RequestParam String price) {
+        addAttributeToModel(() -> postRepository.findByMaxPrice(Integer.parseInt(price)), user, model);
         return "index";
     }
 
     @GetMapping("/byToday")
     public String sortByToday(Model model, @SessionAttribute User user) {
-        User thisUser = userRepository.findById(user.getId()).get();
-        List<Post> postList = postRepository.findByToday();
-        List<CarModel> modelsList = carModelRepository.findAllCarModel();
-        model.addAttribute("thisUser", thisUser);
-        model.addAttribute("posts", postList);
-        model.addAttribute("models", modelsList);
+        addAttributeToModel(() -> postRepository.findByToday(), user, model);
         return "index";
     }
 
     @GetMapping("/brand")
     public String sortByModel(Model model, @SessionAttribute User user, @RequestParam String carBrand) {
-        User thisUser = userRepository.findById(user.getId()).get();
-        List<Post> postList = postRepository.findByModel(carBrand);
-        List<CarModel> modelsList = carModelRepository.findAllCarModel();
-        model.addAttribute("thisUser", thisUser);
-        model.addAttribute("posts", postList);
-        model.addAttribute("models", modelsList);
+        addAttributeToModel(() -> postRepository.findByBrand(carBrand), user, model);
         return "index";
     }
 
-    private Model sortListCars(Supplier<List<Post>> posts, User user) {
-        Model model = new ExtendedModelMap();
+    private void addAttributeToModel(Supplier<List<Post>> posts, User user, Model model) {
         User thisUser = userRepository.findById(user.getId()).get();
-        List<CarModel> modelsList = carModelRepository.findAllCarModel();
+        List<CarBrand> modelsList = carModelRepository.findAllCarBrand();
         model.addAttribute("thisUser", thisUser);
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", posts.get());
         model.addAttribute("models", modelsList);
-        return model;
     }
 }
