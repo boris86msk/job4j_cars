@@ -6,10 +6,10 @@ import ru.job4j.cars.model.CarBrand;
 import java.util.List;
 
 @Repository
-public class CarModelRepository {
+public class FirstCarBrandRepository implements CarBrandRepository {
     private final CrudRepository crudRepository;
 
-    public CarModelRepository(CrudRepository crudRepository) {
+    public FirstCarBrandRepository(CrudRepository crudRepository) {
         this.crudRepository = crudRepository;
     }
 

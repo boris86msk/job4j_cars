@@ -19,14 +19,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PostRepositoryTest {
+class FirstPostRepositoryTest {
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private static SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
     private static CrudRepository crudRepository = new CrudRepository(sf);
     private static UserRepository userRepository = new UserRepository(crudRepository);
-    private static PostRepository postRepository = new PostRepository(crudRepository);
+    private static FirstPostRepository firstPostRepository = new FirstPostRepository(crudRepository);
     private static Post post;
     private static Post post2;
     private static Post post3;
@@ -171,37 +171,37 @@ class PostRepositoryTest {
         testPost.setFile(file);
         testPost.setUser(user);
         testPost.setCar(car);
-        postRepository.save(testPost);
+        firstPostRepository.save(testPost);
         int id = testPost.getId();
-        assertThat(postRepository.findById(id).get()).isEqualTo(testPost);
+        assertThat(firstPostRepository.findById(id).get()).isEqualTo(testPost);
     }
 
     @Test
     public void wenFindAllPosts() {
         var expectedList = List.of(post, post2, post3);
-        assertThat(postRepository.findAll()).containsAll(expectedList);
+        assertThat(firstPostRepository.findAll()).containsAll(expectedList);
     }
 
     @Test
     public void wenFindPostsByToDay() {
         var expectedList = List.of(post, post3);
-        assertThat(postRepository.findByToday()).containsAll(expectedList);
+        assertThat(firstPostRepository.findByToday()).containsAll(expectedList);
     }
 
     @Test
     public void wenFindAllPostsWhereFilesNotNull() {
-        Post ps1 = postRepository.findById(post.getId()).get();
-        Post ps2 = postRepository.findById(post2.getId()).get();
+        Post ps1 = firstPostRepository.findById(post.getId()).get();
+        Post ps2 = firstPostRepository.findById(post2.getId()).get();
         var expectedList = List.of(ps1);
         var notExpected = List.of(ps2);
-        assertThat(postRepository.findAllWhereFilesNotNull()).isEqualTo(expectedList);
-        assertThat(postRepository.findAllWhereFilesNotNull()).isNotEqualTo(notExpected);
+        assertThat(firstPostRepository.findAllWhereFilesNotNull()).isEqualTo(expectedList);
+        assertThat(firstPostRepository.findAllWhereFilesNotNull()).isNotEqualTo(notExpected);
     }
 
     @Test
     public void wenFindAllPostByCarModel() {
         var expectedList = List.of(post);
-        assertThat(postRepository.findByBrand("Audi")).isEqualTo(expectedList);
+        assertThat(firstPostRepository.findByBrand("Audi")).isEqualTo(expectedList);
 
     }
 }

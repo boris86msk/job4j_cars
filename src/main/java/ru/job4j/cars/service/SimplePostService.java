@@ -9,7 +9,6 @@ import ru.job4j.cars.repository.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +17,7 @@ public class SimplePostService implements PostService {
     private final PriceHistoryRepository priceHistoryRepository;
     private final ParticipatesRepository participatesRepository;
     private final BodyTypeService bodyTypeService;
-    private final PostRepository postRepository;
+    private final FirstPostRepository firstPostRepository;
     private final FileService fileService;
     private final OwnerRepository ownerRepository;
     private final HistoryOwnersRepository historyOwnersRepository;
@@ -26,17 +25,37 @@ public class SimplePostService implements PostService {
 
     public SimplePostService(PriceHistoryRepository priceHistoryRepository,
                              ParticipatesRepository participatesRepository,
-                             BodyTypeService bodyTypeService, PostRepository postRepository,
+                             BodyTypeService bodyTypeService, FirstPostRepository firstPostRepository,
                              FileService fileService, OwnerRepository ownerRepository,
                              HistoryOwnersRepository historyOwnersRepository, HistoryRepository historyRepository) {
         this.priceHistoryRepository = priceHistoryRepository;
         this.participatesRepository = participatesRepository;
         this.bodyTypeService = bodyTypeService;
-        this.postRepository = postRepository;
+        this.firstPostRepository = firstPostRepository;
         this.fileService = fileService;
         this.ownerRepository = ownerRepository;
         this.historyOwnersRepository = historyOwnersRepository;
         this.historyRepository = historyRepository;
+    }
+
+    @Override
+    public List<Post> findAll() {
+        return firstPostRepository.findAll();
+    }
+
+    @Override
+    public List<Post> findByMaxPrice(int price) {
+        return firstPostRepository.findByMaxPrice(price);
+    }
+
+    @Override
+    public List<Post> findByToday() {
+        return firstPostRepository.findByToday();
+    }
+
+    @Override
+    public List<Post> findByBrand(String brand) {
+        return firstPostRepository.findByBrand(brand);
     }
 
     @Override
@@ -56,7 +75,7 @@ public class SimplePostService implements PostService {
         BodyType bodyType = bodyTypeService.findById(id).get();
         post.getCar().setBodyType(bodyType);
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
-        Optional<Post> optionalPost = postRepository.save(post);
+        Optional<Post> optionalPost = firstPostRepository.save(post);
         if (optionalPost.isPresent()) {
             savePriceHistory(post);
             participatesRepository.save(post.getId(), user.getId());
@@ -66,17 +85,17 @@ public class SimplePostService implements PostService {
 
     @Override
     public Optional<Post> findById(int id) {
-        return postRepository.findById(id);
+        return firstPostRepository.findById(id);
     }
 
     @Override
     public void updateById(int postId, int price) {
-        postRepository.updateById(postId, price);
+        firstPostRepository.updateById(postId, price);
     }
 
     @Override
     public boolean deletePost(int postId, int fileId) throws IOException {
-        String path = postRepository.delete(postId, fileId);
+        String path = firstPostRepository.delete(postId, fileId);
         if (path != null) {
             fileService.deleteFile(path);
             return true;
@@ -86,6 +105,6 @@ public class SimplePostService implements PostService {
 
     @Override
     public void sold(int postId) {
-        postRepository.sold(postId);
+        firstPostRepository.sold(postId);
     }
 }

@@ -21,9 +21,9 @@
 приложения из консоли выполняем команду "java -jar target/job4j_cars-0.0.1-SNAPSHOT.jar". В браузере приложение будет доступно по адресу
 http://localhost:8083/index
 </p>
-<p>5. Если при попытке запуска приложения в консоли появляется ошибка "Web server failed to start. Port 8083 was already in use."
-Вам необходимо в проекте открыть файл src/main/resources/db/liquibase.properties и изменить настройки порта на свободный в параметре "server.port=...."
-Далее будет необходимо повторно собрать проект в maven и запустить.
+<p>5. Если при попытке запуска приложения в консоли появляется ошибка "Web server failed to start. Port 8083 was already in use",
+вам необходимо в проекте открыть файл src/main/resources/db/liquibase.properties и изменить настройки порта на свободный в параметре "server.port=....".
+Далее необходимо повторно собрать проект в maven и запустить.
 
 ### О приложении:
 Приложение создано по образу популярных платформ по продаже автомобилей, но не повторяет их полный функционал и логику продаж, т.к. основная цель
@@ -47,5 +47,10 @@ http://localhost:8083/index
 <div style="text-align: center;">Личный кабинет.</div>
 
 ![](img/lk.jpg)
+
+<div style="text-align: center;">Страницы входа ирегистрации.</div>
+
+![](img/login.jpg)
+![](img/register.jpg)
 
 

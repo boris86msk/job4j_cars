@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
+    List<Post> findAll();
+    List<Post> findByMaxPrice(int price);
+    List<Post> findByToday();
+    List<Post> findByBrand(String brand);
     Optional<PriceHistory> savePriceHistory(Post post);
     Optional<Post> savePost(Post post, MultipartFile myFile, User user) throws IOException;
     Optional<Post> findById(int id);

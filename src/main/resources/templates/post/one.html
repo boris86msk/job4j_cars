@@ -27,7 +27,7 @@
                  style="display:none"></div>
             <header class="Header Header_theme_default" th:insert="blocks/header :: header"></header>
             <div class="container-fluid">
-                <H3 th:text="${post.car.brand} + ' ' + ${post.car.model} + ' - ' + ${post.car.age} + ' года'" style="text-align: center"></H3>
+                <H3 th:text="${post.car.brand.name} + ' ' + ${post.car.model} + ' - ' + ${post.car.age} + ' года'" style="text-align: center"></H3>
                 <div class="ListingItem__main_one">
                     <div class="ListingItem__thumb"><a
                             class="Link OfferThumb OfferThumb_radius_r8"
