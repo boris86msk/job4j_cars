@@ -25,11 +25,13 @@ class FirstPostRepositoryTest {
     private static SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
     private static CrudRepository crudRepository = new CrudRepository(sf);
-    private static UserRepository userRepository = new UserRepository(crudRepository);
-    private static FirstPostRepository firstPostRepository = new FirstPostRepository(crudRepository);
+    private static UserRepository userRepository = new FirstUserRepository(crudRepository);
+    private static PostRepository postRepository = new FirstPostRepository(crudRepository);
     private static Post post;
     private static Post post2;
     private static Post post3;
+
+    private static User user2;
 
     @BeforeEach
     public void initDataForDb() {
@@ -74,7 +76,7 @@ class FirstPostRepositoryTest {
         user.setPassword("1111");
         user.setName("Иванов Иван Ивыныч");
 
-        User user2 = new User();
+        user2 = new User();
         user2.setLogin("myLogin2");
         user2.setPassword("2222");
         user2.setName("Петров Петр Петрович");
@@ -88,18 +90,21 @@ class FirstPostRepositoryTest {
         post.setUser(user);
         post.setCar(car);
         post.setFile(new File());
+        post.setPrice(100000);
 
         post2 = new Post();
         post2.setDescription("test_description_2");
         post2.setCreated(LocalDateTime.of(2024, Month.JANUARY, 5, 12, 0, 0));
         post2.setUser(user);
         post2.setCar(car2);
+        post2.setPrice(150000);
 
         post3 = new Post();
         post3.setDescription("test_description_3");
         post3.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
         post3.setUser(user2);
         post3.setCar(car3);
+        post3.setPrice(200000);
 
         Session session = sf.openSession();
         try {
@@ -171,37 +176,73 @@ class FirstPostRepositoryTest {
         testPost.setFile(file);
         testPost.setUser(user);
         testPost.setCar(car);
-        firstPostRepository.save(testPost);
+        postRepository.save(testPost);
         int id = testPost.getId();
-        assertThat(firstPostRepository.findById(id).get()).isEqualTo(testPost);
+        assertThat(postRepository.findById(id).get()).isEqualTo(testPost);
     }
 
     @Test
     public void wenFindAllPosts() {
         var expectedList = List.of(post, post2, post3);
-        assertThat(firstPostRepository.findAll()).containsAll(expectedList);
+        assertThat(postRepository.findAll()).containsAll(expectedList);
     }
 
     @Test
     public void wenFindPostsByToDay() {
         var expectedList = List.of(post, post3);
-        assertThat(firstPostRepository.findByToday()).containsAll(expectedList);
+        assertThat(postRepository.findByToday()).containsAll(expectedList);
     }
 
     @Test
     public void wenFindAllPostsWhereFilesNotNull() {
-        Post ps1 = firstPostRepository.findById(post.getId()).get();
-        Post ps2 = firstPostRepository.findById(post2.getId()).get();
+        Post ps1 = postRepository.findById(post.getId()).get();
+        Post ps2 = postRepository.findById(post2.getId()).get();
         var expectedList = List.of(ps1);
         var notExpected = List.of(ps2);
-        assertThat(firstPostRepository.findAllWhereFilesNotNull()).isEqualTo(expectedList);
-        assertThat(firstPostRepository.findAllWhereFilesNotNull()).isNotEqualTo(notExpected);
+        assertThat(postRepository.findAllWhereFilesNotNull()).isEqualTo(expectedList);
+        assertThat(postRepository.findAllWhereFilesNotNull()).isNotEqualTo(notExpected);
     }
 
     @Test
     public void wenFindAllPostByCarModel() {
         var expectedList = List.of(post);
-        assertThat(firstPostRepository.findByBrand("Audi")).isEqualTo(expectedList);
+        assertThat(postRepository.findByBrand("Audi")).isEqualTo(expectedList);
+    }
 
+    @Test
+    public void wenFindAllPostByUser() {
+        var expectedList = List.of(post3);
+        int userId = user2.getId();
+        assertThat(postRepository.findByUser(userId)).isEqualTo(expectedList);
+    }
+
+    @Test
+    public void wenFindAllPostByMaxPrice() {
+        var expectedList = List.of(post);
+        int maxPrice = 150000;
+        assertThat(postRepository.findByMaxPrice(maxPrice)).isEqualTo(expectedList);
+    }
+
+    @Test
+    public void wenUpdatePricePostById() {
+        var expectedPrice = 125000;
+        int postId = post.getId();
+        postRepository.updateById(postId, expectedPrice);
+        assertThat(postRepository.findById(postId).get().getPrice()).isEqualTo(expectedPrice);
+    }
+
+    @Test
+    public void wenPostSoldById() {
+        int postId = post.getId();
+        postRepository.sold(postId);
+        assertThat(postRepository.findById(postId).get().isStatus()).isFalse();
+    }
+
+    @Test
+    public void wenDeletePost() {
+        int postId = post.getId();
+        int fileId = post.getFile().getId();
+        postRepository.delete(postId, fileId);
+        assertThat(postRepository.findById(postId)).isEmpty();
     }
 }

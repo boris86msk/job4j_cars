@@ -15,6 +15,8 @@ import java.util.Set;
 @Table(name = "auto_user")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @EqualsAndHashCode.Include

@@ -29,7 +29,6 @@ insert into car_model(name) values('Porsche');
 insert into car_model(name) values('Renault');
 insert into car_model(name) values('Rover');
 insert into car_model(name) values('Saab');
-insert into car_model(name) values('Suzuki Moto');
 insert into car_model(name) values('Skoda');
 insert into car_model(name) values('SsangYong');
 insert into car_model(name) values('Subaru');

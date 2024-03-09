@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository {
+    Optional<Post> save(Post post);
     List<Post> findAll();
     List<Post> findByToday();
     List<Post> findAllWhereFilesNotNull();

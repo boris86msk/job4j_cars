@@ -24,7 +24,7 @@ public class Post {
     private int price;
 
     private LocalDateTime created;
-    private boolean status = true;
+    private boolean status;
 
     @ManyToOne()
     @JoinColumn(name = "auto_user_id")

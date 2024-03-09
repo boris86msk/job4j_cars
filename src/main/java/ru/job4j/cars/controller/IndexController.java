@@ -49,7 +49,7 @@ public class IndexController {
     }
 
     @GetMapping("/brand")
-    public String sortByModel(Model model, @SessionAttribute User user, @RequestParam String carBrand) {
+    public String sortByBrand(Model model, @SessionAttribute User user, @RequestParam String carBrand) {
         addAttributeToModel(() -> postService.findByBrand(carBrand), user, model);
         return "index";
     }

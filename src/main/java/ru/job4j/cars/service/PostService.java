@@ -14,6 +14,7 @@ public interface PostService {
     List<Post> findByMaxPrice(int price);
     List<Post> findByToday();
     List<Post> findByBrand(String brand);
+    List<Post> findByUser(int userId);
     Optional<PriceHistory> savePriceHistory(Post post);
     Optional<Post> savePost(Post post, MultipartFile myFile, User user) throws IOException;
     Optional<Post> findById(int id);
