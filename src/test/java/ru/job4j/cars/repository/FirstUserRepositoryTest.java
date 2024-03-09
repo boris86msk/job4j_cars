@@ -16,14 +16,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserRepositoryTest {
+class FirstUserRepositoryTest {
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private static SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
     private static CrudRepository crudRepository = new CrudRepository(sf);
 
-    private static UserRepository userRepository = new UserRepository(crudRepository);
+    private static FirstUserRepository firstUserRepository = new FirstUserRepository(crudRepository);
 
     private static User user;
     private static User user2;
@@ -36,14 +36,14 @@ class UserRepositoryTest {
         user.setLogin("myLogin");
         user.setPassword("1111");
         user.setName("Иванов Иван Ивыныч");
-        userRepository.create(user);
+        firstUserRepository.create(user);
         userId = user.getId();
 
         user2 = new User();
         user2.setLogin("BobMarley");
         user2.setPassword("1234");
         user2.setName("Петров Петр Петрович");
-        userRepository.create(user2);
+        firstUserRepository.create(user2);
         user2Id = user2.getId();
     }
 
@@ -70,30 +70,30 @@ class UserRepositoryTest {
 
     @Test
     public void wenSaveNewUserAndFindHisById() {
-        assertThat(userRepository.findById(userId)).isNotEmpty();
-        assertThat(userRepository.findById(userId).get()).isEqualTo(user);
+        assertThat(firstUserRepository.findById(userId)).isNotEmpty();
+        assertThat(firstUserRepository.findById(userId).get()).isEqualTo(user);
     }
 
     @Test
     public void wenNeedUpdateUser() {
         String newPass = "2222";
         user.setPassword(newPass);
-        userRepository.update(user);
-        assertThat(userRepository.findById(userId)).isNotEmpty();
-        assertThat(userRepository.findById(userId).get().getPassword()).isEqualTo(newPass);
+        firstUserRepository.update(user);
+        assertThat(firstUserRepository.findById(userId)).isNotEmpty();
+        assertThat(firstUserRepository.findById(userId).get().getPassword()).isEqualTo(newPass);
     }
 
     @Test
     public void wenWeDeleteUserById() {
-        userRepository.delete(userId);
-        assertThat(userRepository.findById(userId)).isEmpty();
+        firstUserRepository.delete(userId);
+        assertThat(firstUserRepository.findById(userId)).isEmpty();
     }
 
     @Test
     public void wenFindUserByLogin() {
         String findLogin = "myLogin";
         String findPass = "1111";
-        var findUser = userRepository.findByLoginAndPassword(findLogin, findPass);
+        var findUser = firstUserRepository.findByLoginAndPassword(findLogin, findPass);
         assertThat(findUser.get().getLogin()).isEqualTo(findLogin);
         assertThat(findUser.get().getPassword()).isEqualTo(findPass);
     }
@@ -101,7 +101,7 @@ class UserRepositoryTest {
     @Test
     public void wenFindUserByLikeLogin() {
         String likeLogin = "my";
-        var findUsers = userRepository.findByLikeLogin(likeLogin);
+        var findUsers = firstUserRepository.findByLikeLogin(likeLogin);
         assertThat(findUsers).contains(user);
         assertThat(findUsers).doesNotContain(user2);
     }
@@ -110,16 +110,16 @@ class UserRepositoryTest {
     public void wenNeedFindAllUsersOrderById() {
         List<User> adcList = List.of(user, user2);
         List<User> descList = List.of(user2, user);
-        assertThat(userRepository.findAllOrderById()).isEqualTo(adcList);
-        assertThat(userRepository.findAllOrderById()).isNotEqualTo(descList);
+        assertThat(firstUserRepository.findAllOrderById()).isEqualTo(adcList);
+        assertThat(firstUserRepository.findAllOrderById()).isNotEqualTo(descList);
     }
 
     @Test
     public void wenNeedFindAllUsersOrderByName() {
         List<User> adcList = List.of(user, user2);
         List<User> descList = List.of(user2, user);
-        assertThat(userRepository.findAllOrderByName()).isEqualTo(adcList);
-        assertThat(userRepository.findAllOrderByName()).isNotEqualTo(descList);
+        assertThat(firstUserRepository.findAllOrderByName()).isEqualTo(adcList);
+        assertThat(firstUserRepository.findAllOrderByName()).isNotEqualTo(descList);
     }
 
 }

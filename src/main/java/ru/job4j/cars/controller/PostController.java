@@ -53,8 +53,11 @@ public class PostController {
 
     @PostMapping("save")
     public String saveNewPost(@ModelAttribute Post post, @RequestParam MultipartFile myFile,
-                              @SessionAttribute User user) throws IOException {
-        postService.savePost(post, myFile, user);
+                              @SessionAttribute User user, Model model) throws IOException {
+        if(postService.savePost(post, myFile, user).isEmpty()) {
+            model.addAttribute("errorText", "Не удалось сохранить объявление");
+            return "errorPage";
+        }
         return "redirect:/index";
     }
 

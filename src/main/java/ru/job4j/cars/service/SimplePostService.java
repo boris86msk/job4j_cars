@@ -59,6 +59,11 @@ public class SimplePostService implements PostService {
     }
 
     @Override
+    public List<Post> findByUser(int userId) {
+        return firstPostRepository.findByUser(userId);
+    }
+
+    @Override
     public Optional<PriceHistory> savePriceHistory(Post post) {
         PriceHistory priceHistory = new PriceHistory();
         priceHistory.setPrice(post.getPrice());

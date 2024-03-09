@@ -5,8 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import ru.job4j.cars.model.User;
-import ru.job4j.cars.repository.FirstPostRepository;
+import ru.job4j.cars.service.PostService;
 import ru.job4j.cars.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final FirstPostRepository firstPostRepository;
+    private final PostService postService;
 
-    public UserController(UserService userService, FirstPostRepository firstPostRepository) {
+    public UserController(UserService userService, PostService postService) {
         this.userService = userService;
-        this.firstPostRepository = firstPostRepository;
+        this.postService = postService;
     }
 
     @GetMapping("/login")
@@ -55,11 +56,10 @@ public class UserController {
     }
 
     @GetMapping("/account_page")
-    public String getPersonalAccountPage(Model model, HttpServletRequest request) {
-        var user = (User) request.getSession().getAttribute("user");
+    public String getPersonalAccountPage(Model model, @SessionAttribute User user) {
         var userId = user.getId();
         model.addAttribute("user", userService.findById(userId).get());
-        model.addAttribute("posts", firstPostRepository.findByUser(userId));
+        model.addAttribute("posts", postService.findByUser(userId));
         return "users/accountpage";
     }
 
