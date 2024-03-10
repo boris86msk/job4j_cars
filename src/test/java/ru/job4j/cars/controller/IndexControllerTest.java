@@ -2,11 +2,7 @@ package ru.job4j.cars.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.ui.ConcurrentModel;
-import ru.job4j.cars.model.Post;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.service.CarBrandService;
 import ru.job4j.cars.service.PostService;

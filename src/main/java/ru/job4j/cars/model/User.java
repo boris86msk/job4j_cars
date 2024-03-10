@@ -40,12 +40,6 @@ public class User {
     )
     private List<Post> participates = new ArrayList<>();
 
-    /**
-     * name - указывает на таблицу, где идет связь вторичных ключей.
-     * joinColumns - определяет ключ родительского объекта. В данном примере User.id
-     * inverseJoinColumns - определяет ключ объекта, который мы загружаем в родительский объект (Post).
-     */
-
     public int getId() {
         return id;
     }

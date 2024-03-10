@@ -6,7 +6,6 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.CarBrand;
 
 import java.util.List;

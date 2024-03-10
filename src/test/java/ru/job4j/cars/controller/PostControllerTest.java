@@ -2,7 +2,6 @@ package ru.job4j.cars.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.cars.model.Post;
@@ -16,10 +15,9 @@ import ru.job4j.cars.service.PostService;
 import java.io.IOException;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.*;
 
 class PostControllerTest {

@@ -2,9 +2,7 @@ package ru.job4j.cars.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import ru.job4j.cars.dto.FileDto;
-import ru.job4j.cars.model.File;
 import ru.job4j.cars.service.FileService;
 
 import java.util.Optional;
