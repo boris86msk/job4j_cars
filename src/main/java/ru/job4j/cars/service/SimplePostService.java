@@ -19,23 +19,16 @@ public class SimplePostService implements PostService {
     private final BodyTypeService bodyTypeService;
     private final FirstPostRepository firstPostRepository;
     private final FileService fileService;
-    private final OwnerRepository ownerRepository;
-    private final HistoryOwnersRepository historyOwnersRepository;
-    private final HistoryRepository historyRepository;
 
     public SimplePostService(PriceHistoryRepository priceHistoryRepository,
                              ParticipatesRepository participatesRepository,
                              BodyTypeService bodyTypeService, FirstPostRepository firstPostRepository,
-                             FileService fileService, OwnerRepository ownerRepository,
-                             HistoryOwnersRepository historyOwnersRepository, HistoryRepository historyRepository) {
+                             FileService fileService) {
         this.priceHistoryRepository = priceHistoryRepository;
         this.participatesRepository = participatesRepository;
         this.bodyTypeService = bodyTypeService;
         this.firstPostRepository = firstPostRepository;
         this.fileService = fileService;
-        this.ownerRepository = ownerRepository;
-        this.historyOwnersRepository = historyOwnersRepository;
-        this.historyRepository = historyRepository;
     }
 
     @Override
