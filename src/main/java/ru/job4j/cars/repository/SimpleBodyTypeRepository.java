@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class FirstBodyTypeRepository implements BodyTypeRepository {
+public class SimpleBodyTypeRepository implements BodyTypeRepository {
     private final CrudRepository crudRepository;
 
-    public FirstBodyTypeRepository(CrudRepository crudRepository) {
+    public SimpleBodyTypeRepository(CrudRepository crudRepository) {
         this.crudRepository = crudRepository;
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class FirstCarRepositoryTest {
+class SimpleCarRepositoryTest {
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private static SessionFactory sf = new MetadataSources(registry)
@@ -26,7 +26,7 @@ class FirstCarRepositoryTest {
 
     private static CrudRepository crudRepository = new CrudRepository(sf);
 
-    private static CarRepository carRepository = new FirstCarRepository(crudRepository);
+    private static CarRepository carRepository = new SimpleCarRepository(crudRepository);
     private static Car car;
     private static Car car2;
 

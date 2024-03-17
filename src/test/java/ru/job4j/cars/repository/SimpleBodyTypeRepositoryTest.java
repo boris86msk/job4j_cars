@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class FirstBodyTypeRepositoryTest {
+class SimpleBodyTypeRepositoryTest {
 
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
@@ -22,7 +22,7 @@ class FirstBodyTypeRepositoryTest {
 
     private static CrudRepository crudRepository = new CrudRepository(sf);
 
-    private static FirstBodyTypeRepository firstBodyTypeRepository = new FirstBodyTypeRepository(crudRepository);
+    private static SimpleBodyTypeRepository simpleBodyTypeRepository = new SimpleBodyTypeRepository(crudRepository);
 
     @AfterAll
     public static void closeConnection() {
@@ -34,7 +34,7 @@ class FirstBodyTypeRepositoryTest {
         List<String> bodyTypeList = List.of("Сидан", "Хечбек", "Универсал", "Кроссовер",
                 "Внедорожник", "Минивэн", "Пикап", "Купе", "Кабриолет", "Лимузин");
 
-        List<String> nameList = firstBodyTypeRepository.findAllType().stream()
+        List<String> nameList = simpleBodyTypeRepository.findAllType().stream()
                 .map(BodyType::getName)
                 .toList();
         assertThat(nameList).isEqualTo(bodyTypeList);
@@ -47,7 +47,7 @@ class FirstBodyTypeRepositoryTest {
         bodyType.setName("Пикап");
         int findId = 7;
 
-        assertThat(firstBodyTypeRepository.findById(findId).get()).isEqualTo(bodyType);
-        assertThat(firstBodyTypeRepository.findById(findId + 1).get()).isNotEqualTo(bodyType);
+        assertThat(simpleBodyTypeRepository.findById(findId).get()).isEqualTo(bodyType);
+        assertThat(simpleBodyTypeRepository.findById(findId + 1).get()).isNotEqualTo(bodyType);
     }
 }

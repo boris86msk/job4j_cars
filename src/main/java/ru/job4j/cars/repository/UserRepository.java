@@ -7,10 +7,16 @@ import java.util.Optional;
 
 public interface UserRepository {
     Optional<User> create(User user);
+
     void update(User user);
+
     List<User> findAllOrderById();
+
     List<User> findAllOrderByName();
+
     Optional<User> findById(int userId);
+
     List<User> findByLikeLogin(String key);
+
     Optional<User> findByLoginAndPassword(String login, String pass);
 }

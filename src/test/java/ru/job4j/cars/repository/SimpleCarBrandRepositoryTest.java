@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class FirstCarBrandRepositoryTest {
+class SimpleCarBrandRepositoryTest {
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private static SessionFactory sf = new MetadataSources(registry)
@@ -20,7 +20,7 @@ class FirstCarBrandRepositoryTest {
 
     private static CrudRepository crudRepository = new CrudRepository(sf);
 
-    private static FirstCarBrandRepository firstCarBrandRepository = new FirstCarBrandRepository(crudRepository);
+    private static SimpleCarBrandRepository simpleCarBrandRepository = new SimpleCarBrandRepository(crudRepository);
 
     @AfterAll
     public static void closeConnection() {
@@ -34,7 +34,7 @@ class FirstCarBrandRepositoryTest {
                 "Lada", "LandRover", "Lexus", "Man", "Mazda", "Mercedes Benz", "Mitsubishi", "Nissan", "Opel",
                 "Peugeot", "Porsche", "Renault", "Rover", "Saab", "Skoda", "SsangYong", "Subaru", "Suzuki",
                 "Tesla", "Toyota", "Volkswagen", "Volvo", "УАЗ");
-        List<String> nameList = firstCarBrandRepository.findAllCarBrand().stream()
+        List<String> nameList = simpleCarBrandRepository.findAllCarBrand().stream()
                 .map(CarBrand::getName)
                 .toList();
         assertThat(nameList).isEqualTo(carBrandList);

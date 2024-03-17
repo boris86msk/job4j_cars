@@ -14,14 +14,14 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
-public class FirstPostRepository implements PostRepository {
+public class SimplePostRepository implements PostRepository {
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private static SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
     private final CrudRepository crudRepository;
 
-    public FirstPostRepository(CrudRepository crudRepository) {
+    public SimplePostRepository(CrudRepository crudRepository) {
         this.crudRepository = crudRepository;
     }
 

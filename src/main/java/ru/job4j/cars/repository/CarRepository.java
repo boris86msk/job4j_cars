@@ -7,8 +7,12 @@ import java.util.Optional;
 
 public interface CarRepository {
     Optional<Car> save(Car car);
+
     List<Car> findAllCar();
+
     Optional<Car> findById(int id);
+
     void update(Car car);
+
     void delete(int carId);
 }

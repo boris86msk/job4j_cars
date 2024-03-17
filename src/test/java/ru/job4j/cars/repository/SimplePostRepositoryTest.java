@@ -19,14 +19,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class FirstPostRepositoryTest {
+class SimplePostRepositoryTest {
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private static SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
     private static CrudRepository crudRepository = new CrudRepository(sf);
-    private static UserRepository userRepository = new FirstUserRepository(crudRepository);
-    private static PostRepository postRepository = new FirstPostRepository(crudRepository);
+    private static UserRepository userRepository = new SimpleUserRepository(crudRepository);
+    private static PostRepository postRepository = new SimplePostRepository(crudRepository);
     private static Post post;
     private static Post post2;
     private static Post post3;

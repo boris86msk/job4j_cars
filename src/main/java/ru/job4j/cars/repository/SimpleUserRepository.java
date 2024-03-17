@@ -1,5 +1,6 @@
 package ru.job4j.cars.repository;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 import ru.job4j.cars.model.User;
 
@@ -8,10 +9,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class FirstUserRepository implements UserRepository {
+public class SimpleUserRepository implements UserRepository {
     private final CrudRepository crudRepository;
 
-    public FirstUserRepository(CrudRepository crudRepository) {
+    public SimpleUserRepository(CrudRepository crudRepository) {
         this.crudRepository = crudRepository;
     }
 
@@ -19,7 +20,7 @@ public class FirstUserRepository implements UserRepository {
         try {
             crudRepository.run(session -> session.persist(user));
             return Optional.of(user);
-        } catch (Exception e) {
+        } catch (ConstraintViolationException e) {
             e.printStackTrace();
         }
         return Optional.empty();

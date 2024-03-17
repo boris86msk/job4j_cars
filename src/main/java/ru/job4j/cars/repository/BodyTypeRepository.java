@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface BodyTypeRepository {
     List<BodyType> findAllType();
+
     Optional<BodyType> findById(int id);
 }

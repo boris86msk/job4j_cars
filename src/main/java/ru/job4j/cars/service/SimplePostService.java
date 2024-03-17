@@ -17,43 +17,43 @@ public class SimplePostService implements PostService {
     private final PriceHistoryRepository priceHistoryRepository;
     private final ParticipatesRepository participatesRepository;
     private final BodyTypeService bodyTypeService;
-    private final FirstPostRepository firstPostRepository;
+    private final SimplePostRepository simplePostRepository;
     private final FileService fileService;
 
     public SimplePostService(PriceHistoryRepository priceHistoryRepository,
                              ParticipatesRepository participatesRepository,
-                             BodyTypeService bodyTypeService, FirstPostRepository firstPostRepository,
+                             BodyTypeService bodyTypeService, SimplePostRepository simplePostRepository,
                              FileService fileService) {
         this.priceHistoryRepository = priceHistoryRepository;
         this.participatesRepository = participatesRepository;
         this.bodyTypeService = bodyTypeService;
-        this.firstPostRepository = firstPostRepository;
+        this.simplePostRepository = simplePostRepository;
         this.fileService = fileService;
     }
 
     @Override
     public List<Post> findAll() {
-        return firstPostRepository.findAll();
+        return simplePostRepository.findAll();
     }
 
     @Override
     public List<Post> findByMaxPrice(int price) {
-        return firstPostRepository.findByMaxPrice(price);
+        return simplePostRepository.findByMaxPrice(price);
     }
 
     @Override
     public List<Post> findByToday() {
-        return firstPostRepository.findByToday();
+        return simplePostRepository.findByToday();
     }
 
     @Override
     public List<Post> findByBrand(String brand) {
-        return firstPostRepository.findByBrand(brand);
+        return simplePostRepository.findByBrand(brand);
     }
 
     @Override
     public List<Post> findByUser(int userId) {
-        return firstPostRepository.findByUser(userId);
+        return simplePostRepository.findByUser(userId);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SimplePostService implements PostService {
         BodyType bodyType = bodyTypeService.findById(id).get();
         post.getCar().setBodyType(bodyType);
         post.setFile(fileService.savePhoto(new FileDto(myFile.getOriginalFilename(), myFile.getBytes())));
-        Optional<Post> optionalPost = firstPostRepository.save(post);
+        Optional<Post> optionalPost = simplePostRepository.save(post);
         if (optionalPost.isPresent()) {
             savePriceHistory(post);
             participatesRepository.save(post.getId(), user.getId());
@@ -83,17 +83,17 @@ public class SimplePostService implements PostService {
 
     @Override
     public Optional<Post> findById(int id) {
-        return firstPostRepository.findById(id);
+        return simplePostRepository.findById(id);
     }
 
     @Override
     public void updateById(int postId, int price) {
-        firstPostRepository.updateById(postId, price);
+        simplePostRepository.updateById(postId, price);
     }
 
     @Override
     public boolean deletePost(int postId, int fileId) throws IOException {
-        String path = firstPostRepository.delete(postId, fileId);
+        String path = simplePostRepository.delete(postId, fileId);
         if (path != null) {
             fileService.deleteFile(path);
             return true;
@@ -103,6 +103,6 @@ public class SimplePostService implements PostService {
 
     @Override
     public void sold(int postId) {
-        firstPostRepository.sold(postId);
+        simplePostRepository.sold(postId);
     }
 }

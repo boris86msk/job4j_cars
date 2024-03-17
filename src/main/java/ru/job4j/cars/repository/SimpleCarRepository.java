@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class FirstCarRepository implements CarRepository {
+public class SimpleCarRepository implements CarRepository {
     private final CrudRepository crudRepository;
 
-    public FirstCarRepository(CrudRepository crudRepository) {
+    public SimpleCarRepository(CrudRepository crudRepository) {
         this.crudRepository = crudRepository;
     }
 
